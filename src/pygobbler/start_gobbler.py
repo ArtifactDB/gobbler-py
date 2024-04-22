@@ -1,20 +1,17 @@
 from typing import Optional, Tuple
-import appdirs
-import platform
 import tempfile
-import subprocess
 import requests
-import shutil
 import os
-import time
+from . import _utils as ut
 
 test_staging = None
 test_registry = None
+test_port = None
 test_process = None
 
-def start_gobbler(staging: Optional[str] = None, registry: Optional[str] = None, wait: float = 1) -> Tuple[bool, str, str]:
+def start_gobbler(staging: Optional[str] = None, registry: Optional[str] = None, port: Optional[int] = None, wait: float = 1, version: str = "0.3.2", overwrite: bool = False) -> Tuple[bool, str, str, str]:
     """
-    Start a test gobbler service.
+    Start a test Gobbler service.
 
     Args:
         registry: 
@@ -25,29 +22,35 @@ def start_gobbler(staging: Optional[str] = None, registry: Optional[str] = None,
             Path to a registry directory. If None, a temporary directory is
             automatically created.
 
+        port:
+            Port number for the Gobbler API to receive requests.
+
         wait:
             Number of seconds to wait for the service to initialize before use.
 
     Returns:
         A tuple indicating whether a new test service was created (or an
-        existing instance was re-used), the path to the staging directory, and
-        the path to the registry.
+        existing instance was re-used), the path to the staging directory, 
+        the path to the registry, and the chosen URL.
     """
     global test_staging
     global test_registry
     global test_process
+    global test_port
 
     if test_process is not None:
-        return False, test_staging, test_registry
+        return False, test_staging, test_registry, "http://0.0.0.0:" + str(test_port)
 
-    exe = _acquire_gobbler_binary()
-    _initialize_gobbler_process(exe, staging, registry)
+    exe = _acquire_gobbler_binary(version, overwrite)
+    _initialize_gobbler_process(exe, staging, registry, port)
 
+    import time
     time.sleep(wait) # give it some time to spin up.
-    return True, test_staging, test_registry
+    return True, test_staging, test_registry, "http://0.0.0.0:" + str(test_port)
 
 
-def _acquire_gobbler_binary():
+def _acquire_gobbler_binary(version: str, overwrite: bool):
+    import platform
     sysname = platform.system()
     if sysname == "Darwin":
         OS = "darwin"
@@ -64,16 +67,20 @@ def _acquire_gobbler_binary():
     else:
         raise ValueError("unsupported architecture '" + sysmachine + "'")
 
+    import appdirs
     cache = appdirs.user_data_dir("gobbler", "aaron")
     desired = "gobbler-" + OS + "-" + arch
-    exe = os.path.join(cache, desired)
+    exe = os.path.join(cache, desired + "-" + version)
 
-    if not os.path.exists(exe):
-        url = "https://github.com/ArtifactDB/gobbler/releases/download/latest/" + desired
+    if not os.path.exists(exe) or overwrite:
+        import shutil
+        url = "https://github.com/ArtifactDB/gobbler/releases/download/" + version + "/" + desired
 
         os.makedirs(cache, exist_ok=True)
         tmp = exe + ".tmp"
         with requests.get(url, stream=True) as r:
+            if r.status_code >= 300:
+                raise ut.format_error(r)
             with open(tmp, 'wb') as f:
                 shutil.copyfileobj(r.raw, f)
 
@@ -90,19 +97,31 @@ def _acquire_gobbler_binary():
     return exe
    
 
-def _initialize_gobbler_process(exe: str, staging: Optional[str], registry: Optional[str]):
+def _initialize_gobbler_process(exe: str, staging: Optional[str], registry: Optional[str], port: Optional[int]):
     if staging is None:
         staging = tempfile.mkdtemp()
-    if registry is None:
-        registry = tempfile.mkdtemp()
-
     global test_staging
     test_staging = staging
+
+    if registry is None:
+        registry = tempfile.mkdtemp()
     global test_registry
     test_registry = registry
 
+    if port is None:
+        import socket
+        with socket.socket(socket.AF_INET) as s:
+            s.bind(('0.0.0.0', 0))
+            port = s.getsockname()[1]
+    global test_port
+    test_port = port
+
     global test_process
-    test_process = subprocess.Popen([ exe, "-admin", os.getlogin(), "-registry", registry, "-staging", staging ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
+    import subprocess
+    test_process = subprocess.Popen([ exe, "-admin", os.getlogin(), "-registry", registry, "-staging", staging, "-port", str(port) ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    import atexit
+    atexit.register(stop_gobbler)
     return
 
 

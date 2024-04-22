@@ -1,11 +1,22 @@
-from typing import Optional, Dict
+from typing import Optional, Dict, List
 import json
 import os
 import tempfile
-import time
+import requests
 
 
-def dump_request(staging: str, action: str, payload: Optional[Dict]) -> str:
+def format_error(res):
+    ctype = res.headers["content-type"]
+    if ctype == "application/json":
+        info = res.json()
+        return requests.HTTPError(res.status_code, info["reason"])
+    elif ctype == "text/plain":
+        return requests.HTTPError(res.status_code, res.text)
+    else:
+        return requests.HTTPError(res.status_code)
+
+
+def dump_request(staging: str, url: str, action: str, payload: Optional[Dict]) -> str:
     if payload is None:
         as_str = character(0)
     else:
@@ -16,25 +27,8 @@ def dump_request(staging: str, action: str, payload: Optional[Dict]) -> str:
     with os.fdopen(fd, "w") as handle:
         handle.write(as_str)
 
-    return os.path.basename(holding_name)
+    res = requests.post(url + "/new/" + os.path.basename(holding_name))
+    if res.status_code >= 300:
+        raise format_error(res)
 
-
-def wait_response(staging: str, request_name: str, error: bool = True, timeout: float = 10):
-    target = os.path.join(staging, "responses", request_name)
-
-    start = time.time()
-    while not os.path.exists(target):
-        if time.time() - start > timeout:
-            if error:
-                raise ValueError("timed out waiting for a response to '" + request_name + "'")
-            return False
-        time.sleep(0.2)
-
-    if not error:
-        return True
-
-    with open(target, "r") as handle: 
-        output = json.load(handle)
-    if output["status"] == "FAILED":
-        raise ValueError(output["reason"])
-    return output
+    return res.json()

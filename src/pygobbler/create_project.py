@@ -1,7 +1,8 @@
 from typing import Optional, List
 from . import _utils as ut
 
-def create_project(project: str, staging: str, owners: Optional[List] = None, uploaders: Optional[List] = None):
+
+def create_project(project: str, staging: str, url: str, owners: Optional[List] = None, uploaders: Optional[List] = None):
     """
     Create a new project in the registry.
 
@@ -11,6 +12,9 @@ def create_project(project: str, staging: str, owners: Optional[List] = None, up
 
         staging:
             Path to the staging directory.
+
+        url:
+            URL for the Gobbler REST API.
 
         owners:
             List of user IDs of the owners of this project. If not provided,
@@ -33,11 +37,10 @@ def create_project(project: str, staging: str, owners: Optional[List] = None, up
         permissions["owners"] = owners
 
     if uploaders is not None:
-        permissions["uploaders"] = ut.sanitize_uploaders(uploaders)
+        permissions["uploaders"] = uploaders
 
     if len(permissions):
         req["permissions"] = permissions
 
-    chosen = ut.dump_request(staging, "create_project", req)
-    ut.wait_response(staging, chosen)
+    ut.dump_request(staging, url, "create_project", req)
     return

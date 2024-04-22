@@ -17,3 +17,12 @@ finally:
 
 from .start_gobbler import start_gobbler, stop_gobbler
 from .create_project import create_project
+from .fetch_permissions import fetch_permissions
+from .fetch_latest import fetch_latest
+from .fetch_summary import fetch_summary
+from .fetch_manifest import fetch_manifest
+from .fetch_usage import fetch_usage
+from .fetch_directory import fetch_directory
+from .allocate_upload_directory import allocate_upload_directory
+from .upload_directory import upload_directory
+from .remove_project import remove_project
