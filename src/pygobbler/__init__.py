@@ -32,3 +32,4 @@ from .list_files import list_files
 from .remove_project import remove_project
 from .remove_asset import remove_asset
 from .remove_version import remove_version
+from .clone_version import clone_version

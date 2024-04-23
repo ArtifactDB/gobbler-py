@@ -1,5 +1,5 @@
 import os
-from . import allocate_upload_directory as al
+from . import allocate_upload_directory
 from . import _utils as ut
 
 
@@ -36,12 +36,12 @@ def upload_directory(project: str, asset: str, version: str, directory: str, sta
     staging = os.path.normpath(staging)
 
     if os.path.dirname(directory) != staging:
-        newdir = al.allocateUploadDirectory(staging) 
+        newdir = allocate_upload_directory(staging) 
 
         for root, dirs, files in os.walk(directory):
             for f in files:
                 src = os.path.join(root, f)
-                rel = os.path.relpath(directory, root)
+                rel = os.path.relpath(src, directory)
                 dest = os.path.join(newdir, rel)
                 os.makedirs(os.path.dirname(dest), exist_ok=True)
 
@@ -58,7 +58,7 @@ def upload_directory(project: str, asset: str, version: str, directory: str, sta
                 else:
                     os.symlink(slink, dest)
 
-        directory = new.dir
+        directory = newdir
 
     req = {
         "source": os.path.basename(directory),
