@@ -1,24 +1,27 @@
 import pygobbler as pyg
 import tempfile
 import os
-
-_, staging, registry, url = pyg.start_gobbler()
-pyg.remove_project("test-upload", staging=staging, url=url)
-pyg.remove_project("test-more-upload", staging=staging, url=url)
-pyg.remove_project("test-upload-perms", staging=staging, url=url)
-pyg.create_project("test-upload", staging=staging, url=url)
-pyg.create_project("test-more-upload", staging=staging, url=url)
-pyg.create_project("test-upload-perms", staging=staging, url=url)
-
-tmp = tempfile.mkdtemp()
-with open(os.path.join(tmp, "blah.txt"), "w") as f:
-    f.write("BAR")
-os.mkdir(os.path.join(tmp, "foo"))
-with open(os.path.join(tmp, "foo", "bar.txt"), "w") as f:
-    f.write("1 2 3 4 5 6 7 8 9 10")
+import pytest
 
 
-def test_upload_directory_simple():
+@pytest.fixture(scope="module")
+def setup():
+    _, staging, registry, url = pyg.start_gobbler()
+
+    pyg.remove_project("test-upload", staging=staging, url=url)
+    pyg.remove_project("test-more-upload", staging=staging, url=url)
+    pyg.remove_project("test-upload-perms", staging=staging, url=url)
+    pyg.create_project("test-upload", staging=staging, url=url)
+    pyg.create_project("test-more-upload", staging=staging, url=url)
+    pyg.create_project("test-upload-perms", staging=staging, url=url)
+
+    tmp = tempfile.mkdtemp()
+    with open(os.path.join(tmp, "blah.txt"), "w") as f:
+        f.write("BAR")
+    os.mkdir(os.path.join(tmp, "foo"))
+    with open(os.path.join(tmp, "foo", "bar.txt"), "w") as f:
+        f.write("1 2 3 4 5 6 7 8 9 10")
+
     pyg.upload_directory(
         project="test-upload", 
         asset="jennifer", 
@@ -27,6 +30,12 @@ def test_upload_directory_simple():
         staging=staging, 
         url=url
     )
+
+    return tmp
+
+
+def test_upload_directory_simple(setup):
+    _, staging, registry, url = pyg.start_gobbler()
 
     # Checking that the files were, in fact, correctly uploaded.
     man = pyg.fetch_manifest("test-upload", "jennifer", "1", registry=registry, url=url)
@@ -39,7 +48,7 @@ def test_upload_directory_simple():
         project="test-upload", 
         asset="jennifer", 
         version="2", 
-        directory=tmp,
+        directory=setup, # i.e., the 'tmp' returned by the setup.
         staging=staging,
         url=url
     )
@@ -50,7 +59,9 @@ def test_upload_directory_simple():
         assert "link" in v
 
 
-def test_upload_directory_links():
+def test_upload_directory_links(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
     dest = tempfile.mkdtemp()
     pyg.clone_version("test-upload", "jennifer", "2", dest, registry=registry)
     with open(os.path.join(dest, "whee"), "w") as f:
@@ -72,7 +83,9 @@ def test_upload_directory_links():
     assert "link" not in man["whee"]
 
 
-def test_upload_directory_staging():
+def test_upload_directory_staging(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
     dir = pyg.allocate_upload_directory(staging)
     with open(os.path.join(dir, "blah.txt"), "w") as f:
         f.write("A B C D E")

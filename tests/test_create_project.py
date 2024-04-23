@@ -1,9 +1,10 @@
 import pygobbler as pyg
 import datetime
 
-_, staging, registry, url = pyg.start_gobbler()
 
 def test_create_project():
+    _, staging, registry, url = pyg.start_gobbler()
+
     pyg.create_project(
         project="test-create",
         owners=["LTLA", "jkanche"],

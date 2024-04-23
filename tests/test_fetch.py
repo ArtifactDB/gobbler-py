@@ -1,24 +1,30 @@
 import pygobbler as pyg
 import tempfile
 import os
-
-_, staging, registry, url = pyg.start_gobbler()
-
-pyg.remove_project("test", staging=staging, url=url)
-pyg.create_project("test", staging=staging, url=url)
-
-src = pyg.allocate_upload_directory(staging)
-with open(os.path.join(src, "foo"), "w") as f:
-    f.write("BAR")
-os.mkdir(os.path.join(src, "whee"))
-with open(os.path.join(src, "whee", "blah"), "w") as f:
-    f.write("stuff")
-
-pyg.upload_directory("test", "fetch", "v1", src, staging=staging, url=url)
-pyg.upload_directory("test", "fetch", "v2", src, staging=staging, url=url)
+import pytest
 
 
-def test_fetch_manifest():
+@pytest.fixture(scope="module")
+def setup():
+    _, staging, registry, url = pyg.start_gobbler()
+
+    pyg.remove_project("test", staging=staging, url=url)
+    pyg.create_project("test", staging=staging, url=url)
+
+    src = pyg.allocate_upload_directory(staging)
+    with open(os.path.join(src, "foo"), "w") as f:
+        f.write("BAR")
+    os.mkdir(os.path.join(src, "whee"))
+    with open(os.path.join(src, "whee", "blah"), "w") as f:
+        f.write("stuff")
+
+    pyg.upload_directory("test", "fetch", "v1", src, staging=staging, url=url)
+    pyg.upload_directory("test", "fetch", "v2", src, staging=staging, url=url)
+
+
+def test_fetch_manifest(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
     man = pyg.fetch_manifest("test", "fetch", "v1", registry=registry, url=url)
     assert man["foo"]["size"] == 3
     assert man["whee/blah"]["size"] == 5
@@ -28,7 +34,9 @@ def test_fetch_manifest():
     assert man == rman
 
 
-def test_fetch_summary():
+def test_fetch_summary(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
     summ = pyg.fetch_summary("test", "fetch", "v1", registry=registry, url=url)
     assert isinstance(summ["upload_user_id"], str)
     assert isinstance(summ["upload_start"], str)
@@ -39,19 +47,25 @@ def test_fetch_summary():
     assert summ == rsumm
 
 
-def test_fetch_latest():
+def test_fetch_latest(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
     assert pyg.fetch_latest("test", "fetch", registry=registry, url=url) == "v2"
     assert pyg.fetch_latest("test", "missing", registry=registry, url=url) is None
     assert pyg.fetch_latest("test", "fetch", registry=registry, url=url, force_remote=True) == "v2"
     assert pyg.fetch_latest("test", "missing", registry=registry, url=url, force_remote=True) is None
 
 
-def test_fetch_usage():
+def test_fetch_usage(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
     assert pyg.fetch_usage("test", registry=registry, url=url) > 0
     assert pyg.fetch_usage("test", registry=registry, url=url, force_remote=True) > 0
 
 
-def test_fetch_permissions():
+def test_fetch_permissions(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
     perms = pyg.fetch_permissions("test", registry=registry, url=url)
     assert isinstance(perms["owners"], list)
     assert isinstance(perms["uploaders"], list)
@@ -60,7 +74,9 @@ def test_fetch_permissions():
     assert perms == rperms
 
 
-def test_fetch_directory():
+def test_fetch_directory(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
     dir = pyg.fetch_directory("test/fetch/v2", registry=registry, url=url)
     assert dir.startswith(registry)
     with open(os.path.join(dir, "foo"), "r") as handle:
