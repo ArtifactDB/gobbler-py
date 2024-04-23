@@ -1,0 +1,173 @@
+pygobbler package
+=================
+
+Submodules
+----------
+
+pygobbler.allocate\_upload\_directory module
+--------------------------------------------
+
+.. automodule:: pygobbler.allocate_upload_directory
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.clone\_version module
+-------------------------------
+
+.. automodule:: pygobbler.clone_version
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.create\_project module
+--------------------------------
+
+.. automodule:: pygobbler.create_project
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.fetch\_directory module
+---------------------------------
+
+.. automodule:: pygobbler.fetch_directory
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.fetch\_latest module
+------------------------------
+
+.. automodule:: pygobbler.fetch_latest
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.fetch\_manifest module
+--------------------------------
+
+.. automodule:: pygobbler.fetch_manifest
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.fetch\_permissions module
+-----------------------------------
+
+.. automodule:: pygobbler.fetch_permissions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.fetch\_summary module
+-------------------------------
+
+.. automodule:: pygobbler.fetch_summary
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.fetch\_usage module
+-----------------------------
+
+.. automodule:: pygobbler.fetch_usage
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.list\_assets module
+-----------------------------
+
+.. automodule:: pygobbler.list_assets
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.list\_files module
+----------------------------
+
+.. automodule:: pygobbler.list_files
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.list\_projects module
+-------------------------------
+
+.. automodule:: pygobbler.list_projects
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.list\_versions module
+-------------------------------
+
+.. automodule:: pygobbler.list_versions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.remove\_asset module
+------------------------------
+
+.. automodule:: pygobbler.remove_asset
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.remove\_project module
+--------------------------------
+
+.. automodule:: pygobbler.remove_project
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.remove\_version module
+--------------------------------
+
+.. automodule:: pygobbler.remove_version
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.service\_info module
+------------------------------
+
+.. automodule:: pygobbler.service_info
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.start\_gobbler module
+-------------------------------
+
+.. automodule:: pygobbler.start_gobbler
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.upload\_directory module
+----------------------------------
+
+.. automodule:: pygobbler.upload_directory
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.version\_path module
+------------------------------
+
+.. automodule:: pygobbler.version_path
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: pygobbler
+   :members:
+   :undoc-members:
+   :show-inheritance:

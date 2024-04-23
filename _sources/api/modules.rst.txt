@@ -1,0 +1,7 @@
+pygobbler
+=========
+
+.. toctree::
+   :maxdepth: 4
+
+   pygobbler
