@@ -116,10 +116,13 @@ def _initialize_gobbler_process(exe: str, staging: Optional[str], registry: Opti
     global test_port
     test_port = port
 
-    global test_process
+    import getpass
+    user = getpass.getuser()
 
     import subprocess
-    test_process = subprocess.Popen([ exe, "-admin", os.getlogin(), "-registry", registry, "-staging", staging, "-port", str(port) ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    global test_process
+    test_process = subprocess.Popen([ exe, "-admin", user, "-registry", registry, "-staging", staging, "-port", str(port) ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+
     import atexit
     atexit.register(stop_gobbler)
     return
