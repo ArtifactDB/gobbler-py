@@ -25,7 +25,7 @@ def clone_version(project: str, asset: str, version: str, destination: str, regi
             The name of the project.
 
         asset:
-            The name of the asset of the ``project`..
+            The name of the asset of the ``project``.
 
         version:
             The name of the version of the ``asset`` to clone.
