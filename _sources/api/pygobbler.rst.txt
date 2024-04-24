@@ -12,6 +12,14 @@ pygobbler.allocate\_upload\_directory module
    :undoc-members:
    :show-inheritance:
 
+pygobbler.approve\_probation module
+-----------------------------------
+
+.. automodule:: pygobbler.approve_probation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pygobbler.clone\_version module
 -------------------------------
 
@@ -120,6 +128,14 @@ pygobbler.refresh\_usage module
 -------------------------------
 
 .. automodule:: pygobbler.refresh_usage
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.reject\_probation module
+----------------------------------
+
+.. automodule:: pygobbler.reject_probation
    :members:
    :undoc-members:
    :show-inheritance:
