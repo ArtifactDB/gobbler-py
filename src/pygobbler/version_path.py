@@ -16,7 +16,7 @@ def version_path(project, asset, version, **kwargs) -> str:
             The name of the version of the ``asset`` to obtain.
 
         kwargs:
-            Further arguments to :py:func:`~fetch_directory.fetch_directory`.
+            Further arguments to :py:func:`~.fetch_directory`.
 
     Returns:
         The path to the directory containing the desired version.

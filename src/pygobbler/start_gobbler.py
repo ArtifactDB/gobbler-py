@@ -23,15 +23,24 @@ def start_gobbler(staging: Optional[str] = None, registry: Optional[str] = None,
             automatically created.
 
         port:
-            Port number for the Gobbler API to receive requests.
+            Port number for the Gobbler API to receive requests. If None, an
+            open port is automatically chosen.
 
         wait:
             Number of seconds to wait for the service to initialize before use.
 
+        version:
+            Version of the service to run.
+
+        overwrite:
+            Whether to overwrite the existing Gobbler binary.
+
     Returns:
         A tuple indicating whether a new test service was created (or an
-        existing instance was re-used), the path to the staging directory, 
-        the path to the registry, and the chosen URL.
+        existing instance was re-used), the path to the staging directory, the
+        path to the registry, and the chosen URL. If a service is already
+        running, this function is a no-op and the configuration details of the
+        existing service will be returned.
     """
     global test_staging
     global test_registry
@@ -130,9 +139,8 @@ def _initialize_gobbler_process(exe: str, staging: Optional[str], registry: Opti
 
 def stop_gobbler():
     """
-    Stop any existing gobbler test service. This will also reset any URL that
-    was modified by :py:func:`~start_gobbler`. If no test service was running,
-    this function is a no-op.
+    Stop any gobbler test service started by :py:func:`~.start_gobbler`. If no
+    test service was running, this function is a no-op.
     """
     global test_process 
     if test_process is not None:

@@ -1,7 +1,7 @@
 def allocate_upload_directory(staging: str) -> str:
     """
     Allocate a subdirectory in the staging directory to prepare files for
-    upload via :py:func:`~upload_directory.upload_directory`.
+    upload via :py:func:`~.upload_directory`.
 
     Args:
         staging:

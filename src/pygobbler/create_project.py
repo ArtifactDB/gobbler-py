@@ -22,9 +22,8 @@ def create_project(project: str, staging: str, url: str, owners: Optional[List] 
 
         uploaders:
             List specifying the authorized uploaders for this project. See the
-            ``uploaders`` field in
-            :py:func:`~fetch_permissions.fetch_permissions` return value for
-            the the expected format. 
+            ``uploaders`` field in :py:func:`~.fetch_permissions` return value
+            for the expected format. 
 
     Returns:
         On success, the requested project is created in the registry.

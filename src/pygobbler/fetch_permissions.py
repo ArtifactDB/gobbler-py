@@ -30,16 +30,16 @@ def fetch_permissions(project: str, registry: str, url: str, force_remote: bool 
         dictionary has the following fields:
 
         - ``id``, string containing a user ID that is authorized to upload.
-        - (optional) ``asset``, string containing the name of the asset that
+        - ``asset`` (optional), string containing the name of the asset that
           the uploader is allowed to upload to. If not present, there is no
           restriction on the uploaded asset name.
-        - (optional) ``version``, string containing the name of the version
+        - ``version`` (optional), string containing the name of the version
           that the uploader is allowed to upload to. If not present, there is
           no restriction on the uploaded version name.
-        - (optional) ``until``, string containing the expiry date of this
+        - ``until`` (optional), string containing the expiry date of this
           authorization in Internet Date/Time format. If not provided, the
           authorization does not expire.
-        - (optional) ``trusted``, whether the uploader is trusted. If not
+        - ``trusted`` (optional), whether the uploader is trusted. If not
           provided, defaults to false.
     """
     if os.path.exists(registry) and not force_remote:

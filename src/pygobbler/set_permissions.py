@@ -27,8 +27,8 @@ def set_permissions(project: str, registry: str, staging: str, url: str, owners:
         uploaders:
             List of dictionaries specifying the authorized uploaders for this
             project.  See the ``uploaders`` field in the return value of
-            :py:func:`~fetch_permissions.fetch_permissions` for  the expected
-            format. If None, no change is made to the existing uploaders.
+            :py:func:`~.fetch_permissions` for  the expected format. If None,
+            no change is made to the existing uploaders.
 
         append:
             Whether ``owners`` and ``uploaders`` should be appended to the

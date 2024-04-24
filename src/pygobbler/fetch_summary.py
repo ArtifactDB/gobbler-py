@@ -39,12 +39,12 @@ def fetch_summary(project: str, asset: str, version: str, registry: str, url: st
     Returns:
         Dictionary containing summary information including:
 
-        - `uploader_user_id`, string containing the UID of the uploading user.
-        - `upload_start_time`, string containing the upload start time in
+        - ``uploader_user_id``, string containing the UID of the uploading user.
+        - ``upload_start_time``, string containing the upload start time in
           Internet Date/Time format.
-        - `upload_finish_time`, string containing the upload finish time in
+        - ``upload_finish_time``, string containing the upload finish time in
           Internet Date/Time format.
-        - `probation` (optional), boolean indicating whether this version of
+        - ``on_probation`` (optional), boolean indicating whether this version of
           the asset is a probational upload.
     """
 

@@ -11,9 +11,9 @@ def clone_version(project: str, asset: str, version: str, destination: str, regi
     that has the same structure as that of the specified project-asset-version.
     All files in the version are represented as symlinks from ``destination``
     to the corresponding file in the ``registry``.The idea is that, when
-    ``destination`` is used in :py:func:`~upload_directory.upload_directory`,
-    the symlinks are converted into upload links. This allows users to create
-    new versions very cheaply as duplicate files are not stored in the backend.
+    ``destination`` is used in :py:func:`~.upload_directory`, the symlinks are
+    converted into upload links. This allows users to create new versions very
+    cheaply as duplicate files are not stored in the backend.
 
     Users can more-or-less do whatever they want inside the cloned ``destination``,
     but the symlink targets should be read-only as they refer to immutable files in

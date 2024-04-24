@@ -18,10 +18,9 @@ def upload_directory(project: str, asset: str, version: str, directory: str, sta
             The name of a new version of ``asset``.
 
         directory:
-            Path to a directory to be uploaded. This should be a subdirectory
-            of ``staging`` for best performance, see
-            :py:func:`~allocate_upload_directory.allocate_upload_directory` for
-            details.
+            Path to a directory to be uploaded. For best performace, this
+            should be a subdirectory of ``staging``, e.g., as created by
+            :py:func:`~.allocate_upload_directory`.
 
         staging:
             Path to the staging directory.
