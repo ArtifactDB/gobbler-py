@@ -39,3 +39,4 @@ from .refresh_latest import refresh_latest
 from .refresh_usage import refresh_usage
 from .approve_probation import approve_probation
 from .reject_probation import reject_probation
+from .set_permissions import set_permissions
