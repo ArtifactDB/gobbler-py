@@ -172,6 +172,14 @@ pygobbler.service\_info module
    :undoc-members:
    :show-inheritance:
 
+pygobbler.set\_permissions module
+---------------------------------
+
+.. automodule:: pygobbler.set_permissions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pygobbler.start\_gobbler module
 -------------------------------
 

@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="pygobbler" href="modules.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
-        <title>pygobbler package - pygobbler 0.0.post1.dev1+gbff7e63 documentation</title>
+        <title>pygobbler package - pygobbler 0.0.post1.dev1+g15dad01 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+gbff7e63 documentation</div></a>
+      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g15dad01 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+gbff7e63 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g15dad01 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -816,6 +816,35 @@ directories.</p>
 </dd></dl>
 
 </section>
+<section id="module-pygobbler.set_permissions">
+<span id="pygobbler-set-permissions-module"></span><h2>pygobbler.set_permissions module<a class="headerlink" href="#module-pygobbler.set_permissions" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pygobbler.set_permissions.set_permissions">
+<span class="sig-prename descclassname"><span class="pre">pygobbler.set_permissions.</span></span><span class="sig-name descname"><span class="pre">set_permissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">staging</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">owners</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uploaders</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">append</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/set_permissions.html#set_permissions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.set_permissions.set_permissions" title="Link to this definition">¶</a></dt>
+<dd><p>Set the owner and uploader permissions for a project.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name of the project.</p></li>
+<li><p><strong>registry</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the Gobbler registry.</p></li>
+<li><p><strong>staging</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the staging directory.</p></li>
+<li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – URL of the REST API.</p></li>
+<li><p><strong>owners</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>]</span>) – List of user IDs for owners of this project. If None, no change is
+made to the existing owners in the project permissions.</p></li>
+<li><p><strong>uploaders</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>]</span>) – List of dictionaries specifying the authorized uploaders for this
+project.  See the <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> field in the return value of
+<code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_permissions()</span></code> for  the expected
+format. If None, no change is made to the existing uploaders.</p></li>
+<li><p><strong>append</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether <code class="docutils literal notranslate"><span class="pre">owners</span></code> and <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> should be appended to the
+existing owners and uploaders, respectively. If False, the
+<code class="docutils literal notranslate"><span class="pre">owners</span></code> and <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> are used to replace the existing
+values in the project permissions.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="module-pygobbler.start_gobbler">
 <span id="pygobbler-start-gobbler-module"></span><h2>pygobbler.start_gobbler module<a class="headerlink" href="#module-pygobbler.start_gobbler" title="Link to this heading">¶</a></h2>
 <dl class="py function">
@@ -1044,6 +1073,10 @@ details.</p></li>
 <li><a class="reference internal" href="#pygobbler.service_info.service_info"><code class="docutils literal notranslate"><span class="pre">service_info()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#module-pygobbler.set_permissions">pygobbler.set_permissions module</a><ul>
+<li><a class="reference internal" href="#pygobbler.set_permissions.set_permissions"><code class="docutils literal notranslate"><span class="pre">set_permissions()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-pygobbler.start_gobbler">pygobbler.start_gobbler module</a><ul>
 <li><a class="reference internal" href="#pygobbler.start_gobbler.start_gobbler"><code class="docutils literal notranslate"><span class="pre">start_gobbler()</span></code></a></li>
 <li><a class="reference internal" href="#pygobbler.start_gobbler.stop_gobbler"><code class="docutils literal notranslate"><span class="pre">stop_gobbler()</span></code></a></li>
@@ -1069,7 +1102,7 @@ details.</p></li>
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=f092a647"></script>
+</div><script src="../_static/documentation_options.js?v=8e1a9185"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>

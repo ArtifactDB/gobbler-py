@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
-        <title>pygobbler.service_info - pygobbler 0.0.post1.dev1+g15dad01 documentation</title>
+        <title>pygobbler.set_permissions - pygobbler 0.0.post1.dev1+g15dad01 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -196,31 +196,63 @@
           </label>
         </div>
         <article role="main">
-          <h1>Source code for pygobbler.service_info</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
-<span class="kn">import</span> <span class="nn">requests</span>
+          <h1>Source code for pygobbler.set_permissions</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Dict</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_utils</span> <span class="k">as</span> <span class="n">ut</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">fetch_permissions</span>
 
 
-<div class="viewcode-block" id="service_info">
-<a class="viewcode-back" href="../../api/pygobbler.html#pygobbler.service_info.service_info">[docs]</a>
-<span class="k">def</span> <span class="nf">service_info</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<div class="viewcode-block" id="set_permissions">
+<a class="viewcode-back" href="../../api/pygobbler.html#pygobbler.set_permissions.set_permissions">[docs]</a>
+<span class="k">def</span> <span class="nf">set_permissions</span><span class="p">(</span><span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">registry</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">staging</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">owners</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">uploaders</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">append</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Get information about the Gobbler service, namely the locations of the</span>
-<span class="sd">    staging directory and registry.</span>
+<span class="sd">    Set the owner and uploader permissions for a project.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        url:</span>
-<span class="sd">            URL of the gobbler REST API.</span>
+<span class="sd">        project:</span>
+<span class="sd">            Name of the project.</span>
 
-<span class="sd">    Returns:</span>
-<span class="sd">        Dictionary containing the location of the staging and registry</span>
-<span class="sd">        directories.</span>
+<span class="sd">        registry:</span>
+<span class="sd">            Path to the Gobbler registry.</span>
+
+<span class="sd">        staging:</span>
+<span class="sd">            Path to the staging directory.</span>
+
+<span class="sd">        url:</span>
+<span class="sd">            URL of the REST API.</span>
+
+<span class="sd">        owners:</span>
+<span class="sd">            List of user IDs for owners of this project. If None, no change is</span>
+<span class="sd">            made to the existing owners in the project permissions.</span>
+
+<span class="sd">        uploaders:</span>
+<span class="sd">            List of dictionaries specifying the authorized uploaders for this</span>
+<span class="sd">            project.  See the ``uploaders`` field in the return value of</span>
+<span class="sd">            :py:func:`~fetch_permissions.fetch_permissions` for  the expected</span>
+<span class="sd">            format. If None, no change is made to the existing uploaders.</span>
+
+<span class="sd">        append:</span>
+<span class="sd">            Whether ``owners`` and ``uploaders`` should be appended to the</span>
+<span class="sd">            existing owners and uploaders, respectively. If False, the</span>
+<span class="sd">            ``owners`` and ``uploaders`` are used to replace the existing</span>
+<span class="sd">            values in the project permissions.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="s2">&quot;/info&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">&gt;=</span> <span class="mi">300</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ut</span><span class="o">.</span><span class="n">format_error</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span></div>
+    <span class="n">perms</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">if</span> <span class="n">append</span><span class="p">:</span>
+        <span class="n">oldperms</span> <span class="o">=</span> <span class="n">fetch_permissions</span><span class="p">(</span><span class="n">project</span><span class="p">,</span> <span class="n">registry</span><span class="o">=</span><span class="n">registry</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">owners</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">oldset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">oldperms</span><span class="p">[</span><span class="s2">&quot;owners&quot;</span><span class="p">])</span>
+            <span class="n">perms</span><span class="p">[</span><span class="s2">&quot;owners&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">oldperms</span><span class="p">[</span><span class="s2">&quot;owners&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">oldset</span><span class="p">,</span> <span class="n">owners</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">uploaders</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">perms</span><span class="p">[</span><span class="s2">&quot;uploaders&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">oldperms</span><span class="p">[</span><span class="s2">&quot;uploaders&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">uploaders</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">owners</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">perms</span><span class="p">[</span><span class="s2">&quot;owners&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">owners</span>
+        <span class="k">if</span> <span class="n">uploaders</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">perms</span><span class="p">[</span><span class="s2">&quot;uploaders&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">uploaders</span>
+
+    <span class="n">ut</span><span class="o">.</span><span class="n">dump_request</span><span class="p">(</span><span class="n">staging</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;set_permissions&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span> <span class="s2">&quot;permissions&quot;</span><span class="p">:</span> <span class="n">perms</span> <span class="p">})</span></div>
 
 </pre></div>
         </article>
