@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="pygobbler" href="modules.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
-        <title>pygobbler package - pygobbler 0.0.post1.dev1+gd4044b9 documentation</title>
+        <title>pygobbler package - pygobbler 0.0.post1.dev1+g1c024e2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+gd4044b9 documentation</div></a>
+      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g1c024e2 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+gd4044b9 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g1c024e2 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -209,7 +209,7 @@
 <dt class="sig sig-object py" id="pygobbler.allocate_upload_directory.allocate_upload_directory">
 <span class="sig-prename descclassname"><span class="pre">pygobbler.allocate_upload_directory.</span></span><span class="sig-name descname"><span class="pre">allocate_upload_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">staging</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/allocate_upload_directory.html#allocate_upload_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.allocate_upload_directory.allocate_upload_directory" title="Link to this definition">¶</a></dt>
 <dd><p>Allocate a subdirectory in the staging directory to prepare files for
-upload via <code class="xref py py-func docutils literal notranslate"><span class="pre">upload_directory()</span></code>.</p>
+upload via <a class="reference internal" href="#pygobbler.upload_directory.upload_directory" title="pygobbler.upload_directory.upload_directory"><code class="xref py py-func docutils literal notranslate"><span class="pre">upload_directory()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>staging</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the staging directory.</p>
@@ -255,9 +255,9 @@ This is typically used to prepare a new version for a lightweight upload.</p>
 that has the same structure as that of the specified project-asset-version.
 All files in the version are represented as symlinks from <code class="docutils literal notranslate"><span class="pre">destination</span></code>
 to the corresponding file in the <code class="docutils literal notranslate"><span class="pre">registry</span></code>.The idea is that, when
-<code class="docutils literal notranslate"><span class="pre">destination</span></code> is used in <code class="xref py py-func docutils literal notranslate"><span class="pre">upload_directory()</span></code>,
-the symlinks are converted into upload links. This allows users to create
-new versions very cheaply as duplicate files are not stored in the backend.</p>
+<code class="docutils literal notranslate"><span class="pre">destination</span></code> is used in <a class="reference internal" href="#pygobbler.upload_directory.upload_directory" title="pygobbler.upload_directory.upload_directory"><code class="xref py py-func docutils literal notranslate"><span class="pre">upload_directory()</span></code></a>, the symlinks are
+converted into upload links. This allows users to create new versions very
+cheaply as duplicate files are not stored in the backend.</p>
 <p>Users can more-or-less do whatever they want inside the cloned <code class="docutils literal notranslate"><span class="pre">destination</span></code>,
 but the symlink targets should be read-only as they refer to immutable files in
 the <code class="docutils literal notranslate"><span class="pre">registry</span></code>.  If a file in <code class="docutils literal notranslate"><span class="pre">destination</span></code> needs to be modified, the
@@ -291,9 +291,8 @@ symlink should be deleted and replaced with a new file.</p>
 <li><p><strong>owners</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>]</span>) – List of user IDs of the owners of this project. If not provided,
 the current user will be set as the sole owner.</p></li>
 <li><p><strong>uploaders</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>]</span>) – List specifying the authorized uploaders for this project. See the
-<code class="docutils literal notranslate"><span class="pre">uploaders</span></code> field in
-<code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_permissions()</span></code> return value for
-the the expected format.</p></li>
+<code class="docutils literal notranslate"><span class="pre">uploaders</span></code> field in <a class="reference internal" href="#pygobbler.fetch_permissions.fetch_permissions" title="pygobbler.fetch_permissions.fetch_permissions"><code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_permissions()</span></code></a> return value
+for the expected format.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -437,16 +436,16 @@ of this project; and <code class="docutils literal notranslate"><span class="pre
 dictionary has the following fields:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>, string containing a user ID that is authorized to upload.</p></li>
-<li><p>(optional) <code class="docutils literal notranslate"><span class="pre">asset</span></code>, string containing the name of the asset that
+<li><p><code class="docutils literal notranslate"><span class="pre">asset</span></code> (optional), string containing the name of the asset that
 the uploader is allowed to upload to. If not present, there is no
 restriction on the uploaded asset name.</p></li>
-<li><p>(optional) <code class="docutils literal notranslate"><span class="pre">version</span></code>, string containing the name of the version
+<li><p><code class="docutils literal notranslate"><span class="pre">version</span></code> (optional), string containing the name of the version
 that the uploader is allowed to upload to. If not present, there is
 no restriction on the uploaded version name.</p></li>
-<li><p>(optional) <code class="docutils literal notranslate"><span class="pre">until</span></code>, string containing the expiry date of this
+<li><p><code class="docutils literal notranslate"><span class="pre">until</span></code> (optional), string containing the expiry date of this
 authorization in Internet Date/Time format. If not provided, the
 authorization does not expire.</p></li>
-<li><p>(optional) <code class="docutils literal notranslate"><span class="pre">trusted</span></code>, whether the uploader is trusted. If not
+<li><p><code class="docutils literal notranslate"><span class="pre">trusted</span></code> (optional), whether the uploader is trusted. If not
 provided, defaults to false.</p></li>
 </ul>
 </p>
@@ -479,12 +478,12 @@ remote queries.</p></li>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p><ul class="simple">
-<li><p><cite>uploader_user_id</cite>, string containing the UID of the uploading user.</p></li>
-<li><p><cite>upload_start_time</cite>, string containing the upload start time in
+<li><p><code class="docutils literal notranslate"><span class="pre">uploader_user_id</span></code>, string containing the UID of the uploading user.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">upload_start_time</span></code>, string containing the upload start time in
 Internet Date/Time format.</p></li>
-<li><p><cite>upload_finish_time</cite>, string containing the upload finish time in
+<li><p><code class="docutils literal notranslate"><span class="pre">upload_finish_time</span></code>, string containing the upload finish time in
 Internet Date/Time format.</p></li>
-<li><p><cite>probation</cite> (optional), boolean indicating whether this version of
+<li><p><code class="docutils literal notranslate"><span class="pre">on_probation</span></code> (optional), boolean indicating whether this version of
 the asset is a probational upload.</p></li>
 </ul>
 </p>
@@ -813,8 +812,8 @@ directories.</p>
 made to the existing owners in the project permissions.</p></li>
 <li><p><strong>uploaders</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>]</span>) – List of dictionaries specifying the authorized uploaders for this
 project.  See the <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> field in the return value of
-<code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_permissions()</span></code> for  the expected
-format. If None, no change is made to the existing uploaders.</p></li>
+<a class="reference internal" href="#pygobbler.fetch_permissions.fetch_permissions" title="pygobbler.fetch_permissions.fetch_permissions"><code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_permissions()</span></code></a> for  the expected format. If None,
+no change is made to the existing uploaders.</p></li>
 <li><p><strong>append</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether <code class="docutils literal notranslate"><span class="pre">owners</span></code> and <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> should be appended to the
 existing owners and uploaders, respectively. If False, the
 <code class="docutils literal notranslate"><span class="pre">owners</span></code> and <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> are used to replace the existing
@@ -856,9 +855,8 @@ the path to the registry, and the chosen URL.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygobbler.start_gobbler.stop_gobbler">
 <span class="sig-prename descclassname"><span class="pre">pygobbler.start_gobbler.</span></span><span class="sig-name descname"><span class="pre">stop_gobbler</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/start_gobbler.html#stop_gobbler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.start_gobbler.stop_gobbler" title="Link to this definition">¶</a></dt>
-<dd><p>Stop any existing gobbler test service. This will also reset any URL that
-was modified by <a class="reference internal" href="#pygobbler.start_gobbler.start_gobbler" title="pygobbler.start_gobbler.start_gobbler"><code class="xref py py-func docutils literal notranslate"><span class="pre">start_gobbler()</span></code></a>. If no test service was running,
-this function is a no-op.</p>
+<dd><p>Stop any gobbler test service started by <a class="reference internal" href="#pygobbler.start_gobbler.start_gobbler" title="pygobbler.start_gobbler.start_gobbler"><code class="xref py py-func docutils literal notranslate"><span class="pre">start_gobbler()</span></code></a>. If no
+test service was running, this function is a no-op.</p>
 </dd></dl>
 
 </section>
@@ -874,10 +872,9 @@ this function is a no-op.</p>
 <li><p><strong>project</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – The name of an existing project.</p></li>
 <li><p><strong>asset</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – The name of a new or existing asset in <code class="docutils literal notranslate"><span class="pre">project</span></code>.</p></li>
 <li><p><strong>version</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – The name of a new version of <code class="docutils literal notranslate"><span class="pre">asset</span></code>.</p></li>
-<li><p><strong>directory</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to a directory to be uploaded. This should be a subdirectory
-of <code class="docutils literal notranslate"><span class="pre">staging</span></code> for best performance, see
-<code class="xref py py-func docutils literal notranslate"><span class="pre">allocate_upload_directory()</span></code> for
-details.</p></li>
+<li><p><strong>directory</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to a directory to be uploaded. For best performace, this
+should be a subdirectory of <code class="docutils literal notranslate"><span class="pre">staging</span></code>, e.g., as created by
+<a class="reference internal" href="#pygobbler.allocate_upload_directory.allocate_upload_directory" title="pygobbler.allocate_upload_directory.allocate_upload_directory"><code class="xref py py-func docutils literal notranslate"><span class="pre">allocate_upload_directory()</span></code></a>.</p></li>
 <li><p><strong>staging</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the staging directory.</p></li>
 <li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – URL for the Gobbler REST API.</p></li>
 <li><p><strong>probation</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether to upload a probational version.</p></li>
@@ -899,7 +896,7 @@ details.</p></li>
 <li><p><strong>project</strong> – The name of the project.</p></li>
 <li><p><strong>asset</strong> – The name of the asset of the <code class="docutils literal notranslate"><span class="pre">project</span></code>.</p></li>
 <li><p><strong>version</strong> – The name of the version of the <code class="docutils literal notranslate"><span class="pre">asset</span></code> to obtain.</p></li>
-<li><p><strong>kwargs</strong> – Further arguments to <code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_directory()</span></code>.</p></li>
+<li><p><strong>kwargs</strong> – Further arguments to <a class="reference internal" href="#pygobbler.fetch_directory.fetch_directory" title="pygobbler.fetch_directory.fetch_directory"><code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_directory()</span></code></a>.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -1080,7 +1077,7 @@ details.</p></li>
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=cad2f7df"></script>
+</div><script src="../_static/documentation_options.js?v=eb868b33"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
