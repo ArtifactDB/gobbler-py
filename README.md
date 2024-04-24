@@ -12,8 +12,12 @@
 
 # Python client for the gobbler service
 
-Pretty much as it says on the tin; provides an Python client for the [Gobbler service](https://github.com/ArtifactDB/gobbler),
-as a sister package to the corresponding [R client](https://github.com/ArtifactDB/gobbler-R).
+![Unit tests](https://github.com/ArtifactDB/gobbler-py/actions/workflows/run-tests.yaml/badge.svg)
+![Documentation](https://github.com/ArtifactDB/gobbler-py/actions/workflows/build-docs.yaml/badge.svg)
+
+Pretty much as it says on the tin; provides an Python client for the [Gobbler service](https://github.com/ArtifactDB/gobbler).
+It is assumed that the users of this package and the Gobbler service itself are accessing the same shared filesystem;
+this is typically the case for high-performance computing (HPC) clusters in scientific institutions.
 To demonstrate, let's spin up a mock Gobbler instance:
 
 ```python
