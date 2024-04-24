@@ -7,14 +7,14 @@ import shutil
 from . import _utils as ut
 
 
-def local_registry(cache: Optional[str], url: str) -> str:
+def _local_registry(cache: Optional[str], url: str) -> str:
     if cache is None:
         import appdirs
         cache = appdirs.user_data_dir("gobbler", "aaron")
     return os.path.join(cache, urllib.parse.quote_plus(url))
 
 
-def acquire_file(cache: str, path: str, name: str, url: str, overwrite: bool) -> str:
+def _acquire_file(cache: str, path: str, name: str, url: str, overwrite: bool) -> str:
     target = os.path.join(cache, "REGISTRY", path, name)
 
     if overwrite or not os.path.exists(target):
@@ -79,7 +79,7 @@ def fetch_directory(path: str, registry: str, url: str, cache: Optional[str] = N
     if not force_remote and os.path.exists(registry):
         return os.path.join(registry, path)
 
-    cache = local_registry(cache, url)
+    cache = _local_registry(cache, url)
     final = os.path.join(cache, "REGISTRY", path)
     ok = os.path.join(cache, "SUCCESS", path, "....OK")
     if not overwrite and os.path.exists(ok) and os.path.exists(final):
@@ -92,12 +92,12 @@ def fetch_directory(path: str, registry: str, url: str, cache: Optional[str] = N
 
     if concurrent == 1:
         for y in listing:
-            acquire_file(cache, name=y, path=path, url=url, overwrite=overwrite)
+            _acquire_file(cache, name=y, path=path, url=url, overwrite=overwrite)
     else:
         import multiprocessing
         import functools
         with multiprocessing.Pool(concurrent) as p:
-            p.map(functools.partial(acquire_file, cache, path, url=url, overwrite=overwrite), listing)
+            p.map(functools.partial(_acquire_file, cache, path, url=url, overwrite=overwrite), listing)
 
     # We use a directory-level OK file to avoid having to scan through all 
     # the directory contents to indicate that it's complete.

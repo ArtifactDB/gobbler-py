@@ -51,8 +51,8 @@ def fetch_summary(project: str, asset: str, version: str, registry: str, url: st
     if not force_remote and os.path.exists(registry):
         path = os.path.join(registry, project, asset, version, "..summary")
     else:
-        cache = fd.local_registry(cache, url)
-        path = fd.acquire_file(cache, project + "/" + asset + "/" +  version, "..summary", url=url, overwrite=overwrite)
+        cache = fd._local_registry(cache, url)
+        path = fd._acquire_file(cache, project + "/" + asset + "/" +  version, "..summary", url=url, overwrite=overwrite)
 
     with open(path, "r") as handle:
         out = json.load(handle)
