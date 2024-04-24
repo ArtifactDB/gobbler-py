@@ -108,6 +108,22 @@ pygobbler.list\_versions module
    :undoc-members:
    :show-inheritance:
 
+pygobbler.refresh\_latest module
+--------------------------------
+
+.. automodule:: pygobbler.refresh_latest
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+pygobbler.refresh\_usage module
+-------------------------------
+
+.. automodule:: pygobbler.refresh_usage
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pygobbler.remove\_asset module
 ------------------------------
 

@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
-        <title>pygobbler.fetch_latest - pygobbler 0.0.post1.dev1+gb965b83 documentation</title>
+        <title>pygobbler.refresh_usage - pygobbler 0.0.post1.dev1+gb965b83 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -196,56 +196,33 @@
           </label>
         </div>
         <article role="main">
-          <h1>Source code for pygobbler.fetch_latest</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
-<span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">import</span> <span class="nn">requests</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_utils</span> <span class="k">as</span> <span class="n">ut</span>
+          <h1>Source code for pygobbler.refresh_usage</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_utils</span> <span class="k">as</span> <span class="n">ut</span>
 
 
-<div class="viewcode-block" id="fetch_latest">
-<a class="viewcode-back" href="../../api/pygobbler.html#pygobbler.fetch_latest.fetch_latest">[docs]</a>
-<span class="k">def</span> <span class="nf">fetch_latest</span><span class="p">(</span><span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">registry</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">force_remote</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="refresh_usage">
+<a class="viewcode-back" href="../../api/pygobbler.html#pygobbler.refresh_usage.refresh_usage">[docs]</a>
+<span class="k">def</span> <span class="nf">refresh_usage</span><span class="p">(</span><span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">staging</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Fetch the latest version of an asset of a project.</span>
+<span class="sd">    Recompute the quota usage of a project. This is useful on rare occasions</span>
+<span class="sd">    where multiple simultaneous uploads cause the usage calculations to be out</span>
+<span class="sd">    of sync.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        project:</span>
-<span class="sd">            Name of a project.</span>
+<span class="sd">            Name of the project.</span>
 
-<span class="sd">        asset:</span>
-<span class="sd">            Name of an asset in the ``project``.</span>
-
-<span class="sd">        registry:</span>
-<span class="sd">            Path to the Gobbler registry.</span>
+<span class="sd">        staging:</span>
+<span class="sd">            Path to the staging directory.</span>
 
 <span class="sd">        url:</span>
-<span class="sd">            URL of the REST API. Only used for remote queries.</span>
-
-<span class="sd">        force_remote:</span>
-<span class="sd">            Whether to force a remote query via ``url``, even if the</span>
-<span class="sd">            ``registry`` is present on the current filesystem.</span>
+<span class="sd">            URL of the gobbler REST API.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        The name of the latest version of the ``asset``, or None if</span>
-<span class="sd">        no latest version exists.</span>
+<span class="sd">        Total quota usage of this project, in bytes.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">registry</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">force_remote</span><span class="p">:</span>
-        <span class="n">proposed</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">registry</span><span class="p">,</span> <span class="n">project</span><span class="p">,</span> <span class="n">asset</span><span class="p">,</span> <span class="s2">&quot;..latest&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">proposed</span><span class="p">):</span>
-            <span class="k">return</span> <span class="kc">None</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">proposed</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
-            <span class="n">vers</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">vers</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span>
-
-    <span class="n">res</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">url</span> <span class="o">+</span> <span class="s2">&quot;/fetch/&quot;</span> <span class="o">+</span> <span class="n">project</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">asset</span> <span class="o">+</span> <span class="s2">&quot;/..latest&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">elif</span> <span class="n">res</span><span class="o">.</span><span class="n">status_code</span> <span class="o">&gt;=</span> <span class="mi">300</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ut</span><span class="o">.</span><span class="n">format_error</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
-    <span class="n">body</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">body</span><span class="p">[</span><span class="s2">&quot;version&quot;</span><span class="p">]</span></div>
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">ut</span><span class="o">.</span><span class="n">dump_request</span><span class="p">(</span><span class="n">staging</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;refresh_usage&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span> <span class="p">})</span>
+    <span class="k">return</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;total&quot;</span><span class="p">]</span></div>
 
 </pre></div>
         </article>

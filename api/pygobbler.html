@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="pygobbler" href="modules.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
-        <title>pygobbler package - pygobbler 0.0.post1.dev1+gfec30a1 documentation</title>
+        <title>pygobbler package - pygobbler 0.0.post1.dev1+gb965b83 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+gfec30a1 documentation</div></a>
+      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+gb965b83 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+gfec30a1 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+gb965b83 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -644,6 +644,59 @@ on the same filesystem as the caller.</p></li>
 </dd></dl>
 
 </section>
+<section id="module-pygobbler.refresh_latest">
+<span id="pygobbler-refresh-latest-module"></span><h2>pygobbler.refresh_latest module<a class="headerlink" href="#module-pygobbler.refresh_latest" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pygobbler.refresh_latest.refresh_latest">
+<span class="sig-prename descclassname"><span class="pre">pygobbler.refresh_latest.</span></span><span class="sig-name descname"><span class="pre">refresh_latest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">staging</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/refresh_latest.html#refresh_latest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.refresh_latest.refresh_latest" title="Link to this definition">¶</a></dt>
+<dd><p>Recompute the latest version of a project’s asset. This is useful on rare
+occasions where multiple simultaneous uploads cause the latest version to
+be slightly out of sync.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name of the project.</p></li>
+<li><p><strong>asset</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name of the asset.</p></li>
+<li><p><strong>staging</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the staging directory.</p></li>
+<li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – URL of the gobbler REST API.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Latest version of the project, or None if there is no non-probational version.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pygobbler.refresh_usage">
+<span id="pygobbler-refresh-usage-module"></span><h2>pygobbler.refresh_usage module<a class="headerlink" href="#module-pygobbler.refresh_usage" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pygobbler.refresh_usage.refresh_usage">
+<span class="sig-prename descclassname"><span class="pre">pygobbler.refresh_usage.</span></span><span class="sig-name descname"><span class="pre">refresh_usage</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">staging</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/refresh_usage.html#refresh_usage"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.refresh_usage.refresh_usage" title="Link to this definition">¶</a></dt>
+<dd><p>Recompute the quota usage of a project. This is useful on rare occasions
+where multiple simultaneous uploads cause the usage calculations to be out
+of sync.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name of the project.</p></li>
+<li><p><strong>staging</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the staging directory.</p></li>
+<li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – URL of the gobbler REST API.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Total quota usage of this project, in bytes.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="module-pygobbler.remove_asset">
 <span id="pygobbler-remove-asset-module"></span><h2>pygobbler.remove_asset module<a class="headerlink" href="#module-pygobbler.remove_asset" title="Link to this heading">¶</a></h2>
 <dl class="py function">
@@ -919,6 +972,14 @@ details.</p></li>
 <li><a class="reference internal" href="#pygobbler.list_versions.list_versions"><code class="docutils literal notranslate"><span class="pre">list_versions()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#module-pygobbler.refresh_latest">pygobbler.refresh_latest module</a><ul>
+<li><a class="reference internal" href="#pygobbler.refresh_latest.refresh_latest"><code class="docutils literal notranslate"><span class="pre">refresh_latest()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pygobbler.refresh_usage">pygobbler.refresh_usage module</a><ul>
+<li><a class="reference internal" href="#pygobbler.refresh_usage.refresh_usage"><code class="docutils literal notranslate"><span class="pre">refresh_usage()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-pygobbler.remove_asset">pygobbler.remove_asset module</a><ul>
 <li><a class="reference internal" href="#pygobbler.remove_asset.remove_asset"><code class="docutils literal notranslate"><span class="pre">remove_asset()</span></code></a></li>
 </ul>
@@ -960,7 +1021,7 @@ details.</p></li>
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=e93cafa0"></script>
+</div><script src="../_static/documentation_options.js?v=af673686"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
