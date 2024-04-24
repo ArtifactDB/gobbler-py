@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
-        <title>pygobbler.start_gobbler - pygobbler 0.0.post1.dev1+g1c024e2 documentation</title>
+        <title>pygobbler.start_gobbler - pygobbler 0.0.post1.dev1+g5a74a56 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -122,7 +122,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g1c024e2 documentation</div></a>
+      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g5a74a56 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -145,7 +145,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g1c024e2 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g5a74a56 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -224,15 +224,24 @@
 <span class="sd">            automatically created.</span>
 
 <span class="sd">        port:</span>
-<span class="sd">            Port number for the Gobbler API to receive requests.</span>
+<span class="sd">            Port number for the Gobbler API to receive requests. If None, an</span>
+<span class="sd">            open port is automatically chosen.</span>
 
 <span class="sd">        wait:</span>
 <span class="sd">            Number of seconds to wait for the service to initialize before use.</span>
 
+<span class="sd">        version:</span>
+<span class="sd">            Version of the service to run.</span>
+
+<span class="sd">        overwrite:</span>
+<span class="sd">            Whether to overwrite the existing Gobbler binary.</span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        A tuple indicating whether a new test service was created (or an</span>
-<span class="sd">        existing instance was re-used), the path to the staging directory, </span>
-<span class="sd">        the path to the registry, and the chosen URL.</span>
+<span class="sd">        existing instance was re-used), the path to the staging directory, the</span>
+<span class="sd">        path to the registry, and the chosen URL. If a service is already</span>
+<span class="sd">        running, this function is a no-op and the configuration details of the</span>
+<span class="sd">        existing service will be returned.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">global</span> <span class="n">test_staging</span>
     <span class="k">global</span> <span class="n">test_registry</span>
@@ -375,7 +384,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=eb868b33"></script>
+</div><script src="../../_static/documentation_options.js?v=e39835fe"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=32e29ea5"></script>
