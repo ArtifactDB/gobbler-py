@@ -14,8 +14,8 @@ def _local_registry(cache: Optional[str], url: str) -> str:
     return os.path.join(cache, urllib.parse.quote_plus(url))
 
 
-def _acquire_file(cache: str, path: str, name: str, url: str, overwrite: bool) -> str:
-    target = os.path.join(cache, "REGISTRY", path, name)
+def _acquire_file_raw(cache: str, path: str, url: str, overwrite: bool) -> str:
+    target = os.path.join(cache, "REGISTRY", path)
 
     if overwrite or not os.path.exists(target):
         tempdir = os.path.join(cache, "TEMP")
@@ -24,7 +24,7 @@ def _acquire_file(cache: str, path: str, name: str, url: str, overwrite: bool) -
 
         tempfid, temppath = tempfile.mkstemp(dir=tempdir)
         try:
-            with requests.get(url + "/fetch/" + path + "/" + name, stream=True) as r:
+            with requests.get(url + "/fetch/" + path, stream=True) as r:
                 if r.status_code >= 300:
                     raise ut.format_error(r)
                 with os.fdopen(tempfid, 'wb') as f:
@@ -39,9 +39,13 @@ def _acquire_file(cache: str, path: str, name: str, url: str, overwrite: bool) -
     return target
 
 
+def _acquire_file(cache: str, path: str, name: str, url: str, overwrite: bool) -> str:
+    return _acquire_file_raw(cache, path + "/" + name, url, overwrite)
+
+
 def fetch_directory(path: str, registry: str, url: str, cache: Optional[str] = None, force_remote: bool = False, overwrite: bool = False, concurrent: int = 1) -> str:
     """
-    Obtain the path to a directory from the registry. This may create a local
+    Obtain the path to a directory in the registry. This may create a local
     copy of the subdirectory's contents if the caller is not on the same
     filesystem as the registry.
 

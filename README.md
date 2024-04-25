@@ -59,6 +59,7 @@ Anyone can fetch or list the contents, either on the same filesystem or remotely
 pyg.list_files("test", "foo", "bar", registry=registry, url=url)
 pyg.fetch_manifest("test", "foo", "bar", registry=registry, url=url)
 pyg.fetch_summary("test", "foo", "bar", registry=registry, url=url)
+pyg.fetch_file("test/foo/bar/blah.txt", registry=registry, url=url)
 pyg.version_path("test", "foo", "bar", registry=registry, url=url)
 ```
 

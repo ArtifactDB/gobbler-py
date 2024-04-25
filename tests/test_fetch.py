@@ -74,6 +74,21 @@ def test_fetch_permissions(setup):
     assert perms == rperms
 
 
+def test_fetch_file(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
+    p = pyg.fetch_file("test/fetch/v1/foo", registry=registry, url=url)
+    assert p.startswith(registry)
+    with open(p, "r") as handle:
+        assert handle.read() == "BAR"
+
+    cache = tempfile.mkdtemp()
+    p = pyg.fetch_file("test/fetch/v1/whee/blah", registry=registry, url=url, cache=cache, force_remote=True)
+    assert p.startswith(cache)
+    with open(p, "r") as handle:
+        assert handle.read() == "stuff"
+
+
 def test_fetch_directory(setup):
     _, staging, registry, url = pyg.start_gobbler()
 

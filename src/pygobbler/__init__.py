@@ -22,6 +22,7 @@ from .fetch_latest import fetch_latest
 from .fetch_summary import fetch_summary
 from .fetch_manifest import fetch_manifest
 from .fetch_usage import fetch_usage
+from .fetch_file import fetch_file
 from .fetch_directory import fetch_directory
 from .allocate_upload_directory import allocate_upload_directory
 from .upload_directory import upload_directory
