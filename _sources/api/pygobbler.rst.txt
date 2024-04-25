@@ -44,6 +44,14 @@ pygobbler.fetch\_directory module
    :undoc-members:
    :show-inheritance:
 
+pygobbler.fetch\_file module
+----------------------------
+
+.. automodule:: pygobbler.fetch_file
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pygobbler.fetch\_latest module
 ------------------------------
 

@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="pygobbler" href="modules.html" />
 
     <!-- Generated with Sphinx 7.3.7 and Furo 2024.01.29 -->
-        <title>pygobbler package - pygobbler 0.0.post1.dev1+gb1325b0 documentation</title>
+        <title>pygobbler package - pygobbler 0.0.post1.dev1+gbb8dcaa documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=135e06be" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=36a5483c" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+gb1325b0 documentation</div></a>
+      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+gbb8dcaa documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+gb1325b0 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+gbb8dcaa documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -307,7 +307,7 @@ for the expected format.</p></li>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygobbler.fetch_directory.fetch_directory">
 <span class="sig-prename descclassname"><span class="pre">pygobbler.fetch_directory.</span></span><span class="sig-name descname"><span class="pre">fetch_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_remote</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">concurrent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/fetch_directory.html#fetch_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.fetch_directory.fetch_directory" title="Link to this definition">¶</a></dt>
-<dd><p>Obtain the path to a directory from the registry. This may create a local
+<dd><p>Obtain the path to a directory in the registry. This may create a local
 copy of the subdirectory’s contents if the caller is not on the same
 filesystem as the registry.</p>
 <dl class="field-list simple">
@@ -333,6 +333,41 @@ automatically chosen. Only used for remote access.</p></li>
 <dd class="field-odd"><p>Path to the subdirectory on the caller’s filesystem.  This is either a
 path to the registry if it is accessible, or a path to a local cache of
 the registry’s contents otherwise.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pygobbler.fetch_file">
+<span id="pygobbler-fetch-file-module"></span><h2>pygobbler.fetch_file module<a class="headerlink" href="#module-pygobbler.fetch_file" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pygobbler.fetch_file.fetch_file">
+<span class="sig-prename descclassname"><span class="pre">pygobbler.fetch_file.</span></span><span class="sig-name descname"><span class="pre">fetch_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force_remote</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/fetch_file.html#fetch_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.fetch_file.fetch_file" title="Link to this definition">¶</a></dt>
+<dd><p>Obtain the path to a file in the registry. This may create a local copy if
+the caller is not on the same filesystem as the registry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Relative path to a file within the registry. This usually takes the
+form of <code class="docutils literal notranslate"><span class="pre">PROJECT/ASSET/VERSION/*</span></code>.</p></li>
+<li><p><strong>registry</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the registry.</p></li>
+<li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – URL to the Gobbler REST API. Only used for remote queries.</p></li>
+<li><p><strong>cache</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – Path to a cache directory. If None, an appropriate location is
+automatically chosen. Only used for remote access.</p></li>
+<li><p><strong>force_remote</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether to force remote access. This will download all files in the
+<code class="docutils literal notranslate"><span class="pre">path</span></code> via the REST API and cache them locally, even if
+<code class="docutils literal notranslate"><span class="pre">registry</span></code> is present on the same filesystem.</p></li>
+<li><p><strong>overwrite</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether to overwrite existing files in the cache.</p></li>
+<li><p><strong>concurrent</strong> – Number of concurrent downloads.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Path to the file on the caller’s filesystem.  This is either a path to
+the file in the registry if it is accessible, or a path to a local
+cache of the registry’s contents otherwise.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -988,6 +1023,10 @@ should be a subdirectory of <code class="docutils literal notranslate"><span cla
 <li><a class="reference internal" href="#pygobbler.fetch_directory.fetch_directory"><code class="docutils literal notranslate"><span class="pre">fetch_directory()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#module-pygobbler.fetch_file">pygobbler.fetch_file module</a><ul>
+<li><a class="reference internal" href="#pygobbler.fetch_file.fetch_file"><code class="docutils literal notranslate"><span class="pre">fetch_file()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-pygobbler.fetch_latest">pygobbler.fetch_latest module</a><ul>
 <li><a class="reference internal" href="#pygobbler.fetch_latest.fetch_latest"><code class="docutils literal notranslate"><span class="pre">fetch_latest()</span></code></a></li>
 </ul>
@@ -1082,7 +1121,7 @@ should be a subdirectory of <code class="docutils literal notranslate"><span cla
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=60dc9bd2"></script>
+</div><script src="../_static/documentation_options.js?v=3cabc984"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=32e29ea5"></script>
