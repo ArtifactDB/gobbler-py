@@ -41,6 +41,11 @@ def fetch_permissions(project: str, registry: str, url: str, force_remote: bool 
           authorization does not expire.
         - ``trusted`` (optional), whether the uploader is trusted. If not
           provided, defaults to false.
+
+        The top-level dictionary may also contain `global_write`, a boolean
+        indicating whether global writes are supported. If true, any user may
+        create a new asset in this project, and each user can upload new
+        versions to any asset they created under this mode.
     """
     if os.path.exists(registry) and not force_remote:
         with open(os.path.join(registry, project, "..permissions"), "r") as f:

@@ -9,7 +9,13 @@ test_registry = None
 test_port = None
 test_process = None
 
-def start_gobbler(staging: Optional[str] = None, registry: Optional[str] = None, port: Optional[int] = None, wait: float = 1, version: str = "0.3.2", overwrite: bool = False) -> Tuple[bool, str, str, str]:
+def start_gobbler(
+    staging: Optional[str] = None,
+    registry: Optional[str] = None,
+    port: Optional[int] = None,
+    wait: float = 1,
+    version: str = "0.3.7",
+    overwrite: bool = False) -> Tuple[bool, str, str, str]:
     """
     Start a test Gobbler service.
 

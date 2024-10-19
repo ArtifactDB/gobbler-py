@@ -3,7 +3,15 @@ from . import _utils as ut
 from . import fetch_permissions
 
 
-def set_permissions(project: str, registry: str, staging: str, url: str, owners: Optional[List] = None, uploaders: Optional[Dict] = None, append: bool = True):
+def set_permissions(
+    project: str,
+    registry: str,
+    staging: str,
+    url: str,
+    owners: Optional[List] = None,
+    uploaders: Optional[Dict] = None,
+    global_write: Optional[bool] = None,
+    append: bool = True):
     """
     Set the owner and uploader permissions for a project.
 
@@ -30,6 +38,12 @@ def set_permissions(project: str, registry: str, staging: str, url: str, owners:
             :py:func:`~.fetch_permissions` for  the expected format. If None,
             no change is made to the existing uploaders.
 
+        global_write:
+            Whether to enable global writes for this project, see the
+            ``global_write`` field in the return value of
+            :py:func:`~.fetch_permissions` for more details. If None, no change
+            is made to the global write status.
+
         append:
             Whether ``owners`` and ``uploaders`` should be appended to the
             existing owners and uploaders, respectively. If False, the
@@ -50,5 +64,8 @@ def set_permissions(project: str, registry: str, staging: str, url: str, owners:
             perms["owners"] = owners
         if uploaders is not None:
             perms["uploaders"] = uploaders
+
+    if global_write is not None:
+        perms["global_write"] = global_write
 
     ut.dump_request(staging, url, "set_permissions", { "project": project, "permissions": perms })

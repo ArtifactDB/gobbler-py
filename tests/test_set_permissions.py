@@ -20,6 +20,7 @@ def test_set_permissions():
     assert len(perms["uploaders"]) == 1
     assert perms["uploaders"][0]["id"] == "lawremi"
     assert perms["uploaders"][0]["until"] == until
+    assert not "global_write" in perms
 
     # Checking uploader appending, while also checking owners=NULL.
     pyg.set_permissions("test-perms", uploaders=[ { "id": "ArtifactDB-bot", "trusted": True } ], staging=staging, url=url, registry=registry)
@@ -29,6 +30,7 @@ def test_set_permissions():
     assert perms["uploaders"][0]["id"] == "lawremi"
     assert perms["uploaders"][1]["id"] == "ArtifactDB-bot"
     assert perms["uploaders"][1]["trusted"]
+    assert not "global_write" in perms
 
     # Checking union of owners, and also that uploaders=NULL works.
     pyg.set_permissions("test-perms", owners=[ "PeteHaitch", "LTLA" ], staging=staging, url=url, registry=registry)
@@ -47,3 +49,8 @@ def test_set_permissions():
     perms = pyg.fetch_permissions("test-perms", registry=registry, url=url)
     assert perms["owners"] == [ "LTLA" ]
     assert len(perms["uploaders"]) == 0
+
+    # Checking that it works with global writes enabled.
+    pyg.set_permissions("test-perms", global_write=True, staging=staging, url=url, registry=registry)
+    perms = pyg.fetch_permissions("test-perms", registry=registry, url=url)
+    assert perms["global_write"] 
