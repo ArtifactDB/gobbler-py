@@ -83,6 +83,41 @@ def test_upload_directory_links(setup):
     assert "link" not in man["whee"]
 
 
+def test_upload_directory_relative_links(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
+    dest = tempfile.mkdtemp()
+    with open(os.path.join(dest, "blah.txt"), "w") as handle:
+        handle.write("motto motto")
+    os.symlink("blah.txt", os.path.join(dest, "whee.txt")) # relative links inside the directory are retained.
+    os.mkdir(os.path.join(dest, "foo"))
+    os.symlink("../whee.txt", os.path.join(dest, "foo/bar.txt")) 
+
+    fid, outside = tempfile.mkstemp(dir=os.path.dirname(dest))
+    with open(outside, "w") as handle:
+        handle.write("toki wa kizuna uta")
+    os.symlink(os.path.join("../../", os.path.basename(outside)), os.path.join(dest, "foo/outer.txt")) # relative links outside the directory are lost.
+
+    pyg.upload_directory(
+        project="test-more-upload", 
+        asset="nicole", 
+        version="1", 
+        directory=dest,
+        staging=staging,
+        url=url
+    )
+
+    man = pyg.fetch_manifest("test-more-upload", "nicole", "1", registry=registry, url=url)
+    assert sorted(man.keys()) == [ "blah.txt", "foo/bar.txt", "foo/outer.txt", "whee.txt" ]
+    assert "link" in man["whee.txt"]
+    assert "link" not in man["foo/outer.txt"]
+    assert "link" in man["foo/bar.txt"]
+    assert "link" not in man["blah.txt"]
+    assert man["foo/outer.txt"]["size"] == 18
+    assert man["whee.txt"]["size"] == man["foo/bar.txt"]["size"]
+    assert man["whee.txt"]["size"] == man["blah.txt"]["size"]
+
+
 def test_upload_directory_staging(setup):
     _, staging, registry, url = pyg.start_gobbler()
 

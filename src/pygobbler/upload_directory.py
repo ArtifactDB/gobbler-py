@@ -48,14 +48,13 @@ def upload_directory(project: str, asset: str, version: str, directory: str, sta
                 if os.path.islink(src):
                     slink = os.readlink(src)
 
-                if slink == "" or not os.path.isabs(slink):
-                    try:
-                        os.link(src, dest)
-                    except:
-                        import shutil
-                        shutil.copy(src, dest)
-                else:
+                if slink == "":
+                    _link_or_copy(src, dest)
+                elif _is_absolute_or_local_link(slink, f):
                     os.symlink(slink, dest)
+                else:
+                    full_src = os.path.normpath(os.path.join(os.path.dirname(src), slink))
+                    _link_or_copy(full_src, dest)
 
         directory = newdir
 
@@ -68,3 +67,34 @@ def upload_directory(project: str, asset: str, version: str, directory: str, sta
     }
     ut.dump_request(staging, url, "upload", req)
     return
+
+
+def _is_absolute_or_local_link(target: str, link_path: str) -> bool:
+    if os.path.isabs(target):
+        return True
+
+    # Both 'target' and 'link_path' should be relative at this point, so the
+    # idea is to check whether 'os.path.join(os.path.dirname(link_path),
+    # target)' is still a child of 'os.path.dirname(link_path)'.
+    pre_length = len(link_path.split("/"))
+    post_fragments = target.split("/")[:-1]
+
+    for x in post_fragments:
+        if x == ".":
+            continue
+        elif x == "..":
+            pre_length -= 1
+            if pre_length < 0:
+                return False
+        else:
+            pre_length += 1
+
+    return True
+
+
+def _link_or_copy(src: str, dest: str):
+    try:
+        os.link(src, dest)
+    except:
+        import shutil
+        shutil.copy(src, dest)
