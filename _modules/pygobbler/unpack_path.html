@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>pygobbler.remove_asset - pygobbler 0.0.post1.dev1+g32f90de documentation</title>
+        <title>pygobbler.unpack_path - pygobbler 0.0.post1.dev1+g32f90de documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
@@ -241,30 +241,35 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <h1>Source code for pygobbler.remove_asset</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">_utils</span> <span class="k">as</span> <span class="n">ut</span>
+          <h1>Source code for pygobbler.unpack_path</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
 
-
-<div class="viewcode-block" id="remove_asset">
-<a class="viewcode-back" href="../../api/pygobbler.html#pygobbler.remove_asset.remove_asset">[docs]</a>
-<span class="k">def</span> <span class="nf">remove_asset</span><span class="p">(</span><span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">staging</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Remove an asset of a project from the registry.</span>
+<span class="c1">#&#39; @export</span>
+<span class="c1">#&#39; @importFrom utils tail</span>
+<div class="viewcode-block" id="unpack_path">
+<a class="viewcode-back" href="../../api/pygobbler.html#pygobbler.unpack_path.unpack_path">[docs]</a>
+<span class="k">def</span> <span class="nf">unpack_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Unpack a path to its combination of project, asset, version, and</span>
+<span class="sd">    (optionally) path, for easier use in the various pygobbler functions.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        project:</span>
-<span class="sd">            The name of the project.</span>
+<span class="sd">        path: </span>
+<span class="sd">            Relative path within the Gobbler registry. </span>
 
-<span class="sd">        asset:</span>
-<span class="sd">            The name of the asset to remove.</span>
-
-<span class="sd">        staging:</span>
-<span class="sd">            Path to the staging directory.</span>
-
-<span class="sd">        url:</span>
-<span class="sd">            URL to the Gobbler REST API.</span>
+<span class="sd">    Return:</span>
+<span class="sd">        Dictionary with the ``project``, ``asset``, ``version`` and ``path`` keys.</span>
+<span class="sd">        All values are strings except for ``path``, which may be None.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">ut</span><span class="o">.</span><span class="n">dump_request</span><span class="p">(</span><span class="n">staging</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;delete_asset&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span> <span class="s2">&quot;asset&quot;</span><span class="p">:</span> <span class="n">asset</span> <span class="p">})</span></div>
+    <span class="n">components</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">components</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;expected at least 3 path components in &#39;path&#39;&quot;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">components</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">or</span> <span class="n">components</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="mi">3</span><span class="p">:])</span>
+
+    <span class="k">return</span> <span class="p">{</span> <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">components</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s2">&quot;asset&quot;</span><span class="p">:</span> <span class="n">components</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">components</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s2">&quot;path&quot;</span><span class="p">:</span> <span class="n">path</span> <span class="p">}</span></div>
 
 </pre></div>
         </article>

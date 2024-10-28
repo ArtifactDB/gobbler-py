@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="pygobbler" href="modules.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>pygobbler package - pygobbler 0.0.post1.dev1+ge943663 documentation</title>
+        <title>pygobbler package - pygobbler 0.0.post1.dev1+g32f90de documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+ge943663 documentation</div></a>
+      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g32f90de documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -190,7 +190,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+ge943663 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g32f90de documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -958,6 +958,28 @@ test service was running, this function is a no-op.</p>
 </dd></dl>
 
 </section>
+<section id="module-pygobbler.unpack_path">
+<span id="pygobbler-unpack-path-module"></span><h2>pygobbler.unpack_path module<a class="headerlink" href="#module-pygobbler.unpack_path" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pygobbler.unpack_path.unpack_path">
+<span class="sig-prename descclassname"><span class="pre">pygobbler.unpack_path.</span></span><span class="sig-name descname"><span class="pre">unpack_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/unpack_path.html#unpack_path"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.unpack_path.unpack_path" title="Link to this definition">¶</a></dt>
+<dd><p>Unpack a path to its combination of project, asset, version, and
+(optionally) path, for easier use in the various pygobbler functions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>path</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Relative path within the Gobbler registry.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary with the <code class="docutils literal notranslate"><span class="pre">project</span></code>, <code class="docutils literal notranslate"><span class="pre">asset</span></code>, <code class="docutils literal notranslate"><span class="pre">version</span></code> and <code class="docutils literal notranslate"><span class="pre">path</span></code> keys.
+All values are strings except for <code class="docutils literal notranslate"><span class="pre">path</span></code>, which may be None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="module-pygobbler.upload_directory">
 <span id="pygobbler-upload-directory-module"></span><h2>pygobbler.upload_directory module<a class="headerlink" href="#module-pygobbler.upload_directory" title="Link to this heading">¶</a></h2>
 <dl class="py function">
@@ -1159,6 +1181,10 @@ should be a subdirectory of <code class="docutils literal notranslate"><span cla
 <li><a class="reference internal" href="#pygobbler.start_gobbler.stop_gobbler"><code class="docutils literal notranslate"><span class="pre">stop_gobbler()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#module-pygobbler.unpack_path">pygobbler.unpack_path module</a><ul>
+<li><a class="reference internal" href="#pygobbler.unpack_path.unpack_path"><code class="docutils literal notranslate"><span class="pre">unpack_path()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-pygobbler.upload_directory">pygobbler.upload_directory module</a><ul>
 <li><a class="reference internal" href="#pygobbler.upload_directory.upload_directory"><code class="docutils literal notranslate"><span class="pre">upload_directory()</span></code></a></li>
 </ul>
@@ -1179,7 +1205,7 @@ should be a subdirectory of <code class="docutils literal notranslate"><span cla
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=f57362a6"></script>
+</div><script src="../_static/documentation_options.js?v=0a58f645"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=5fa4622c"></script>

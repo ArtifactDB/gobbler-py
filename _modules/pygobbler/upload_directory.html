@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>pygobbler.upload_directory - pygobbler 0.0.post1.dev1+ge943663 documentation</title>
+        <title>pygobbler.upload_directory - pygobbler 0.0.post1.dev1+g32f90de documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
@@ -165,7 +165,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+ge943663 documentation</div></a>
+      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g32f90de documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -189,7 +189,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+ge943663 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g32f90de documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -320,11 +320,12 @@
     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">True</span>
 
+    <span class="c1"># Both &#39;target&#39; and &#39;link_path&#39; should be relative at this point, so the</span>
+    <span class="c1"># idea is to check whether &#39;os.path.join(os.path.dirname(link_path),</span>
+    <span class="c1"># target)&#39; is still a child of &#39;os.path.dirname(link_path)&#39;.</span>
     <span class="n">pre_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">link_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">))</span>
     <span class="n">post_fragments</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
-    <span class="c1"># link_path should be relative, so the idea is to check whether the</span>
-    <span class="c1"># &#39;target&#39; file is still a child of &#39;dirname(link_path)&#39;.</span>
     <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">post_fragments</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
             <span class="k">continue</span>
@@ -376,7 +377,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=f57362a6"></script>
+</div><script src="../../_static/documentation_options.js?v=0a58f645"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>

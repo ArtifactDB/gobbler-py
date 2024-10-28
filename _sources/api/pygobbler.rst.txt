@@ -196,6 +196,14 @@ pygobbler.start\_gobbler module
    :undoc-members:
    :show-inheritance:
 
+pygobbler.unpack\_path module
+-----------------------------
+
+.. automodule:: pygobbler.unpack_path
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pygobbler.upload\_directory module
 ----------------------------------
 
