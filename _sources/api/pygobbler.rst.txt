@@ -140,6 +140,14 @@ pygobbler.refresh\_usage module
    :undoc-members:
    :show-inheritance:
 
+pygobbler.reindex\_version module
+---------------------------------
+
+.. automodule:: pygobbler.reindex_version
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pygobbler.reject\_probation module
 ----------------------------------
 

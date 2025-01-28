@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>pygobbler.list_assets - pygobbler 0.0.post1.dev1+g59c7a27 documentation</title>
+        <title>pygobbler.reindex_version - pygobbler 0.0.post1.dev1+g59c7a27 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
@@ -241,35 +241,37 @@
           </label>
         </div>
         <article role="main" id="furo-main-content">
-          <h1>Source code for pygobbler.list_assets</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">.list_projects</span><span class="w"> </span><span class="kn">import</span> <span class="n">list_registry_directories</span>
+          <h1>Source code for pygobbler.reindex_version</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_utils</span> <span class="k">as</span> <span class="n">ut</span>
 
 
-<div class="viewcode-block" id="list_assets">
-<a class="viewcode-back" href="../../api/pygobbler.html#pygobbler.list_assets.list_assets">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">list_assets</span><span class="p">(</span><span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">registry</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">force_remote</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<div class="viewcode-block" id="reindex_version">
+<a class="viewcode-back" href="../../api/pygobbler.html#pygobbler.reindex_version.reindex_version">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">reindex_version</span><span class="p">(</span><span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">staging</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    List all assets in a project.</span>
+<span class="sd">    Reindex a version of a project asset in the registry.</span>
+<span class="sd">    This regenerates all of the internal ``..manifest`` and ``..links`` files.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        project:</span>
 <span class="sd">            The name of the project.</span>
 
-<span class="sd">        registry:</span>
-<span class="sd">            Path to the registry.</span>
+<span class="sd">        asset:</span>
+<span class="sd">            The name of the asset of the ``project``.</span>
+
+<span class="sd">        version:</span>
+<span class="sd">            The name of the version of the ``asset`` to remove.</span>
+
+<span class="sd">        staging:</span>
+<span class="sd">            Path to the staging directory.</span>
 
 <span class="sd">        url:</span>
-<span class="sd">            URL to the Gobbler REST API. Only used for remote access.</span>
-
-<span class="sd">        force_remote:</span>
-<span class="sd">            Whether to force remote access via the API, even if ``registry`` is</span>
-<span class="sd">            on the same filesystem as the caller. </span>
+<span class="sd">            URL to the Gobbler REST API.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        List of strings containing the project names.</span>
+<span class="sd">        The requested version is reindexed.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">list_registry_directories</span><span class="p">(</span><span class="n">project</span><span class="p">,</span> <span class="n">registry</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">force_remote</span><span class="p">)</span></div>
+    <span class="n">ut</span><span class="o">.</span><span class="n">dump_request</span><span class="p">(</span><span class="n">staging</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;reindex_version&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span> <span class="s2">&quot;asset&quot;</span><span class="p">:</span> <span class="n">asset</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">version</span> <span class="p">})</span></div>
 
 </pre></div>
         </article>

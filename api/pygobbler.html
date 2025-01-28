@@ -6,8 +6,8 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="pygobbler" href="modules.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>pygobbler package - pygobbler 0.0.post1.dev1+g32f90de documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+        <title>pygobbler package - pygobbler 0.0.post1.dev1+g59c7a27 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
     
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g32f90de documentation</div></a>
+      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g59c7a27 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -190,7 +190,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g32f90de documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g59c7a27 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -785,6 +785,30 @@ of sync.</p>
 </dd></dl>
 
 </section>
+<section id="module-pygobbler.reindex_version">
+<span id="pygobbler-reindex-version-module"></span><h2>pygobbler.reindex_version module<a class="headerlink" href="#module-pygobbler.reindex_version" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pygobbler.reindex_version.reindex_version">
+<span class="sig-prename descclassname"><span class="pre">pygobbler.reindex_version.</span></span><span class="sig-name descname"><span class="pre">reindex_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">staging</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/reindex_version.html#reindex_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.reindex_version.reindex_version" title="Link to this definition">¶</a></dt>
+<dd><p>Reindex a version of a project asset in the registry.
+This regenerates all of the internal <code class="docutils literal notranslate"><span class="pre">..manifest</span></code> and <code class="docutils literal notranslate"><span class="pre">..links</span></code> files.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>project</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – The name of the project.</p></li>
+<li><p><strong>asset</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – The name of the asset of the <code class="docutils literal notranslate"><span class="pre">project</span></code>.</p></li>
+<li><p><strong>version</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – The name of the version of the <code class="docutils literal notranslate"><span class="pre">asset</span></code> to remove.</p></li>
+<li><p><strong>staging</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the staging directory.</p></li>
+<li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – URL to the Gobbler REST API.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The requested version is reindexed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
 <section id="module-pygobbler.reject_probation">
 <span id="pygobbler-reject-probation-module"></span><h2>pygobbler.reject_probation module<a class="headerlink" href="#module-pygobbler.reject_probation" title="Link to this heading">¶</a></h2>
 <dl class="py function">
@@ -921,7 +945,7 @@ values in the project permissions.</p></li>
 <span id="pygobbler-start-gobbler-module"></span><h2>pygobbler.start_gobbler module<a class="headerlink" href="#module-pygobbler.start_gobbler" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygobbler.start_gobbler.start_gobbler">
-<span class="sig-prename descclassname"><span class="pre">pygobbler.start_gobbler.</span></span><span class="sig-name descname"><span class="pre">start_gobbler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">staging</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.3.7'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/start_gobbler.html#start_gobbler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.start_gobbler.start_gobbler" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygobbler.start_gobbler.</span></span><span class="sig-name descname"><span class="pre">start_gobbler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">staging</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.3.8'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/start_gobbler.html#start_gobbler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.start_gobbler.start_gobbler" title="Link to this definition">¶</a></dt>
 <dd><p>Start a test Gobbler service.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1152,6 +1176,10 @@ should be a subdirectory of <code class="docutils literal notranslate"><span cla
 <li><a class="reference internal" href="#pygobbler.refresh_usage.refresh_usage"><code class="docutils literal notranslate"><span class="pre">refresh_usage()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#module-pygobbler.reindex_version">pygobbler.reindex_version module</a><ul>
+<li><a class="reference internal" href="#pygobbler.reindex_version.reindex_version"><code class="docutils literal notranslate"><span class="pre">reindex_version()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-pygobbler.reject_probation">pygobbler.reject_probation module</a><ul>
 <li><a class="reference internal" href="#pygobbler.reject_probation.reject_probation"><code class="docutils literal notranslate"><span class="pre">reject_probation()</span></code></a></li>
 </ul>
@@ -1205,7 +1233,7 @@ should be a subdirectory of <code class="docutils literal notranslate"><span cla
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=0a58f645"></script>
+</div><script src="../_static/documentation_options.js?v=59d6a0ca"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
