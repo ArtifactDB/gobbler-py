@@ -34,6 +34,7 @@ from .remove_project import remove_project
 from .remove_asset import remove_asset
 from .remove_version import remove_version
 from .clone_version import clone_version
+from .reindex_version import reindex_version
 from .service_info import service_info
 from .version_path import version_path
 from .refresh_latest import refresh_latest
