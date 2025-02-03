@@ -1,11 +1,16 @@
-from typing import Dict, Any
+from typing import Dict, Any, Optional
 import os
 import json
 import requests
 from . import _utils as ut
 
 
-def fetch_permissions(project: str, registry: str, url: str, force_remote: bool = False) -> Dict[str, Any]:
+def fetch_permissions(
+    project: str,
+    registry: str,
+    url: str,
+    asset: Optional[str] = None,
+    force_remote: bool = False) -> Dict[str, Any]:
     """
     Fetch permissions for a project.
 
@@ -18,6 +23,10 @@ def fetch_permissions(project: str, registry: str, url: str, force_remote: bool 
 
         url:
             URL of the REST API. Only used for remote queries.
+
+        asset:
+            Name of the asset inside the project.
+            If supplied, permissions are returned for this asset rather than the entire project.
 
         force_remote:
             Whether to force a remote query via ``url``, even if the
@@ -46,14 +55,33 @@ def fetch_permissions(project: str, registry: str, url: str, force_remote: bool 
         indicating whether global writes are supported. If true, any user may
         create a new asset in this project, and each user can upload new
         versions to any asset they created under this mode.
-    """
-    if os.path.exists(registry) and not force_remote:
-        with open(os.path.join(registry, project, "..permissions"), "r") as f:
-            perms = json.load(f)
-    else:
-        res = requests.get(url + "/fetch/" + project + "/..permissions")
-        if res.status_code >= 300:
-            raise ut.format_error(res)
-        perms = res.json()
-    return perms
 
+        If ``asset`` is provided, the returned dictionary contains ``owners`` and ``uploaders`` to describe the owners and uploaders, respectively, for the specified ``asset``.
+    """
+    use_registry = (os.path.exists(registry) and not force_remote)
+
+    if asset is None:
+        if use_registry:
+            with open(os.path.join(registry, project, "..permissions"), "r") as f:
+                perms = json.load(f)
+        else:
+            res = requests.get(url + "/fetch/" + project + "/..permissions")
+            if res.status_code >= 300:
+                raise ut.format_error(res)
+            perms = res.json()
+
+    else:
+        perms = { "owners": [], "uploaders": [] }
+        if use_registry:
+            ppath = os.path.join(registry, project, asset, "..permissions")
+            if os.path.exists(ppath):
+                with open(ppath, "r") as f:
+                    perms = json.load(f)
+        else:
+            res = requests.get(url + "/fetch/" + project + "/" + asset + "/..permissions")
+            if res.status_code != 404:
+                if res.status_code >= 300:
+                    raise ut.format_error(res)
+                perms = res.json()
+
+    return perms

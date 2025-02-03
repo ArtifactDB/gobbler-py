@@ -8,6 +8,7 @@ def set_permissions(
     registry: str,
     staging: str,
     url: str,
+    asset: Optional[str] = None,
     owners: Optional[List] = None,
     uploaders: Optional[Dict] = None,
     global_write: Optional[bool] = None,
@@ -28,6 +29,10 @@ def set_permissions(
         url:
             URL of the REST API.
 
+        asset:
+            Name of the asset inside the project.
+            If supplied, permissions are set on this asset rather than the entire project.
+
         owners:
             List of user IDs for owners of this project. If None, no change is
             made to the existing owners in the project permissions.
@@ -39,10 +44,9 @@ def set_permissions(
             no change is made to the existing uploaders.
 
         global_write:
-            Whether to enable global writes for this project, see the
-            ``global_write`` field in the return value of
-            :py:func:`~.fetch_permissions` for more details. If None, no change
-            is made to the global write status.
+            Whether to enable global writes for this project, see the ``global_write`` field in the return value of :py:func:`~.fetch_permissions` for more details.
+            If None, no change is made to the global write status.
+            Ignored if ``asset`` is provided.
 
         append:
             Whether ``owners`` and ``uploaders`` should be appended to the
@@ -53,7 +57,7 @@ def set_permissions(
     perms = {}
 
     if append:
-        oldperms = fetch_permissions(project, registry=registry, url=url)
+        oldperms = fetch_permissions(project, asset=asset, registry=registry, url=url)
         if owners is not None:
             oldset = set(oldperms["owners"])
             perms["owners"] = oldperms["owners"] + list(filter(lambda x : x not in oldset, owners))
@@ -65,7 +69,11 @@ def set_permissions(
         if uploaders is not None:
             perms["uploaders"] = uploaders
 
-    if global_write is not None:
+    payload = { "project": project }
+    if asset is not None:
+        payload["asset"] = asset
+    elif global_write is not None:
         perms["global_write"] = global_write
 
-    ut.dump_request(staging, url, "set_permissions", { "project": project, "permissions": perms })
+    payload["permissions"] = perms
+    ut.dump_request(staging, url, "set_permissions", payload)

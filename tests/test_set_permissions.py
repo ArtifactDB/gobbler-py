@@ -54,3 +54,38 @@ def test_set_permissions():
     pyg.set_permissions("test-perms", global_write=True, staging=staging, url=url, registry=registry)
     perms = pyg.fetch_permissions("test-perms", registry=registry, url=url)
     assert perms["global_write"] 
+
+
+def test_set_asset_permissions():
+    _, staging, registry, url = pyg.start_gobbler()
+    pyg.remove_project("test-perms", staging=staging, url=url)
+    pyg.create_project("test-perms", staging=staging, url=url, owners=["LTLA"])
+
+    until = "2022-02-02T02:20:02.02Z"
+    pyg.set_permissions("test-perms",
+        asset="foobar",
+        owners=["jkanche"], 
+        uploaders=[ { "id": "lawremi", "until": until } ],
+        staging=staging,
+        url=url,
+        registry=registry
+    )
+
+    perms = pyg.fetch_permissions("test-perms", asset="foobar", registry=registry, url=url)
+    assert perms["owners"] == ["jkanche"]
+    assert len(perms["uploaders"]) == 1
+    assert perms["uploaders"][0]["id"] == "lawremi"
+    assert perms["uploaders"][0]["until"] == until
+    assert "global_write" not in perms
+
+    # Works with remote.
+    rperms = pyg.fetch_permissions("test-perms", asset="foobar", force_remote=True, registry=registry, url=url)
+    assert rperms == perms
+
+    # Works correctly when there are no permissions.
+    perms = pyg.fetch_permissions("test-perms", asset="stuff", registry=registry, url=url)
+    assert len(perms["owners"]) == 0
+    assert len(perms["uploaders"]) == 0
+
+    rperms = pyg.fetch_permissions("test-perms", asset="stuff", registry=registry, url=url)
+    assert rperms == perms
