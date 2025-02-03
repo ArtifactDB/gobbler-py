@@ -50,7 +50,7 @@ def upload_directory(project: str, asset: str, version: str, directory: str, sta
 
                 if slink == "":
                     _link_or_copy(src, dest)
-                elif _is_absolute_or_local_link(slink, f):
+                elif _is_absolute_or_local_link(slink, rel):
                     os.symlink(slink, dest)
                 else:
                     full_src = os.path.normpath(os.path.join(os.path.dirname(src), slink))
@@ -76,7 +76,7 @@ def _is_absolute_or_local_link(target: str, link_path: str) -> bool:
     # Both 'target' and 'link_path' should be relative at this point, so the
     # idea is to check whether 'os.path.join(os.path.dirname(link_path),
     # target)' is still a child of 'os.path.dirname(link_path)'.
-    pre_length = len(link_path.split("/"))
+    pre_length = len(link_path.split("/")) - 1
     post_fragments = target.split("/")[:-1]
 
     for x in post_fragments:

@@ -4,6 +4,7 @@
 
 - Enable setting/getting of asset-level permissions in `set_permissions()` and `fetch_permissions()`.
 - Added the `force=` option to forcibly remove directories in `remove_asset()`, `remove_version()` and `reject_probation()`.
+- Bugfix for handling relative links in `upload_directory()`.
 
 ## Version 0.1.2
 
