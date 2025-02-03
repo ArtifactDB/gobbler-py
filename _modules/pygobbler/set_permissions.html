@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>pygobbler.set_permissions - pygobbler 0.0.post1.dev1+g59c7a27 documentation</title>
+        <title>pygobbler.set_permissions - pygobbler 0.0.post1.dev1+g1a4f75d documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
@@ -165,7 +165,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g59c7a27 documentation</div></a>
+      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g1a4f75d documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -189,7 +189,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g59c7a27 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g1a4f75d documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -254,6 +254,7 @@
     <span class="n">registry</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">staging</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">owners</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">uploaders</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">global_write</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -274,6 +275,10 @@
 <span class="sd">        url:</span>
 <span class="sd">            URL of the REST API.</span>
 
+<span class="sd">        asset:</span>
+<span class="sd">            Name of the asset inside the project.</span>
+<span class="sd">            If supplied, permissions are set on this asset rather than the entire project.</span>
+
 <span class="sd">        owners:</span>
 <span class="sd">            List of user IDs for owners of this project. If None, no change is</span>
 <span class="sd">            made to the existing owners in the project permissions.</span>
@@ -285,10 +290,9 @@
 <span class="sd">            no change is made to the existing uploaders.</span>
 
 <span class="sd">        global_write:</span>
-<span class="sd">            Whether to enable global writes for this project, see the</span>
-<span class="sd">            ``global_write`` field in the return value of</span>
-<span class="sd">            :py:func:`~.fetch_permissions` for more details. If None, no change</span>
-<span class="sd">            is made to the global write status.</span>
+<span class="sd">            Whether to enable global writes for this project, see the ``global_write`` field in the return value of :py:func:`~.fetch_permissions` for more details.</span>
+<span class="sd">            If None, no change is made to the global write status.</span>
+<span class="sd">            Ignored if ``asset`` is provided.</span>
 
 <span class="sd">        append:</span>
 <span class="sd">            Whether ``owners`` and ``uploaders`` should be appended to the</span>
@@ -299,7 +303,7 @@
     <span class="n">perms</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">if</span> <span class="n">append</span><span class="p">:</span>
-        <span class="n">oldperms</span> <span class="o">=</span> <span class="n">fetch_permissions</span><span class="p">(</span><span class="n">project</span><span class="p">,</span> <span class="n">registry</span><span class="o">=</span><span class="n">registry</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+        <span class="n">oldperms</span> <span class="o">=</span> <span class="n">fetch_permissions</span><span class="p">(</span><span class="n">project</span><span class="p">,</span> <span class="n">asset</span><span class="o">=</span><span class="n">asset</span><span class="p">,</span> <span class="n">registry</span><span class="o">=</span><span class="n">registry</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">owners</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">oldset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">oldperms</span><span class="p">[</span><span class="s2">&quot;owners&quot;</span><span class="p">])</span>
             <span class="n">perms</span><span class="p">[</span><span class="s2">&quot;owners&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">oldperms</span><span class="p">[</span><span class="s2">&quot;owners&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">oldset</span><span class="p">,</span> <span class="n">owners</span><span class="p">))</span>
@@ -311,10 +315,14 @@
         <span class="k">if</span> <span class="n">uploaders</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">perms</span><span class="p">[</span><span class="s2">&quot;uploaders&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">uploaders</span>
 
-    <span class="k">if</span> <span class="n">global_write</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="p">{</span> <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span> <span class="p">}</span>
+    <span class="k">if</span> <span class="n">asset</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;asset&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">asset</span>
+    <span class="k">elif</span> <span class="n">global_write</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">perms</span><span class="p">[</span><span class="s2">&quot;global_write&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">global_write</span>
 
-    <span class="n">ut</span><span class="o">.</span><span class="n">dump_request</span><span class="p">(</span><span class="n">staging</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;set_permissions&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span> <span class="s2">&quot;permissions&quot;</span><span class="p">:</span> <span class="n">perms</span> <span class="p">})</span></div>
+    <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;permissions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">perms</span>
+    <span class="n">ut</span><span class="o">.</span><span class="n">dump_request</span><span class="p">(</span><span class="n">staging</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;set_permissions&quot;</span><span class="p">,</span> <span class="n">payload</span><span class="p">)</span></div>
 
 </pre></div>
         </article>
@@ -348,7 +356,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=59d6a0ca"></script>
+</div><script src="../../_static/documentation_options.js?v=433938d8"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
