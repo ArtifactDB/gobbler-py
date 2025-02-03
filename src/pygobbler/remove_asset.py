@@ -1,7 +1,7 @@
 from . import _utils as ut
 
 
-def remove_asset(project: str, asset: str, staging: str, url: str):
+def remove_asset(project: str, asset: str, staging: str, url: str, force: bool = False):
     """
     Remove an asset of a project from the registry.
 
@@ -17,5 +17,9 @@ def remove_asset(project: str, asset: str, staging: str, url: str):
 
         url:
             URL to the Gobbler REST API.
+
+        force:
+            Whether the asset should be forcibly removed if it contains invalid files.
+            If this needs to be set to ``True``, users may need to call :py:func:`~gobbler.refresh_usage.refresh_usage`` afterwards to correct project-level usage statistics.
     """
-    ut.dump_request(staging, url, "delete_asset", { "project": project, "asset": asset })
+    ut.dump_request(staging, url, "delete_asset", { "project": project, "asset": asset, "force": force })
