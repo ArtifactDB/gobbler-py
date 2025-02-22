@@ -26,6 +26,7 @@ def dump_request(staging: str, url: str, action: str, payload: Optional[Dict]) -
     fd, holding_name = tempfile.mkstemp(dir=staging, prefix=prefix)
     with os.fdopen(fd, "w") as handle:
         handle.write(as_str)
+    os.chmod(os.path.join(staging, holding_name), 0o644)
 
     res = requests.post(url + "/new/" + os.path.basename(holding_name))
     if res.status_code >= 300:
