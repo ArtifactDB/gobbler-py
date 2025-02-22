@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="pygobbler" href="modules.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>pygobbler package - pygobbler 0.0.post1.dev1+gd12fab5 documentation</title>
+        <title>pygobbler package - pygobbler 0.0.post1.dev1+g4f7c3b4 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+gd12fab5 documentation</div></a>
+      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g4f7c3b4 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -190,7 +190,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+gd12fab5 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g4f7c3b4 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -839,7 +839,9 @@ If this needs to be set to <code class="docutils literal notranslate"><span clas
 <dl class="py function">
 <dt class="sig sig-object py" id="pygobbler.remove_asset.remove_asset">
 <span class="sig-prename descclassname"><span class="pre">pygobbler.remove_asset.</span></span><span class="sig-name descname"><span class="pre">remove_asset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">staging</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/remove_asset.html#remove_asset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.remove_asset.remove_asset" title="Link to this definition">¶</a></dt>
-<dd><p>Remove an asset of a project from the registry.</p>
+<dd><p>Remove an asset of a project from the registry.
+This should only be performed by Gobbler instance administrators.
+Consider running <a class="reference internal" href="#pygobbler.reroute_links.reroute_links" title="pygobbler.reroute_links.reroute_links"><code class="xref py py-func docutils literal notranslate"><span class="pre">reroute_links()</span></code></a> beforehand to avoid dangling references to files in this asset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -860,7 +862,9 @@ If this needs to be set to <code class="docutils literal notranslate"><span clas
 <dl class="py function">
 <dt class="sig sig-object py" id="pygobbler.remove_project.remove_project">
 <span class="sig-prename descclassname"><span class="pre">pygobbler.remove_project.</span></span><span class="sig-name descname"><span class="pre">remove_project</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">staging</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/remove_project.html#remove_project"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.remove_project.remove_project" title="Link to this definition">¶</a></dt>
-<dd><p>Remove a project from the registry.</p>
+<dd><p>Remove a project from the registry.
+This should only be performed by Gobbler instance administrators.
+Consider running <a class="reference internal" href="#pygobbler.reroute_links.reroute_links" title="pygobbler.reroute_links.reroute_links"><code class="xref py py-func docutils literal notranslate"><span class="pre">reroute_links()</span></code></a> beforehand to avoid dangling references to files in this project.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -878,7 +882,9 @@ If this needs to be set to <code class="docutils literal notranslate"><span clas
 <dl class="py function">
 <dt class="sig sig-object py" id="pygobbler.remove_version.remove_version">
 <span class="sig-prename descclassname"><span class="pre">pygobbler.remove_version.</span></span><span class="sig-name descname"><span class="pre">remove_version</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">staging</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">force</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/remove_version.html#remove_version"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.remove_version.remove_version" title="Link to this definition">¶</a></dt>
-<dd><p>Remove a version of a project asset from the registry.</p>
+<dd><p>Remove a version of a project asset from the registry.
+This should only be performed by Gobbler instance administrators.
+Consider running <a class="reference internal" href="#pygobbler.reroute_links.reroute_links" title="pygobbler.reroute_links.reroute_links"><code class="xref py py-func docutils literal notranslate"><span class="pre">reroute_links()</span></code></a> beforehand to avoid dangling references to files in this version.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -891,6 +897,52 @@ If this needs to be set to <code class="docutils literal notranslate"><span clas
 Similarly, <code class="xref py py-func docutils literal notranslate"><span class="pre">refresh_latest()</span></code> may also need to be called.</p></li>
 <li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – URL to the Gobbler REST API.</p></li>
 </ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-pygobbler.reroute_links">
+<span id="pygobbler-reroute-links-module"></span><h2>pygobbler.reroute_links module<a class="headerlink" href="#module-pygobbler.reroute_links" title="Link to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="pygobbler.reroute_links.reroute_links">
+<span class="sig-prename descclassname"><span class="pre">pygobbler.reroute_links.</span></span><span class="sig-name descname"><span class="pre">reroute_links</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">to_delete</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">staging</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dry_run</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/reroute_links.html#reroute_links"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.reroute_links.reroute_links" title="Link to this definition">¶</a></dt>
+<dd><p>Reroute symbolic links to files in directories that are to be deleted, e.g., by <a class="reference internal" href="#pygobbler.remove_project.remove_project" title="pygobbler.remove_project.remove_project"><code class="xref py py-func docutils literal notranslate"><span class="pre">remove_project()</span></code></a>.
+This preserves the validity of links within the Gobbler registry.</p>
+<p>Note that rerouting does not actually delete the directories specified in <code class="docutils literal notranslate"><span class="pre">to_delete</span></code>.
+Deletion requires separate invocations of <a class="reference internal" href="#pygobbler.remove_project.remove_project" title="pygobbler.remove_project.remove_project"><code class="xref py py-func docutils literal notranslate"><span class="pre">remove_project()</span></code></a> and friends - preferably after the user has verified that rerouting was successful!</p>
+<p>Rerouting is not necessary if <code class="docutils literal notranslate"><span class="pre">to_delete</span></code> consists only of probational versions, or projects/assets containing only probational versions.
+The Gobbler should never create links to files in probational version directories.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>to_delete</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a></span>) – List of projects, assets or versions to be deleted.
+Each entry should be a dicionary containing at least the <code class="docutils literal notranslate"><span class="pre">project</span></code> name.
+When deleting an asset, the inner list should contain an additional <code class="docutils literal notranslate"><span class="pre">asset</span></code> name.
+When deleting a version, the inner list should contain additional <code class="docutils literal notranslate"><span class="pre">asset</span></code> and <code class="docutils literal notranslate"><span class="pre">version</span></code> names.
+Different inner lists may specify different projects, assets or versions.</p></li>
+<li><p><strong>staging</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the staging directory.</p></li>
+<li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – URL for the Gobbler REST API.</p></li>
+<li><p><strong>dry_run</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether to perform a dry run of the rerouting.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a></span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>List of dictionaries.
+Each dictionary represents a rerouting action and contains the following fields.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">path</span></code>, string containing the path to a symbolic link in the registry that was changed by rerouting.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">copy</span></code>, boolean indicating whether the link at <code class="docutils literal notranslate"><span class="pre">path</span></code> was replaced by a copy of its target file.
+If <code class="docutils literal notranslate"><span class="pre">False</span></code>, the link was merely updated to refer to a new target file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">source</span></code>, the path to the target file that caused rerouting of <code class="docutils literal notranslate"><span class="pre">path</span></code>.
+Specifically, this is a file in one of the to-be-deleted directories specified in <code class="docutils literal notranslate"><span class="pre">to_delete</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">copy</span> <span class="pre">=</span> <span class="pre">TRUE</span></code>, this is the original linked-to file that was copied to <code class="docutils literal notranslate"><span class="pre">path</span></code>.</p></li>
+</ul>
+<p>If <code class="docutils literal notranslate"><span class="pre">dry_run</span> <span class="pre">=</span> <span class="pre">False</span></code>, the registry is modified as described by the rerouting actions.
+Otherwise, no modifications are performed to the registry.</p>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -956,7 +1008,7 @@ values in the project permissions.</p></li>
 <span id="pygobbler-start-gobbler-module"></span><h2>pygobbler.start_gobbler module<a class="headerlink" href="#module-pygobbler.start_gobbler" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygobbler.start_gobbler.start_gobbler">
-<span class="sig-prename descclassname"><span class="pre">pygobbler.start_gobbler.</span></span><span class="sig-name descname"><span class="pre">start_gobbler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">staging</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.3.9'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/start_gobbler.html#start_gobbler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.start_gobbler.start_gobbler" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygobbler.start_gobbler.</span></span><span class="sig-name descname"><span class="pre">start_gobbler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">staging</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.3.10'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/start_gobbler.html#start_gobbler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.start_gobbler.start_gobbler" title="Link to this definition">¶</a></dt>
 <dd><p>Start a test Gobbler service.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1207,6 +1259,10 @@ should be a subdirectory of <code class="docutils literal notranslate"><span cla
 <li><a class="reference internal" href="#pygobbler.remove_version.remove_version"><code class="docutils literal notranslate"><span class="pre">remove_version()</span></code></a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#module-pygobbler.reroute_links">pygobbler.reroute_links module</a><ul>
+<li><a class="reference internal" href="#pygobbler.reroute_links.reroute_links"><code class="docutils literal notranslate"><span class="pre">reroute_links()</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#module-pygobbler.service_info">pygobbler.service_info module</a><ul>
 <li><a class="reference internal" href="#pygobbler.service_info.service_info"><code class="docutils literal notranslate"><span class="pre">service_info()</span></code></a></li>
 </ul>
@@ -1244,7 +1300,7 @@ should be a subdirectory of <code class="docutils literal notranslate"><span cla
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=071feba1"></script>
+</div><script src="../_static/documentation_options.js?v=2106109f"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=5fa4622c"></script>

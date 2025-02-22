@@ -180,6 +180,14 @@ pygobbler.remove\_version module
    :undoc-members:
    :show-inheritance:
 
+pygobbler.reroute\_links module
+-------------------------------
+
+.. automodule:: pygobbler.reroute_links
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pygobbler.service\_info module
 ------------------------------
 
