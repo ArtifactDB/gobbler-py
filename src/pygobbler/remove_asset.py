@@ -4,6 +4,8 @@ from . import _utils as ut
 def remove_asset(project: str, asset: str, staging: str, url: str, force: bool = False):
     """
     Remove an asset of a project from the registry.
+    This should only be performed by Gobbler instance administrators.
+    Consider running :py:func:`~pygobbler.reroute_links.reroute_links` beforehand to avoid dangling references to files in this asset.
 
     Args:
         project:

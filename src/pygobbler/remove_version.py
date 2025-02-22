@@ -4,6 +4,8 @@ from . import _utils as ut
 def remove_version(project: str, asset: str, version: str, staging: str, url: str, force: bool = False):
     """
     Remove a version of a project asset from the registry.
+    This should only be performed by Gobbler instance administrators.
+    Consider running :py:func:`~pygobbler.reroute_links.reroute_links` beforehand to avoid dangling references to files in this version.
 
     Args:
         project:
