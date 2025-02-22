@@ -58,6 +58,21 @@ def upload_directory(project: str, asset: str, version: str, directory: str, sta
 
         directory = newdir
 
+    # Ensuring that everything is world-readable in this directory.
+    extra_file_args = stat.S_IROTH | stat.S_IRGRP | stat.S_IRUSR
+    extra_dir_args = extra_file_args | stat.S_IXOTH | stat.S_IXGRP | stat.S_IXUSR
+    for root, dirs, files in os.walk(directory):
+        for name in dirs:
+            path = os.path.join(root, name)
+            st = os.stat(path)
+            if st.st_mode & extra_dir_args != extra_dir_args:
+                os.chmod(path, st.st_mode | extra_dir_args)
+        for name in files:
+            path = os.path.join(root, name)
+            st = os.stat(path)
+            if st.st_mode & extra_file_args != extra_file_args:
+                os.chmod(path, st.st_mode | extra_file_args)
+
     req = {
         "source": os.path.basename(directory),
         "project": project,
