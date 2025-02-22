@@ -43,3 +43,4 @@ from .approve_probation import approve_probation
 from .reject_probation import reject_probation
 from .set_permissions import set_permissions
 from .unpack_path import unpack_path
+from .reroute_links import reroute_links
