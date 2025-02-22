@@ -30,7 +30,8 @@ def reroute_links(to_delete: List, staging: str, url: str, dry_run: bool = False
             Whether to perform a dry run of the rerouting.
 
     Returns:
-        List where each entry corresponds to a rerouting action and is a dictionary that contains:
+        List of dictionaries.
+        Each dictionary represents a rerouting action and contains the following fields.
 
         - ``path``, string containing the path to a symbolic link in the registry that was changed by rerouting.
         - ``copy``, boolean indicating whether the link at ``path`` was replaced by a copy of its target file.
