@@ -64,6 +64,9 @@ def upload_directory(project: str, asset: str, version: str, directory: str, sta
         import stat
         extra_file_args = stat.S_IROTH | stat.S_IRGRP | stat.S_IRUSR
         extra_dir_args = extra_file_args | stat.S_IXOTH | stat.S_IXGRP | stat.S_IXUSR
+        st = os.stat(directory)
+        if st.st_mode & extra_dir_args != extra_dir_args:
+            os.chmod(directory, st.st_mode | extra_dir_args)
         for root, dirs, files in os.walk(directory):
             for name in dirs:
                 path = os.path.join(root, name)
