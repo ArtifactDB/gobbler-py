@@ -1,4 +1,5 @@
 import os
+import tempfile
 
 
 def allocate_upload_directory(staging: str) -> str:
