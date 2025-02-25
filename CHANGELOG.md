@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.1.4
+
+- Added the `reroute_links()` function to support link rerouting.
+- Respect process-level umask when creating temporary files in the staging directory.
+
 ## Version 0.1.3
 
 - Enable setting/getting of asset-level permissions in `set_permissions()` and `fetch_permissions()`.
