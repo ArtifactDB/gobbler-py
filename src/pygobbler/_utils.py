@@ -22,9 +22,15 @@ def dump_request(staging: str, url: str, action: str, payload: Optional[Dict]) -
     else:
         as_str = json.dumps(payload, indent=4)
 
+    # Doing this little shuffle to get the right permissions. tempfile loves to
+    # create 0o600 directories that the gobbler service account can't actually
+    # read, so we just delete it and create it again under the more permissive
+    # umask. Unfortunately we can't use chmod as this screws up FACLs.
     prefix = "request-" + action + "-"
     fd, holding_name = tempfile.mkstemp(dir=staging, prefix=prefix)
-    with os.fdopen(fd, "w") as handle:
+    os.close(fd)
+    os.remove(holding_name)
+    with open(holding_name, "w") as handle:
         handle.write(as_str)
 
     res = requests.post(url + "/new/" + os.path.basename(holding_name))
