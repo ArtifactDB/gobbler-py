@@ -28,9 +28,9 @@ def dump_request(staging: str, url: str, action: str, payload: Optional[Dict]) -
     # umask. Unfortunately we can't use chmod as this screws up FACLs.
     prefix = "request-" + action + "-"
     fd, holding_name = tempfile.mkstemp(dir=staging, prefix=prefix)
-    fd.close()
+    os.close(fd)
     os.remove(holding_name)
-    with os.fdopen(holding_name, "w") as handle:
+    with open(holding_name, "w") as handle:
         handle.write(as_str)
 
     res = requests.post(url + "/new/" + os.path.basename(holding_name))
