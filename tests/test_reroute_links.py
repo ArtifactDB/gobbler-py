@@ -2,6 +2,18 @@ import pygobbler as pyg
 import os
 
 
+def _sort_array_of_actions(x):
+    paths = [y["path"] for y in x]
+    paths.sort()
+    order = {}
+    for i, p in enumerate(paths):
+        order[p] = i
+    output = [None] * len(x)
+    for y in x:
+        output[order[y["path"]]] = y
+    return output
+
+
 def test_reroute_links():
     _, staging, registry, url = pyg.start_gobbler()
 
@@ -17,7 +29,6 @@ def test_reroute_links():
     pyg.upload_directory("test-reroute", "simple", "v3", src, staging=staging, url=url)
 
     actions = pyg.reroute_links([{"project":"test-reroute", "asset":"simple", "version":"v1"}], staging=staging, url=url, dry_run=True)
-    print(actions)
     assert all([x["source"] == "test-reroute/simple/v1/foo" for x in actions])
     all_paths = [x["path"] for x in actions]
     assert "test-reroute/simple/v2/foo" in all_paths
@@ -28,5 +39,5 @@ def test_reroute_links():
     assert os.path.islink(os.path.join(registry, "test-reroute/simple/v2/foo")) 
 
     actions2 = pyg.reroute_links([{"project":"test-reroute", "asset":"simple", "version":"v1"}], staging=staging, url=url)
-    assert actions == actions2
+    assert _sort_array_of_actions(actions) == _sort_array_of_actions(actions2)
     assert not os.path.islink(os.path.join(registry, "test-reroute/simple/v2/foo")) 
