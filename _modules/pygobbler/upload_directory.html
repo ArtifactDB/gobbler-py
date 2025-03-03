@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>pygobbler.upload_directory - pygobbler 0.0.post1.dev1+g9b06622 documentation</title>
+        <title>pygobbler.upload_directory - pygobbler 0.0.post1.dev1+gffc0158 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
@@ -165,7 +165,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g9b06622 documentation</div></a>
+      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+gffc0158 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -189,7 +189,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g9b06622 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+gffc0158 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -242,14 +242,15 @@
         </div>
         <article role="main" id="furo-main-content">
           <h1>Source code for pygobbler.upload_directory</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">allocate_upload_directory</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_utils</span> <span class="k">as</span> <span class="n">ut</span>
 
 
 <div class="viewcode-block" id="upload_directory">
 <a class="viewcode-back" href="../../api/pygobbler.html#pygobbler.upload_directory.upload_directory">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">upload_directory</span><span class="p">(</span><span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">staging</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">probation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">upload_directory</span><span class="p">(</span><span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">directory</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">staging</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">probation</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">consume</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">ignore_dot</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Upload a directory as a new versioned asset of a project in the registry.</span>
 
@@ -276,11 +277,28 @@
 
 <span class="sd">        probation:</span>
 <span class="sd">            Whether to upload a probational version.</span>
+<span class="sd">    </span>
+<span class="sd">        consume:</span>
+<span class="sd">            Whether the contents of ``directory`` can be consumed by the upload process.</span>
+<span class="sd">            If true, the Gobbler will attempt to move files from ``directory`` into the registry.</span>
+<span class="sd">            Otherwise, the contents of ``directory`` will not be modified by the upload.</span>
+<span class="sd">            Defaults to true if the contents of ``directory`` need to be copied to ``staging``.</span>
+
+<span class="sd">        ignore_dot:</span>
+<span class="sd">            Whether to skip dotfiles in ``directory`` during upload.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
     <span class="n">staging</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">staging</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span> <span class="o">!=</span> <span class="n">staging</span><span class="p">:</span>
+    <span class="n">in_staging</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">tmpd</span> <span class="o">=</span> <span class="n">directory</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">tmpd</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">staging</span><span class="p">):</span>
+        <span class="n">tmpd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">tmpd</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">tmpd</span> <span class="o">==</span> <span class="n">staging</span><span class="p">:</span>
+            <span class="n">in_staging</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">break</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">in_staging</span><span class="p">:</span>
         <span class="n">newdir</span> <span class="o">=</span> <span class="n">allocate_upload_directory</span><span class="p">(</span><span class="n">staging</span><span class="p">)</span> 
 
         <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
@@ -304,12 +322,17 @@
 
         <span class="n">directory</span> <span class="o">=</span> <span class="n">newdir</span>
 
+    <span class="k">if</span> <span class="n">consume</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">consume</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">in_staging</span>
+
     <span class="n">req</span> <span class="o">=</span> <span class="p">{</span>
         <span class="s2">&quot;source&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">directory</span><span class="p">),</span>
         <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span>
         <span class="s2">&quot;asset&quot;</span><span class="p">:</span> <span class="n">asset</span><span class="p">,</span>
         <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">version</span><span class="p">,</span>
-        <span class="s2">&quot;on_probation&quot;</span><span class="p">:</span> <span class="n">probation</span>
+        <span class="s2">&quot;on_probation&quot;</span><span class="p">:</span> <span class="n">probation</span><span class="p">,</span>
+        <span class="s2">&quot;consume&quot;</span><span class="p">:</span> <span class="n">consume</span><span class="p">,</span>
+        <span class="s2">&quot;ignore_dot&quot;</span><span class="p">:</span> <span class="n">ignore_dot</span>
     <span class="p">}</span>
     <span class="n">ut</span><span class="o">.</span><span class="n">dump_request</span><span class="p">(</span><span class="n">staging</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;upload&quot;</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
     <span class="k">return</span></div>
@@ -377,7 +400,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=1ecbf10d"></script>
+</div><script src="../../_static/documentation_options.js?v=bf3a91ec"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
