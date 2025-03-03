@@ -14,7 +14,7 @@ def start_gobbler(
     registry: Optional[str] = None,
     port: Optional[int] = None,
     wait: float = 1,
-    version: str = "0.3.10",
+    version: str = "0.4.0",
     overwrite: bool = False) -> Tuple[bool, str, str, str]:
     """
     Start a test Gobbler service.

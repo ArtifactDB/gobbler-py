@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 0.1.5
+
+- Added `consume=` option in `upload_directory()` to allow staging files to be moved into the registry.
+- Added `ignore_dot=` option in `upload_directory()` to indicate whether dotfiles should be ignored.
+
 ## Version 0.1.4
 
 - Added the `reroute_links()` function to support link rerouting.

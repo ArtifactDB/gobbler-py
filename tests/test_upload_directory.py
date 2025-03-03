@@ -141,3 +141,73 @@ def test_upload_directory_staging(setup):
     assert sorted(man.keys()) == ["blah.txt", "foo/bar.txt"]
     assert "link" not in man["blah.txt"]
     assert "link" in man["foo/bar.txt"]
+
+
+def test_upload_directory_consume(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
+    dir = pyg.allocate_upload_directory(staging)
+    with open(os.path.join(dir, "blah.txt"), "w") as f:
+        f.write("A B C D E")
+    os.mkdir(os.path.join(dir, "foo"))
+    with open(os.path.join(dir, "foo", "bar.txt"), "w") as f:
+        f.write("1 2 3 4 5 6 7 8 9 10")
+
+    pyg.upload_directory(
+        project="test-upload", 
+        asset="anastasia", 
+        version="1", 
+        directory=dir,
+        staging=staging,
+        url=url,
+        consume=False
+    )
+    assert os.path.exists(os.path.join(dir, "blah.txt"))
+    assert os.path.exists(os.path.join(dir, "foo/bar.txt"))
+
+    pyg.upload_directory(
+        project="test-upload", 
+        asset="victoria", 
+        version="1", 
+        directory=dir,
+        staging=staging,
+        url=url,
+        consume=True
+    )
+    assert not os.path.exists(os.path.join(dir, "blah.txt"))
+    assert not os.path.exists(os.path.join(dir, "foo/bar.txt"))
+
+
+def test_upload_directory_ignore_dot(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
+    dir = pyg.allocate_upload_directory(staging)
+    with open(os.path.join(dir, ".blah.txt"), "w") as f:
+        f.write("A B C D E")
+    os.mkdir(os.path.join(dir, ".foo"))
+    with open(os.path.join(dir, ".foo", "bar.txt"), "w") as f:
+        f.write("1 2 3 4 5 6 7 8 9 10")
+
+    pyg.upload_directory(
+        project="test-upload", 
+        asset="annabelle", 
+        version="0", 
+        directory=dir,
+        staging=staging,
+        url=url
+    )
+    man = pyg.fetch_manifest("test-upload", "annabelle", "0", registry=registry, url=url)
+    assert len(man) == 0
+
+    pyg.upload_directory(
+        project="test-upload", 
+        asset="annabelle", 
+        version="1", 
+        directory=dir,
+        staging=staging,
+        url=url,
+        ignore_dot=False
+    )
+    man = pyg.fetch_manifest("test-upload", "annabelle", "1", registry=registry, url=url)
+    assert ".blah.txt" in man
+    assert ".foo/bar.txt" in man
