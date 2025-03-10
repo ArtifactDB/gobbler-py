@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>pygobbler.fetch_permissions - pygobbler 0.0.post1.dev1+gffc0158 documentation</title>
+        <title>pygobbler.fetch_permissions - pygobbler 0.0.post1.dev1+g9a21cf0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
@@ -165,7 +165,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+gffc0158 documentation</div></a>
+      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g9a21cf0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -189,7 +189,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+gffc0158 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g9a21cf0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -256,7 +256,8 @@
     <span class="n">registry</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">asset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">force_remote</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+    <span class="n">force_remote</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Fetch permissions for a project.</span>
 
@@ -268,39 +269,33 @@
 <span class="sd">            Path to the Gobbler registry.</span>
 
 <span class="sd">        url:</span>
-<span class="sd">            URL of the REST API. Only used for remote queries.</span>
+<span class="sd">            URL to the Gobbler REST API.</span>
+<span class="sd">            Only used for remote queries.</span>
 
 <span class="sd">        asset:</span>
 <span class="sd">            Name of the asset inside the project.</span>
 <span class="sd">            If supplied, permissions are returned for this asset rather than the entire project.</span>
 
 <span class="sd">        force_remote:</span>
-<span class="sd">            Whether to force a remote query via ``url``, even if the</span>
-<span class="sd">            ``registry`` is present on the current filesystem.</span>
+<span class="sd">            Whether to force a remote query via ``url``, even if the ``registry`` is present on the current filesystem.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        A dictionary containing the permissions for the ``project``.  This</span>
-<span class="sd">        contains ``owners``, a list of strings with the user IDs of the owners</span>
-<span class="sd">        of this project; and ``uploaders``, a list of dictionaries where each</span>
-<span class="sd">        dictionary has the following fields:</span>
+<span class="sd">        A dictionary containing the permissions for the ``project``.</span>
+<span class="sd">        This contains ``owners``, a list of strings with the user IDs of the owners of this project;</span>
+<span class="sd">        and ``uploaders``, a list of dictionaries where each dictionary has the following fields:</span>
 
 <span class="sd">        - ``id``, string containing a user ID that is authorized to upload.</span>
-<span class="sd">        - ``asset`` (optional), string containing the name of the asset that</span>
-<span class="sd">          the uploader is allowed to upload to. If not present, there is no</span>
-<span class="sd">          restriction on the uploaded asset name.</span>
-<span class="sd">        - ``version`` (optional), string containing the name of the version</span>
-<span class="sd">          that the uploader is allowed to upload to. If not present, there is</span>
-<span class="sd">          no restriction on the uploaded version name.</span>
-<span class="sd">        - ``until`` (optional), string containing the expiry date of this</span>
-<span class="sd">          authorization in Internet Date/Time format. If not provided, the</span>
-<span class="sd">          authorization does not expire.</span>
-<span class="sd">        - ``trusted`` (optional), whether the uploader is trusted. If not</span>
-<span class="sd">          provided, defaults to false.</span>
+<span class="sd">        - ``asset`` (optional), string containing the name of the asset that the uploader is allowed to upload to.</span>
+<span class="sd">          If not present, there is no restriction on the uploaded asset name.</span>
+<span class="sd">        - ``version`` (optional), string containing the name of the version that the uploader is allowed to upload to.</span>
+<span class="sd">          If not present, there is no restriction on the uploaded version name.</span>
+<span class="sd">        - ``until`` (optional), string containing the expiry date of this authorization in Internet Date/Time format.</span>
+<span class="sd">          If not provided, the authorization does not expire.</span>
+<span class="sd">        - ``trusted`` (optional), a boolean indicating whether the uploader is trusted.</span>
+<span class="sd">          If not provided, defaults to ``False``.</span>
 
-<span class="sd">        The top-level dictionary may also contain `global_write`, a boolean</span>
-<span class="sd">        indicating whether global writes are supported. If true, any user may</span>
-<span class="sd">        create a new asset in this project, and each user can upload new</span>
-<span class="sd">        versions to any asset they created under this mode.</span>
+<span class="sd">        When ``asset = None``, the dictionary may also contain `global_write`, a boolean indicating whether global writes are supported.</span>
+<span class="sd">        If ``True``, any user may create a new asset in this project, and each user can upload new versions to any asset they created under this mode.</span>
 
 <span class="sd">        If ``asset`` is provided, the returned dictionary contains ``owners`` and ``uploaders`` to describe the owners and uploaders, respectively, for the specified ``asset``.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -364,7 +359,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=bf3a91ec"></script>
+</div><script src="../../_static/documentation_options.js?v=43a89921"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>

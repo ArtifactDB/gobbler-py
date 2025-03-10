@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="pygobbler" href="modules.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>pygobbler package - pygobbler 0.0.post1.dev1+gffc0158 documentation</title>
+        <title>pygobbler package - pygobbler 0.0.post1.dev1+g9a21cf0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+gffc0158 documentation</div></a>
+      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g9a21cf0 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -190,7 +190,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+gffc0158 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g9a21cf0 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -505,39 +505,33 @@ location of the file after resolving all intermediate links.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>project</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name of a project.</p></li>
 <li><p><strong>registry</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the Gobbler registry.</p></li>
-<li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – URL of the REST API. Only used for remote queries.</p></li>
+<li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – URL to the Gobbler REST API.
+Only used for remote queries.</p></li>
 <li><p><strong>asset</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – Name of the asset inside the project.
 If supplied, permissions are returned for this asset rather than the entire project.</p></li>
-<li><p><strong>force_remote</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether to force a remote query via <code class="docutils literal notranslate"><span class="pre">url</span></code>, even if the
-<code class="docutils literal notranslate"><span class="pre">registry</span></code> is present on the current filesystem.</p></li>
+<li><p><strong>force_remote</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether to force a remote query via <code class="docutils literal notranslate"><span class="pre">url</span></code>, even if the <code class="docutils literal notranslate"><span class="pre">registry</span></code> is present on the current filesystem.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>]</span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p><p>A dictionary containing the permissions for the <code class="docutils literal notranslate"><span class="pre">project</span></code>.  This
-contains <code class="docutils literal notranslate"><span class="pre">owners</span></code>, a list of strings with the user IDs of the owners
-of this project; and <code class="docutils literal notranslate"><span class="pre">uploaders</span></code>, a list of dictionaries where each
-dictionary has the following fields:</p>
+<dd class="field-odd"><p><p>A dictionary containing the permissions for the <code class="docutils literal notranslate"><span class="pre">project</span></code>.
+This contains <code class="docutils literal notranslate"><span class="pre">owners</span></code>, a list of strings with the user IDs of the owners of this project;
+and <code class="docutils literal notranslate"><span class="pre">uploaders</span></code>, a list of dictionaries where each dictionary has the following fields:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">id</span></code>, string containing a user ID that is authorized to upload.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">asset</span></code> (optional), string containing the name of the asset that
-the uploader is allowed to upload to. If not present, there is no
-restriction on the uploaded asset name.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">version</span></code> (optional), string containing the name of the version
-that the uploader is allowed to upload to. If not present, there is
-no restriction on the uploaded version name.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">until</span></code> (optional), string containing the expiry date of this
-authorization in Internet Date/Time format. If not provided, the
-authorization does not expire.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">trusted</span></code> (optional), whether the uploader is trusted. If not
-provided, defaults to false.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">asset</span></code> (optional), string containing the name of the asset that the uploader is allowed to upload to.
+If not present, there is no restriction on the uploaded asset name.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">version</span></code> (optional), string containing the name of the version that the uploader is allowed to upload to.
+If not present, there is no restriction on the uploaded version name.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">until</span></code> (optional), string containing the expiry date of this authorization in Internet Date/Time format.
+If not provided, the authorization does not expire.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">trusted</span></code> (optional), a boolean indicating whether the uploader is trusted.
+If not provided, defaults to <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p></li>
 </ul>
-<p>The top-level dictionary may also contain <cite>global_write</cite>, a boolean
-indicating whether global writes are supported. If true, any user may
-create a new asset in this project, and each user can upload new
-versions to any asset they created under this mode.</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">asset</span> <span class="pre">=</span> <span class="pre">None</span></code>, the dictionary may also contain <cite>global_write</cite>, a boolean indicating whether global writes are supported.
+If <code class="docutils literal notranslate"><span class="pre">True</span></code>, any user may create a new asset in this project, and each user can upload new versions to any asset they created under this mode.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">asset</span></code> is provided, the returned dictionary contains <code class="docutils literal notranslate"><span class="pre">owners</span></code> and <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> to describe the owners and uploaders, respectively, for the specified <code class="docutils literal notranslate"><span class="pre">asset</span></code>.</p>
 </p>
 </dd>
@@ -974,29 +968,26 @@ directories.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygobbler.set_permissions.set_permissions">
 <span class="sig-prename descclassname"><span class="pre">pygobbler.set_permissions.</span></span><span class="sig-name descname"><span class="pre">set_permissions</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">project</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registry</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">staging</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">asset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">owners</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uploaders</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">global_write</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">append</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/set_permissions.html#set_permissions"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.set_permissions.set_permissions" title="Link to this definition">¶</a></dt>
-<dd><p>Set the owner and uploader permissions for a project.</p>
+<dd><p>Set the owner and uploader permissions for a project or an asset within a project.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>project</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Name of the project.</p></li>
 <li><p><strong>registry</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the Gobbler registry.</p></li>
 <li><p><strong>staging</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the staging directory.</p></li>
-<li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – URL of the REST API.</p></li>
+<li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – URL to the Gobbler REST API.</p></li>
 <li><p><strong>asset</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – Name of the asset inside the project.
 If supplied, permissions are set on this asset rather than the entire project.</p></li>
-<li><p><strong>owners</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>]</span>) – List of user IDs for owners of this project. If None, no change is
-made to the existing owners in the project permissions.</p></li>
-<li><p><strong>uploaders</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Dict" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>]</span>) – List of dictionaries specifying the authorized uploaders for this
-project.  See the <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> field in the return value of
-<a class="reference internal" href="#pygobbler.fetch_permissions.fetch_permissions" title="pygobbler.fetch_permissions.fetch_permissions"><code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_permissions()</span></code></a> for  the expected format. If None,
-no change is made to the existing uploaders.</p></li>
-<li><p><strong>global_write</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</span>) – Whether to enable global writes for this project, see the <code class="docutils literal notranslate"><span class="pre">global_write</span></code> field in the return value of <a class="reference internal" href="#pygobbler.fetch_permissions.fetch_permissions" title="pygobbler.fetch_permissions.fetch_permissions"><code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_permissions()</span></code></a> for more details.
-If None, no change is made to the global write status.
+<li><p><strong>owners</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>]</span>) – List of user IDs for owners of this project.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, no change is made to the existing owners in the project permissions.</p></li>
+<li><p><strong>uploaders</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.List" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>]</span>) – List of dictionaries specifying the authorized uploaders for this project.
+Each dictionary should follow the same format as the <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> field in the return value of <code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_permissions()</span></code>.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, no change is made to the existing uploaders.</p></li>
+<li><p><strong>global_write</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/typing.html#typing.Optional" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</span>) – Whether to enable global writes for this project, see the <code class="docutils literal notranslate"><span class="pre">global_write</span></code> field in the return value of <code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_permissions()</span></code> for more details.
+If <code class="docutils literal notranslate"><span class="pre">None</span></code>, no change is made to the global write status.
 Ignored if <code class="docutils literal notranslate"><span class="pre">asset</span></code> is provided.</p></li>
-<li><p><strong>append</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether <code class="docutils literal notranslate"><span class="pre">owners</span></code> and <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> should be appended to the
-existing owners and uploaders, respectively. If False, the
-<code class="docutils literal notranslate"><span class="pre">owners</span></code> and <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> are used to replace the existing
-values in the project permissions.</p></li>
+<li><p><strong>append</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether <code class="docutils literal notranslate"><span class="pre">owners</span></code> and <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> should be appended to the existing owners and uploaders, respectively.
+If <code class="docutils literal notranslate"><span class="pre">False</span></code>, the <code class="docutils literal notranslate"><span class="pre">owners</span></code> and <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> are used to replace the existing values in the project permissions.</p></li>
 </ul>
 </dd>
 </dl>
@@ -1304,7 +1295,7 @@ Defaults to true if the contents of <code class="docutils literal notranslate"><
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=bf3a91ec"></script>
+</div><script src="../_static/documentation_options.js?v=43a89921"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
