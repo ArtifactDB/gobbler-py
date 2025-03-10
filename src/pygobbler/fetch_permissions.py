@@ -10,7 +10,8 @@ def fetch_permissions(
     registry: str,
     url: str,
     asset: Optional[str] = None,
-    force_remote: bool = False) -> Dict[str, Any]:
+    force_remote: bool = False,
+) -> Dict[str, Any]:
     """
     Fetch permissions for a project.
 
@@ -22,39 +23,33 @@ def fetch_permissions(
             Path to the Gobbler registry.
 
         url:
-            URL of the REST API. Only used for remote queries.
+            URL to the Gobbler REST API.
+            Only used for remote queries.
 
         asset:
             Name of the asset inside the project.
             If supplied, permissions are returned for this asset rather than the entire project.
 
         force_remote:
-            Whether to force a remote query via ``url``, even if the
-            ``registry`` is present on the current filesystem.
+            Whether to force a remote query via ``url``, even if the ``registry`` is present on the current filesystem.
 
     Returns:
-        A dictionary containing the permissions for the ``project``.  This
-        contains ``owners``, a list of strings with the user IDs of the owners
-        of this project; and ``uploaders``, a list of dictionaries where each
-        dictionary has the following fields:
+        A dictionary containing the permissions for the ``project``.
+        This contains ``owners``, a list of strings with the user IDs of the owners of this project;
+        and ``uploaders``, a list of dictionaries where each dictionary has the following fields:
 
         - ``id``, string containing a user ID that is authorized to upload.
-        - ``asset`` (optional), string containing the name of the asset that
-          the uploader is allowed to upload to. If not present, there is no
-          restriction on the uploaded asset name.
-        - ``version`` (optional), string containing the name of the version
-          that the uploader is allowed to upload to. If not present, there is
-          no restriction on the uploaded version name.
-        - ``until`` (optional), string containing the expiry date of this
-          authorization in Internet Date/Time format. If not provided, the
-          authorization does not expire.
-        - ``trusted`` (optional), whether the uploader is trusted. If not
-          provided, defaults to false.
+        - ``asset`` (optional), string containing the name of the asset that the uploader is allowed to upload to.
+          If not present, there is no restriction on the uploaded asset name.
+        - ``version`` (optional), string containing the name of the version that the uploader is allowed to upload to.
+          If not present, there is no restriction on the uploaded version name.
+        - ``until`` (optional), string containing the expiry date of this authorization in Internet Date/Time format.
+          If not provided, the authorization does not expire.
+        - ``trusted`` (optional), a boolean indicating whether the uploader is trusted.
+          If not provided, defaults to ``False``.
 
-        The top-level dictionary may also contain `global_write`, a boolean
-        indicating whether global writes are supported. If true, any user may
-        create a new asset in this project, and each user can upload new
-        versions to any asset they created under this mode.
+        When ``asset = None``, the dictionary may also contain `global_write`, a boolean indicating whether global writes are supported.
+        If ``True``, any user may create a new asset in this project, and each user can upload new versions to any asset they created under this mode.
 
         If ``asset`` is provided, the returned dictionary contains ``owners`` and ``uploaders`` to describe the owners and uploaders, respectively, for the specified ``asset``.
     """

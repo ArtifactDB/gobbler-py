@@ -1,4 +1,4 @@
-from typing import Optional, List, Dict
+from typing import Optional, List
 from . import _utils as ut
 from . import fetch_permissions
 
@@ -10,11 +10,12 @@ def set_permissions(
     url: str,
     asset: Optional[str] = None,
     owners: Optional[List] = None,
-    uploaders: Optional[Dict] = None,
+    uploaders: Optional[List] = None,
     global_write: Optional[bool] = None,
-    append: bool = True):
+    append: bool = True,
+):
     """
-    Set the owner and uploader permissions for a project.
+    Set the owner and uploader permissions for a project or an asset within a project.
 
     Args:
         project:
@@ -27,32 +28,29 @@ def set_permissions(
             Path to the staging directory.
 
         url:
-            URL of the REST API.
+            URL to the Gobbler REST API.
 
         asset:
             Name of the asset inside the project.
             If supplied, permissions are set on this asset rather than the entire project.
 
         owners:
-            List of user IDs for owners of this project. If None, no change is
-            made to the existing owners in the project permissions.
+            List of user IDs for owners of this project.
+            If ``None``, no change is made to the existing owners in the project permissions.
 
         uploaders:
-            List of dictionaries specifying the authorized uploaders for this
-            project.  See the ``uploaders`` field in the return value of
-            :py:func:`~.fetch_permissions` for  the expected format. If None,
-            no change is made to the existing uploaders.
+            List of dictionaries specifying the authorized uploaders for this project.
+            Each dictionary should follow the same format as the ``uploaders`` field in the return value of :py:func:`~gobbler.fetch_permissions.fetch_permissions`. 
+            If ``None``, no change is made to the existing uploaders.
 
         global_write:
-            Whether to enable global writes for this project, see the ``global_write`` field in the return value of :py:func:`~.fetch_permissions` for more details.
-            If None, no change is made to the global write status.
+            Whether to enable global writes for this project, see the ``global_write`` field in the return value of :py:func:`~gobbler.fetch_permissions.fetch_permissions` for more details.
+            If ``None``, no change is made to the global write status.
             Ignored if ``asset`` is provided.
 
         append:
-            Whether ``owners`` and ``uploaders`` should be appended to the
-            existing owners and uploaders, respectively. If False, the
-            ``owners`` and ``uploaders`` are used to replace the existing
-            values in the project permissions.
+            Whether ``owners`` and ``uploaders`` should be appended to the existing owners and uploaders, respectively.
+            If ``False``, the ``owners`` and ``uploaders`` are used to replace the existing values in the project permissions.
     """
     perms = {}
 
