@@ -211,3 +211,9 @@ def test_upload_directory_ignore_dot(setup):
     man = pyg.fetch_manifest("test-upload", "annabelle", "1", registry=registry, url=url)
     assert ".blah.txt" in man
     assert ".foo/bar.txt" in man
+
+
+def test_allocate_upload_directory():
+    _, staging, registry, url = pyg.start_gobbler()
+    assert os.path.exists(pyg.allocate_upload_directory(staging))
+    assert not os.path.exists(pyg.allocate_upload_directory(staging, create=False))
