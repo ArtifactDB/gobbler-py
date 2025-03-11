@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="pygobbler" href="modules.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>pygobbler package - pygobbler 0.0.post1.dev1+g9a21cf0 documentation</title>
+        <title>pygobbler package - pygobbler 0.0.post1.dev1+gbac8f38 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g9a21cf0 documentation</div></a>
+      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+gbac8f38 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -190,7 +190,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g9a21cf0 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+gbac8f38 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -257,17 +257,21 @@
 <span id="pygobbler-allocate-upload-directory-module"></span><h2>pygobbler.allocate_upload_directory module<a class="headerlink" href="#module-pygobbler.allocate_upload_directory" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygobbler.allocate_upload_directory.allocate_upload_directory">
-<span class="sig-prename descclassname"><span class="pre">pygobbler.allocate_upload_directory.</span></span><span class="sig-name descname"><span class="pre">allocate_upload_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">staging</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/allocate_upload_directory.html#allocate_upload_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.allocate_upload_directory.allocate_upload_directory" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygobbler.allocate_upload_directory.</span></span><span class="sig-name descname"><span class="pre">allocate_upload_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">staging</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">create</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/allocate_upload_directory.html#allocate_upload_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.allocate_upload_directory.allocate_upload_directory" title="Link to this definition">¶</a></dt>
 <dd><p>Allocate a subdirectory in the staging directory to prepare files for upload via <a class="reference internal" href="#pygobbler.upload_directory.upload_directory" title="pygobbler.upload_directory.upload_directory"><code class="xref py py-func docutils literal notranslate"><span class="pre">upload_directory()</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>staging</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the staging directory.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>staging</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the staging directory.</p></li>
+<li><p><strong>create</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether to actually create the subdirectory.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.9/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span></p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Path to a new subdirectory for staging uploads.</p>
+<dd class="field-odd"><p>Path to a new subdirectory for staging uploads.
+If <code class="docutils literal notranslate"><span class="pre">create</span> <span class="pre">=</span> <span class="pre">False</span></code>, a name is chosen but the subdirectory is not created.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -998,7 +1002,7 @@ If <code class="docutils literal notranslate"><span class="pre">False</span></co
 <span id="pygobbler-start-gobbler-module"></span><h2>pygobbler.start_gobbler module<a class="headerlink" href="#module-pygobbler.start_gobbler" title="Link to this heading">¶</a></h2>
 <dl class="py function">
 <dt class="sig sig-object py" id="pygobbler.start_gobbler.start_gobbler">
-<span class="sig-prename descclassname"><span class="pre">pygobbler.start_gobbler.</span></span><span class="sig-name descname"><span class="pre">start_gobbler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">staging</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.4.0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/start_gobbler.html#start_gobbler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.start_gobbler.start_gobbler" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">pygobbler.start_gobbler.</span></span><span class="sig-name descname"><span class="pre">start_gobbler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">staging</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">registry</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0.4.1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">overwrite</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/pygobbler/start_gobbler.html#start_gobbler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pygobbler.start_gobbler.start_gobbler" title="Link to this definition">¶</a></dt>
 <dd><p>Start a test Gobbler service.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -1295,7 +1299,7 @@ Defaults to true if the contents of <code class="docutils literal notranslate"><
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=43a89921"></script>
+</div><script src="../_static/documentation_options.js?v=64192fd2"></script>
     <script src="../_static/doctools.js?v=9a2dae69"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
