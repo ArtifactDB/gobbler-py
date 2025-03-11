@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.1.6
+
+- Added `create=` option to `allocate_upload_directory()` to only return a name without creating the directory.
+
 ## Version 0.1.5
 
 - Added `consume=` option in `upload_directory()` to allow staging files to be moved into the registry.
