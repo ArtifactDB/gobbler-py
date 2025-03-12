@@ -34,7 +34,7 @@ def list_projects(registry: str, url: str, force_remote: bool = False) -> List[s
 
 
 def list_registry_directories(path: str, registry: str, url: str, force_remote: bool) -> List[str]:
-    if force_remote and os.path.exists(registry):
+    if not force_remote and os.path.exists(registry):
         output = []
         full = os.path.join(registry, path)
         for x in os.listdir(full):

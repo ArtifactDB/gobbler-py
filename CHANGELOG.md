@@ -1,5 +1,9 @@
 # Changelog
 
+## Version 0.1.7
+
+- Bugfix to `force_remote=` in `list_projects()`, `list_assets()` and `list_versions()`.
+
 ## Version 0.1.6
 
 - Added `create=` option to `allocate_upload_directory()` to only return a name without creating the directory.
