@@ -30,11 +30,18 @@ def dump_request(staging: str, url: str, action: str, payload: Optional[Dict]) -
     fd, holding_name = tempfile.mkstemp(dir=staging, prefix=prefix)
     os.close(fd)
     os.remove(holding_name)
-    with open(holding_name, "w") as handle:
-        handle.write(as_str)
 
-    res = requests.post(url + "/new/" + os.path.basename(holding_name))
-    if res.status_code >= 300:
-        raise format_error(res)
+    purge_holding = False
+    try:
+        with open(holding_name, "w") as handle:
+            handle.write(as_str)
+        purge_holding = True
 
-    return res.json()
+        res = requests.post(url + "/new/" + os.path.basename(holding_name))
+        if res.status_code >= 300:
+            raise format_error(res)
+        return res.json()
+
+    finally:
+        if purge_holding:
+            os.remove(holding_name)

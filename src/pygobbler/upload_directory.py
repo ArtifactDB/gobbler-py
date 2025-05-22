@@ -41,6 +41,7 @@ def upload_directory(project: str, asset: str, version: str, directory: str, sta
         ignore_dot:
             Whether to skip dotfiles in ``directory`` during upload.
     """
+    # Normalizing them so that they're comparable, in order to figure out whether 'directory' lies inside 'staging'.
     directory = os.path.normpath(directory)
     staging = os.path.normpath(staging)
 
@@ -52,44 +53,57 @@ def upload_directory(project: str, asset: str, version: str, directory: str, sta
             in_staging = True
             break
 
-    if not in_staging:
-        newdir = allocate_upload_directory(staging) 
+    purge_newdir = False 
+    try:
+        if not in_staging:
+            newdir = allocate_upload_directory(staging) 
 
-        for root, dirs, files in os.walk(directory):
-            for f in files:
-                src = os.path.join(root, f)
-                rel = os.path.relpath(src, directory)
-                dest = os.path.join(newdir, rel)
-                os.makedirs(os.path.dirname(dest), exist_ok=True)
+            # If we're copying everything to our own staging directory, we can
+            # delete it afterwards without affecting the user. We do this
+            # clean-up to free up storage in the staging space.
+            purge_newdir = True 
 
-                slink = ""
-                if os.path.islink(src):
-                    slink = os.readlink(src)
+            for root, dirs, files in os.walk(directory):
+                for f in files:
+                    src = os.path.join(root, f)
+                    rel = os.path.relpath(src, directory)
+                    dest = os.path.join(newdir, rel)
+                    os.makedirs(os.path.dirname(dest), exist_ok=True)
 
-                if slink == "":
-                    _link_or_copy(src, dest)
-                elif _is_absolute_or_local_link(slink, rel):
-                    os.symlink(slink, dest)
-                else:
-                    full_src = os.path.normpath(os.path.join(os.path.dirname(src), slink))
-                    _link_or_copy(full_src, dest)
+                    slink = ""
+                    if os.path.islink(src):
+                        slink = os.readlink(src)
 
-        directory = newdir
+                    if slink == "":
+                        _link_or_copy(src, dest)
+                    elif _is_absolute_or_local_link(slink, rel):
+                        os.symlink(slink, dest)
+                    else:
+                        full_src = os.path.normpath(os.path.join(os.path.dirname(src), slink))
+                        _link_or_copy(full_src, dest)
 
-    if consume is None:
-        consume = not in_staging
+            directory = newdir
 
-    req = {
-        "source": os.path.basename(directory),
-        "project": project,
-        "asset": asset,
-        "version": version,
-        "on_probation": probation,
-        "consume": consume,
-        "ignore_dot": ignore_dot
-    }
-    ut.dump_request(staging, url, "upload", req)
-    return
+        if consume is None:
+            # If we copied everything over to our own staging directory, we're entitled to consume its contents.
+            consume = not in_staging
+
+        req = {
+            "source": os.path.basename(directory),
+            "project": project,
+            "asset": asset,
+            "version": version,
+            "on_probation": probation,
+            "consume": consume,
+            "ignore_dot": ignore_dot
+        }
+        ut.dump_request(staging, url, "upload", req)
+        return
+
+    finally:
+        if purge_newdir:
+            import shutil
+            shutil.rmtree(newdir)
 
 
 def _is_absolute_or_local_link(target: str, link_path: str) -> bool:
