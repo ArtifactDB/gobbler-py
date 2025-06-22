@@ -4,7 +4,18 @@ from . import allocate_upload_directory
 from . import _utils as ut
 
 
-def upload_directory(project: str, asset: str, version: str, directory: str, staging: str, url: str, probation: bool = False, consume: Optional[bool] = None, ignore_dot: bool = True):
+def upload_directory(
+    project: str,
+    asset: str,
+    version: str,
+    directory: str,
+    staging: str,
+    url: str,
+    probation: bool = False,
+    consume: Optional[bool] = None,
+    ignore_dot: bool = True,
+    spoof: Optional[str] = None,
+):
     """
     Upload a directory as a new versioned asset of a project in the registry.
 
@@ -40,6 +51,11 @@ def upload_directory(project: str, asset: str, version: str, directory: str, sta
 
         ignore_dot:
             Whether to skip dotfiles in ``directory`` during upload.
+
+        spoof:
+            String containing the name of a user on whose behalf this request is being made.
+            This should only be used if the Gobbler service allows spoofing by the current user. 
+            If ``None``, no spoofing is performed.
     """
     # Normalizing them so that they're comparable, in order to figure out whether 'directory' lies inside 'staging'.
     directory = os.path.normpath(directory)
@@ -97,7 +113,7 @@ def upload_directory(project: str, asset: str, version: str, directory: str, sta
             "consume": consume,
             "ignore_dot": ignore_dot
         }
-        ut.dump_request(staging, url, "upload", req)
+        ut.dump_request(staging, url, "upload", req, spoof=spoof)
         return
 
     finally:

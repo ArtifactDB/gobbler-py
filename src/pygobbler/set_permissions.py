@@ -13,6 +13,7 @@ def set_permissions(
     uploaders: Optional[List] = None,
     global_write: Optional[bool] = None,
     append: bool = True,
+    spoof: Optional[str] = None,
 ):
     """
     Set the owner and uploader permissions for a project or an asset within a project.
@@ -51,6 +52,11 @@ def set_permissions(
         append:
             Whether ``owners`` and ``uploaders`` should be appended to the existing owners and uploaders, respectively.
             If ``False``, the ``owners`` and ``uploaders`` are used to replace the existing values in the project permissions.
+
+        spoof:
+            String containing the name of a user on whose behalf this request is being made.
+            This should only be used if the Gobbler service allows spoofing by the current user. 
+            If ``None``, no spoofing is performed.
     """
     perms = {}
 
@@ -74,4 +80,4 @@ def set_permissions(
         perms["global_write"] = global_write
 
     payload["permissions"] = perms
-    ut.dump_request(staging, url, "set_permissions", payload)
+    ut.dump_request(staging, url, "set_permissions", payload, spoof=spoof)

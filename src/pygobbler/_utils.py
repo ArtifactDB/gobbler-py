@@ -16,11 +16,10 @@ def format_error(res):
         return requests.HTTPError(res.status_code)
 
 
-def dump_request(staging: str, url: str, action: str, payload: Optional[Dict]) -> str:
-    if payload is None:
-        as_str = character(0)
-    else:
-        as_str = json.dumps(payload, indent=4)
+def dump_request(staging: str, url: str, action: str, payload: Dict, spoof: Optional[str] = None) -> str:
+    if spoof is not None:
+        payload = { **payload, "spoof": spoof }
+    as_str = json.dumps(payload, indent=4)
 
     # Doing this little shuffle to get the right permissions. tempfile loves to
     # create 0o600 directories that the gobbler service account can't actually
