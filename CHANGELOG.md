@@ -1,5 +1,13 @@
 # Changelog
 
+## Version 0.1.9
+
+- Added spoofing options for the project owner-related endpoints, i.e., approving/rejecting probation, changing permissions, or uploading new versions.
+
+## Version 0.1.8
+
+- Delete request files from staging directory once each request is complete, to free up storage space on the backend.
+
 ## Version 0.1.7
 
 - Bugfix to `force_remote=` in `list_projects()`, `list_assets()` and `list_versions()`.
