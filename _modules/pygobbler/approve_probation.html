@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 7.4.7 and Furo 2024.08.06 -->
-        <title>pygobbler.approve_probation - pygobbler 0.0.post1.dev1+g86ba1a3 documentation</title>
+        <title>pygobbler.approve_probation - pygobbler 0.0.post1.dev1+g70df71c documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
@@ -165,7 +165,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g86ba1a3 documentation</div></a>
+      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g70df71c documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -189,7 +189,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g86ba1a3 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g70df71c documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -242,12 +242,14 @@
         </div>
         <article role="main" id="furo-main-content">
           <h1>Source code for pygobbler.approve_probation</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_utils</span> <span class="k">as</span> <span class="n">ut</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_utils</span> <span class="k">as</span> <span class="n">ut</span>
 
 
 <div class="viewcode-block" id="approve_probation">
 <a class="viewcode-back" href="../../api/pygobbler.html#pygobbler.approve_probation.approve_probation">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">approve_probation</span><span class="p">(</span><span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">staging</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">approve_probation</span><span class="p">(</span><span class="n">project</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">version</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">staging</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">spoof</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Approve a probational upload of a version of a project&#39;s asset.</span>
 
@@ -266,8 +268,13 @@
 
 <span class="sd">        url:</span>
 <span class="sd">            URL to the Gobbler REST API.</span>
+
+<span class="sd">        spoof:</span>
+<span class="sd">            String containing the name of a user on whose behalf this request is being made.</span>
+<span class="sd">            This should only be used if the Gobbler service allows spoofing by the current user. </span>
+<span class="sd">            If ``None``, no spoofing is performed.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">ut</span><span class="o">.</span><span class="n">dump_request</span><span class="p">(</span><span class="n">staging</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;approve_probation&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span> <span class="s2">&quot;asset&quot;</span><span class="p">:</span> <span class="n">asset</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">version</span> <span class="p">})</span></div>
+    <span class="n">ut</span><span class="o">.</span><span class="n">dump_request</span><span class="p">(</span><span class="n">staging</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;approve_probation&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="s2">&quot;project&quot;</span><span class="p">:</span> <span class="n">project</span><span class="p">,</span> <span class="s2">&quot;asset&quot;</span><span class="p">:</span> <span class="n">asset</span><span class="p">,</span> <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="n">version</span> <span class="p">},</span> <span class="n">spoof</span><span class="o">=</span><span class="n">spoof</span><span class="p">)</span></div>
 
 </pre></div>
         </article>
@@ -301,7 +308,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=52e4d5de"></script>
+</div><script src="../../_static/documentation_options.js?v=9050cb28"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
