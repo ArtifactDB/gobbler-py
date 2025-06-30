@@ -82,3 +82,25 @@ def test_list_files(setup):
     assert files == sorted(["whee/blah"])
     rfiles = sorted(pyg.list_files("test", "list", "v1", registry=registry, url=url, force_remote=True, prefix="whee/"))
     assert files == rfiles
+
+
+def test_list_files_empty(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
+    src = pyg.allocate_upload_directory(staging)
+    with open(os.path.join(src, "foo"), "w") as f:
+        f.write("BAR")
+    os.mkdir(os.path.join(src, "whee"))
+    with open(os.path.join(src, "whee", "blah"), "w") as f:
+        f.write("stuff")
+    with open(os.path.join(src, "whee2"), "w") as f:
+        f.write("ABCDEFGHIJK")
+    os.mkdir(os.path.join(src, "whee", "stuff"))
+    os.makedirs(os.path.join(src, "argo", "naut"))
+
+    pyg.upload_directory("test", "list-empty", "v1", src, staging=staging, url=url)
+
+    files = sorted(pyg.list_files("test", "list-empty", "v1", registry=registry, url=url))
+    assert files == sorted(["..summary", "..manifest", "argo/naut/", "foo", "whee/blah", "whee/stuff/", "whee2"])
+    rfiles = sorted(pyg.list_files("test", "list-empty", "v1", registry=registry, url=url, force_remote=True))
+    assert files == rfiles

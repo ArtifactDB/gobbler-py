@@ -58,14 +58,31 @@ def list_files(project: str, asset: str, version: str, registry: str, url: str, 
         if prefix is not None:
             target = os.path.join(target, prefix)
 
+        empty_directories = {}
         for root, dirs, files in os.walk(target):
             rel = os.path.relpath(root, target)
             for f in files:
                 if include_dotdot or not f.startswith(".."):
                     if rel != ".":
-                        listing.append(os.path.join(rel, f))
-                    else:
-                        listing.append(f)
+                        f = os.path.join(rel, f)
+                    listing.append(f)
+            for d in dirs:
+                if rel != ".":
+                    d = os.path.join(rel, d)
+                empty_directories[d] = True
+
+        for f in listing:
+            fdir = os.path.dirname(f)
+            if fdir != ".":
+                empty_directories[fdir] = False
+        for d, empty in empty_directories.items():
+            if empty:
+                ddir = os.path.dirname(d)
+                if ddir != ".":
+                    empty_directories[ddir] = False
+        for d, empty in empty_directories.items():
+            if empty:
+                listing.append(d + "/")
 
     else:
         target = project + "/" + asset + "/" + version
@@ -77,11 +94,10 @@ def list_files(project: str, asset: str, version: str, registry: str, url: str, 
         if res.status_code >= 300:
             raise ut.format_error(res)
 
-        body = res.json()
-        if include_dotdot:
-            listing = body
-        else:
-            listing = filter(lambda x : not x.startswith("..") and x.find("/..") == -1, body)
+        listing = res.json()
+
+    if not include_dotdot:
+        listing = filter(lambda x : not x.startswith("..") and x.find("/..") == -1, listing)
 
     if suffix_filter is not None:
         listing = filter(lambda x : x.startswith(suffix_filter), listing)

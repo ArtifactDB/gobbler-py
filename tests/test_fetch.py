@@ -123,3 +123,29 @@ def test_fetch_directory(setup):
     rdir2 = pyg.fetch_directory("test/fetch/v2", registry=registry, url=url, cache=cache, force_remote=True, concurrent=2)
     with open(os.path.join(rdir2, "foo"), "r") as handle:
         assert handle.read() == "BAR"
+
+
+def test_fetch_directory(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
+    src = pyg.allocate_upload_directory(staging)
+    with open(os.path.join(src, "foo"), "w") as f:
+        f.write("BAR")
+    os.mkdir(os.path.join(src, "whee"))
+    with open(os.path.join(src, "whee", "blah"), "w") as f:
+        f.write("stuff")
+    os.mkdir(os.path.join(src, "whee", "stuff"))
+    os.makedirs(os.path.join(src, "chihaya", "kisaragi"))
+
+    pyg.upload_directory("test", "fetch-empty", "v1", src, staging=staging, url=url)
+
+    cache = tempfile.mkdtemp()
+    rdir2 = pyg.fetch_directory("test/fetch-empty/v1", registry=registry, url=url, cache=cache, force_remote=True, concurrent=2)
+
+    with open(os.path.join(rdir2, "foo"), "r") as handle:
+        assert handle.read() == "BAR"
+    with open(os.path.join(rdir2, "whee", "blah"), "r") as handle:
+        assert handle.read() == "stuff"
+
+    assert os.path.isdir(os.path.join(rdir2, "whee", "stuff"))
+    assert os.path.isdir(os.path.join(rdir2, "chihaya", "kisaragi"))

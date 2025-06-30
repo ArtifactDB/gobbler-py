@@ -92,7 +92,16 @@ def fetch_directory(path: str, registry: str, url: str, cache: Optional[str] = N
     res = requests.get(url + "/list?path=" + urllib.parse.quote_plus(path) + "&recursive=true")
     if res.status_code >= 300:
         raise ut.format_error(res)
-    listing = res.json()
+    raw_listing = res.json()
+
+    listing = []
+    for f in raw_listing:
+        if f.endswith("/"):
+            epath = os.path.join(final, f)
+            if not os.path.isdir(epath):
+                os.makedirs(epath, exist_ok=True)
+        else:
+            listing.append(f)
 
     if concurrent == 1:
         for y in listing:
