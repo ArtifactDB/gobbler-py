@@ -228,6 +228,14 @@ pygobbler.upload\_directory module
    :undoc-members:
    :show-inheritance:
 
+pygobbler.validate\_version module
+----------------------------------
+
+.. automodule:: pygobbler.validate_version
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 pygobbler.version\_path module
 ------------------------------
 
