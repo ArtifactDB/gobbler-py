@@ -2,6 +2,12 @@
 
 ## Version 0.1.9
 
+- Added the `validate_version()` function to validate an existing directory in the registry.
+- Report empty subdirectories when listing directory contents with `list_files()`.
+- Create empty subdirectories in `fetch_directory()` to completely reproduce the registry contents.
+
+## Version 0.1.9
+
 - Added spoofing options for the project owner-related endpoints, i.e., approving/rejecting probation, changing permissions, or uploading new versions.
 
 ## Version 0.1.8
