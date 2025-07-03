@@ -44,6 +44,14 @@ def test_set_permissions():
     assert perms["owners"] == [ "LTLA" ]
     assert len(perms["uploaders"]) == 2
 
+    # Dry run has no effect.
+    new_perms = pyg.set_permissions("test-perms", owners=[ "foobar" ], uploaders= [], append=False, staging=staging, url=url, registry=registry, dry_run=True)
+    assert new_perms["owners"] == [ "foobar" ]
+    assert len(new_perms["uploaders"]) == 0
+    perms = pyg.fetch_permissions("test-perms", registry=registry, url=url)
+    assert perms["owners"] == [ "LTLA" ]
+    assert len(perms["uploaders"]) == 2
+
     # Now resetting the uploaders. 
     pyg.set_permissions("test-perms", uploaders=[], append=False, staging=staging, url=url, registry=registry)
     perms = pyg.fetch_permissions("test-perms", registry=registry, url=url)
