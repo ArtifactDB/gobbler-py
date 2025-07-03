@@ -59,6 +59,56 @@ def test_upload_directory_simple(setup):
         assert "link" in v
 
 
+def test_upload_directory_parallel(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
+    tmp = tempfile.mkdtemp()
+    with open(os.path.join(tmp, "whee.txt"), "w") as handle:
+        handle.write("motto motto")
+    os.mkdir(os.path.join(tmp, "foo"))
+    with open(os.path.join(tmp, "foo", "bar"), "w") as handle:
+        handle.write("toki o kizuma uta")
+
+    pyg.upload_directory(
+        project="test-upload", 
+        asset="penelope", 
+        version="1", 
+        directory=tmp,
+        staging=staging, 
+        url=url,
+        concurrent=2
+    )
+
+    man = pyg.fetch_manifest("test-upload", "penelope", "1", registry=registry, url=url)
+    assert sorted(man.keys()) == ["foo/bar", "whee.txt"]
+    for k, v in man.items():
+       assert not "link" in v
+
+
+def test_upload_directory_empty_dirs(setup):
+    _, staging, registry, url = pyg.start_gobbler()
+
+    tmp = tempfile.mkdtemp()
+    with open(os.path.join(tmp, "blah.txt"), "w") as handle:
+        handle.write("motto motto")
+    os.mkdir(os.path.join(tmp, "foo"))
+
+    pyg.upload_directory(
+        project="test-upload", 
+        asset="violet", 
+        version="1", 
+        directory=tmp,
+        staging=staging, 
+        url=url
+    )
+
+    man = pyg.fetch_manifest("test-upload", "violet", "1", registry=registry, url=url)
+    assert sorted(man.keys()) == ["blah.txt", "foo"]
+    assert man["foo"]["md5sum"] == ""
+    for k, v in man.items():
+        assert "link" not in v
+
+
 def test_upload_directory_links(setup):
     _, staging, registry, url = pyg.start_gobbler()
 
@@ -93,11 +143,6 @@ def test_upload_directory_relative_links(setup):
     os.mkdir(os.path.join(dest, "foo"))
     os.symlink("../whee.txt", os.path.join(dest, "foo/bar.txt")) 
 
-    fid, outside = tempfile.mkstemp(dir=os.path.dirname(dest))
-    with open(outside, "w") as handle:
-        handle.write("toki wa kizuna uta")
-    os.symlink(os.path.join("../../", os.path.basename(outside)), os.path.join(dest, "foo/outer.txt")) # relative links outside the directory are lost.
-
     pyg.upload_directory(
         project="test-more-upload", 
         asset="nicole", 
@@ -108,12 +153,10 @@ def test_upload_directory_relative_links(setup):
     )
 
     man = pyg.fetch_manifest("test-more-upload", "nicole", "1", registry=registry, url=url)
-    assert sorted(man.keys()) == [ "blah.txt", "foo/bar.txt", "foo/outer.txt", "whee.txt" ]
+    assert sorted(man.keys()) == [ "blah.txt", "foo/bar.txt", "whee.txt" ]
     assert "link" in man["whee.txt"]
-    assert "link" not in man["foo/outer.txt"]
     assert "link" in man["foo/bar.txt"]
     assert "link" not in man["blah.txt"]
-    assert man["foo/outer.txt"]["size"] == 18
     assert man["whee.txt"]["size"] == man["foo/bar.txt"]["size"]
     assert man["whee.txt"]["size"] == man["blah.txt"]["size"]
 

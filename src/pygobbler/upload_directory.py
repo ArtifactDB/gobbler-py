@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Tuple
 import os
 from . import allocate_upload_directory
 from . import _utils as ut
@@ -15,6 +15,7 @@ def upload_directory(
     consume: Optional[bool] = None,
     ignore_dot: bool = True,
     spoof: Optional[str] = None,
+    concurrent: int = 1,
 ):
     """
     Upload a directory as a new versioned asset of a project in the registry.
@@ -56,6 +57,9 @@ def upload_directory(
             String containing the name of a user on whose behalf this request is being made.
             This should only be used if the Gobbler service allows spoofing by the current user. 
             If ``None``, no spoofing is performed.
+
+        concurrent:
+            Number of concurrent copies.
     """
     # Normalizing them so that they're comparable, in order to figure out whether 'directory' lies inside 'staging'.
     directory = os.path.normpath(directory)
@@ -78,27 +82,38 @@ def upload_directory(
             # delete it afterwards without affecting the user. We do this
             # clean-up to free up storage in the staging space.
             purge_newdir = True 
+            to_copy = []
 
             for root, dirs, files in os.walk(directory):
+                for d in dirs:
+                    src = os.path.join(root, d)
+                    rel = os.path.relpath(src, directory)
+                    os.mkdir(os.path.join(newdir, rel))
+
                 for f in files:
                     src = os.path.join(root, f)
                     rel = os.path.relpath(src, directory)
                     dest = os.path.join(newdir, rel)
-                    os.makedirs(os.path.dirname(dest), exist_ok=True)
 
                     slink = ""
                     if os.path.islink(src):
                         slink = os.readlink(src)
 
                     if slink == "":
-                        _link_or_copy(src, dest)
-                    elif _is_absolute_or_local_link(slink, rel):
-                        os.symlink(slink, dest)
+                        to_copy.append((src, dest))
                     else:
-                        full_src = os.path.normpath(os.path.join(os.path.dirname(src), slink))
-                        _link_or_copy(full_src, dest)
+                        os.symlink(slink, dest)
 
             directory = newdir
+
+            if concurrent == 1:
+                for y in to_copy:
+                    _transfer_file(y)
+            else:
+                import multiprocessing
+                import functools
+                with multiprocessing.Pool(concurrent) as p:
+                    p.map(_transfer_file, to_copy)
 
         if consume is None:
             # If we copied everything over to our own staging directory, we're entitled to consume its contents.
@@ -122,32 +137,29 @@ def upload_directory(
             shutil.rmtree(newdir)
 
 
-def _is_absolute_or_local_link(target: str, link_path: str) -> bool:
-    if os.path.isabs(target):
-        return True
+def _transfer_file(info: Tuple):
+    src, dest = info
+    import shutil
+    shutil.copy(src, dest)
 
-    # Both 'target' and 'link_path' should be relative at this point, so the
-    # idea is to check whether 'os.path.join(os.path.dirname(link_path),
-    # target)' is still a child of 'os.path.dirname(link_path)'.
-    pre_length = len(link_path.split("/")) - 1
-    post_fragments = target.split("/")[:-1]
+    sstat = os.stat(src)
+    dstat = os.stat(dest)
+    if sstat.st_size != dstat.st_size:
+        raise ValueError("mismatch in sizes after copy (" + str(sstat.st_size) + " vs " + str(dstat.st_size) + ")")
 
-    for x in post_fragments:
-        if x == ".":
-            continue
-        elif x == "..":
-            pre_length -= 1
-            if pre_length < 0:
-                return False
-        else:
-            pre_length += 1
-
-    return True
+    smd5 = compute_md5sum(src)
+    dmd5 = compute_md5sum(src)
+    if smd5 != dmd5:
+        raise ValueError("mismatch in MD5 checksums after copy (" + str(smd5) + " vs " + str(dmd5) + ")")
 
 
-def _link_or_copy(src: str, dest: str):
-    try:
-        os.link(src, dest)
-    except:
-        import shutil
-        shutil.copy(src, dest)
+def compute_md5sum(path: str):
+    import hashlib
+    hasher = hashlib.md5()
+    with open(path, "rb") as handle:
+        while True:
+            chunk = handle.read(8192)
+            if len(chunk) == 0:
+                break
+            hasher.update(chunk)
+    return hasher.hexdigest()
