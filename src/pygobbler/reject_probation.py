@@ -25,7 +25,7 @@ def reject_probation(project: str, asset: str, version: str, staging: str, url: 
 
         force:
             Whether the version should be forcibly rejected and removed if it contains invalid files.
-            If this needs to be set to ``True``, users may need to call :py:func:`~gobbler.refresh_usage.refresh_usage`` afterwards to correct project-level usage statistics.
+            If this needs to be set to ``True``, users may need to call :py:func:`~.refresh_usage` afterwards to correct project-level usage statistics.
 
         spoof:
             String containing the name of a user on whose behalf this request is being made.

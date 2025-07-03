@@ -3,11 +3,11 @@ from ._utils import dump_request
 
 
 def reroute_links(to_delete: List, staging: str, url: str, dry_run: bool = False) -> List:
-    """Reroute symbolic links to files in directories that are to be deleted, e.g., by :py:func:`~pygobbler.remove_project.remove_project`.
+    """Reroute symbolic links to files in directories that are to be deleted, e.g., by :py:func:`~.remove_project`.
     This preserves the validity of links within the Gobbler registry.
 
     Note that rerouting does not actually delete the directories specified in ``to_delete``.
-    Deletion requires separate invocations of :py:func:`~pygobbler.remove_project.remove_project` and friends - preferably after the user has verified that rerouting was successful!
+    Deletion requires separate invocations of :py:func:`~.remove_project` and friends - preferably after the user has verified that rerouting was successful!
 
     Rerouting is not necessary if ``to_delete`` consists only of probational versions, or projects/assets containing only probational versions.
     The Gobbler should never create links to files in probational version directories.

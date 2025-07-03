@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, List, Dict
 from . import _utils as ut
 from . import fetch_permissions
 
@@ -15,7 +15,7 @@ def set_permissions(
     append: bool = True,
     spoof: Optional[str] = None,
     dry_run: bool = False,
-):
+) -> Optional[Dict]:
     """
     Set the owner and uploader permissions for a project or an asset within a project.
 
@@ -42,11 +42,11 @@ def set_permissions(
 
         uploaders:
             List of dictionaries specifying the authorized uploaders for this project.
-            Each dictionary should follow the same format as the ``uploaders`` field in the return value of :py:func:`~gobbler.fetch_permissions.fetch_permissions`. 
+            Each dictionary should follow the same format as the ``uploaders`` field in the return value of :py:func:`~.fetch_permissions`. 
             If ``None``, no change is made to the existing uploaders.
 
         global_write:
-            Whether to enable global writes for this project, see the ``global_write`` field in the return value of :py:func:`~gobbler.fetch_permissions.fetch_permissions` for more details.
+            Whether to enable global writes for this project, see the ``global_write`` field in the return value of :py:func:`~.fetch_permissions` for more details.
             If ``None``, no change is made to the global write status.
             Ignored if ``asset`` is provided.
 

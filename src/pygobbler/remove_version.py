@@ -5,7 +5,7 @@ def remove_version(project: str, asset: str, version: str, staging: str, url: st
     """
     Remove a version of a project asset from the registry.
     This should only be performed by Gobbler instance administrators.
-    Consider running :py:func:`~pygobbler.reroute_links.reroute_links` beforehand to avoid dangling references to files in this version.
+    Consider running :py:func:`~.reroute_links` beforehand to avoid dangling references to files in this version.
 
     Args:
         project:
@@ -22,8 +22,8 @@ def remove_version(project: str, asset: str, version: str, staging: str, url: st
 
         force:
             Whether the version should be forcibly removed if it contains invalid files.
-            If this needs to be set to ``True``, users may need to call :py:func:`~gobbler.refresh_usage.refresh_usage`` afterwards to correct project-level usage statistics.
-            Similarly, :py:func:`~gobbler.refresh_latest.refresh_latest` may also need to be called.
+            If this needs to be set to ``True``, users may need to call :py:func:`~.refresh_usage` afterwards to correct project-level usage statistics.
+            Similarly, :py:func:`~.refresh_latest` may also need to be called.
 
         url:
             URL to the Gobbler REST API.

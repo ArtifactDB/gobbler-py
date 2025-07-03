@@ -5,7 +5,7 @@ def remove_project(project: str, staging: str, url: str):
     """
     Remove a project from the registry.
     This should only be performed by Gobbler instance administrators.
-    Consider running :py:func:`~pygobbler.reroute_links.reroute_links` beforehand to avoid dangling references to files in this project.
+    Consider running :py:func:`~.reroute_links` beforehand to avoid dangling references to files in this project.
 
     Args:
         project:
