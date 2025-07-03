@@ -15,7 +15,10 @@ def start_gobbler(
     port: Optional[int] = None,
     wait: float = 1,
     version: str = "0.5.0",
-    overwrite: bool = False) -> Tuple[bool, str, str, str]:
+    overwrite: bool = False,
+    admin: Optional[list] = None, 
+    extra_args: list = [],
+) -> Tuple[bool, str, str, str]:
     """
     Start a test Gobbler service.
 
@@ -41,6 +44,13 @@ def start_gobbler(
         overwrite:
             Whether to overwrite the existing Gobbler binary.
 
+        admin:
+            List of strings containing the user names of the Gobbler administrators.
+            If ``None``, the current user is used.
+
+        extra_args:
+            Additional arguments to pass to the Gobbler service on the command line.
+
     Returns:
         A tuple indicating whether a new test service was created (or an
         existing instance was re-used), the path to the staging directory, the
@@ -57,7 +67,7 @@ def start_gobbler(
         return False, test_staging, test_registry, "http://0.0.0.0:" + str(test_port)
 
     exe = _acquire_gobbler_binary(version, overwrite)
-    _initialize_gobbler_process(exe, staging, registry, port)
+    _initialize_gobbler_process(exe, staging, registry, port, admin, extra_args)
 
     import time
     time.sleep(wait) # give it some time to spin up.
@@ -112,7 +122,7 @@ def _acquire_gobbler_binary(version: str, overwrite: bool):
     return exe
    
 
-def _initialize_gobbler_process(exe: str, staging: Optional[str], registry: Optional[str], port: Optional[int]):
+def _initialize_gobbler_process(exe: str, staging: Optional[str], registry: Optional[str], port: Optional[int], admin: Optional[str], extra_args: list):
     if staging is None:
         staging = tempfile.mkdtemp()
     global test_staging
@@ -131,12 +141,23 @@ def _initialize_gobbler_process(exe: str, staging: Optional[str], registry: Opti
     global test_port
     test_port = port
 
-    import getpass
-    user = getpass.getuser()
+    if admin is None:
+        import getpass
+        admin = [getpass.getuser()]
+
+    cmd_args = [
+        exe,
+        "-registry", registry,
+        "-staging", staging,
+        "-port", str(port) 
+    ]
+    if len(admin) > 0:
+        cmd_args += [ "-admin", ",".join(admin) ]
+    cmd_args += extra_args
 
     import subprocess
     global test_process
-    test_process = subprocess.Popen([ exe, "-admin", user, "-registry", registry, "-staging", staging, "-port", str(port) ], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    test_process = subprocess.Popen(cmd_args, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     import atexit
     atexit.register(stop_gobbler)
