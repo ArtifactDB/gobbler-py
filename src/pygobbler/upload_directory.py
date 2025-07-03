@@ -111,7 +111,6 @@ def upload_directory(
                     _transfer_file(y)
             else:
                 import multiprocessing
-                import functools
                 with multiprocessing.Pool(concurrent) as p:
                     p.map(_transfer_file, to_copy)
 
