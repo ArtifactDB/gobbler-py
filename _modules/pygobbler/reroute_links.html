@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
-        <title>pygobbler.reroute_links - pygobbler 0.0.post1.dev1+g24b7922 documentation</title>
+        <title>pygobbler.reroute_links - pygobbler 0.0.post1.dev1+g34c1420 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
@@ -165,7 +165,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g24b7922 documentation</div></a>
+      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g34c1420 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -189,7 +189,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g24b7922 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g34c1420 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -249,11 +249,11 @@
 <div class="viewcode-block" id="reroute_links">
 <a class="viewcode-back" href="../../api/pygobbler.html#pygobbler.reroute_links.reroute_links">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">reroute_links</span><span class="p">(</span><span class="n">to_delete</span><span class="p">:</span> <span class="n">List</span><span class="p">,</span> <span class="n">staging</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dry_run</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reroute symbolic links to files in directories that are to be deleted, e.g., by :py:func:`~pygobbler.remove_project.remove_project`.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reroute symbolic links to files in directories that are to be deleted, e.g., by :py:func:`~.remove_project`.</span>
 <span class="sd">    This preserves the validity of links within the Gobbler registry.</span>
 
 <span class="sd">    Note that rerouting does not actually delete the directories specified in ``to_delete``.</span>
-<span class="sd">    Deletion requires separate invocations of :py:func:`~pygobbler.remove_project.remove_project` and friends - preferably after the user has verified that rerouting was successful!</span>
+<span class="sd">    Deletion requires separate invocations of :py:func:`~.remove_project` and friends - preferably after the user has verified that rerouting was successful!</span>
 
 <span class="sd">    Rerouting is not necessary if ``to_delete`` consists only of probational versions, or projects/assets containing only probational versions.</span>
 <span class="sd">    The Gobbler should never create links to files in probational version directories.</span>
@@ -324,7 +324,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=7276c0f0"></script>
+</div><script src="../../_static/documentation_options.js?v=37ee7a61"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
