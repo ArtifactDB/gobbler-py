@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
-        <title>pygobbler.upload_directory - pygobbler 0.0.post1.dev1+g6d355b8 documentation</title>
+        <title>pygobbler.upload_directory - pygobbler 0.0.post1.dev1+g74827c2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
@@ -165,7 +165,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g6d355b8 documentation</div></a>
+      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g74827c2 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -189,7 +189,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g6d355b8 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g74827c2 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -242,7 +242,7 @@
         </div>
         <article role="main" id="furo-main-content">
           <h1>Source code for pygobbler.upload_directory</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">allocate_upload_directory</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.</span><span class="w"> </span><span class="kn">import</span> <span class="n">_utils</span> <span class="k">as</span> <span class="n">ut</span>
@@ -261,6 +261,7 @@
     <span class="n">consume</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">ignore_dot</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">spoof</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">concurrent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Upload a directory as a new versioned asset of a project in the registry.</span>
@@ -302,6 +303,9 @@
 <span class="sd">            String containing the name of a user on whose behalf this request is being made.</span>
 <span class="sd">            This should only be used if the Gobbler service allows spoofing by the current user. </span>
 <span class="sd">            If ``None``, no spoofing is performed.</span>
+
+<span class="sd">        concurrent:</span>
+<span class="sd">            Number of concurrent copies.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Normalizing them so that they&#39;re comparable, in order to figure out whether &#39;directory&#39; lies inside &#39;staging&#39;.</span>
     <span class="n">directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">directory</span><span class="p">)</span>
@@ -324,27 +328,38 @@
             <span class="c1"># delete it afterwards without affecting the user. We do this</span>
             <span class="c1"># clean-up to free up storage in the staging space.</span>
             <span class="n">purge_newdir</span> <span class="o">=</span> <span class="kc">True</span> 
+            <span class="n">to_copy</span> <span class="o">=</span> <span class="p">[]</span>
 
             <span class="k">for</span> <span class="n">root</span><span class="p">,</span> <span class="n">dirs</span><span class="p">,</span> <span class="n">files</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">directory</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
+                    <span class="n">src</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
+                    <span class="n">rel</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">directory</span><span class="p">)</span>
+                    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">newdir</span><span class="p">,</span> <span class="n">rel</span><span class="p">))</span>
+
                 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
                     <span class="n">src</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
                     <span class="n">rel</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">relpath</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">directory</span><span class="p">)</span>
                     <span class="n">dest</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">newdir</span><span class="p">,</span> <span class="n">rel</span><span class="p">)</span>
-                    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">dest</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
                     <span class="n">slink</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
                     <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">islink</span><span class="p">(</span><span class="n">src</span><span class="p">):</span>
                         <span class="n">slink</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">readlink</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
 
                     <span class="k">if</span> <span class="n">slink</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-                        <span class="n">_link_or_copy</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
-                    <span class="k">elif</span> <span class="n">_is_absolute_or_local_link</span><span class="p">(</span><span class="n">slink</span><span class="p">,</span> <span class="n">rel</span><span class="p">):</span>
-                        <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">slink</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+                        <span class="n">to_copy</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">))</span>
                     <span class="k">else</span><span class="p">:</span>
-                        <span class="n">full_src</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">src</span><span class="p">),</span> <span class="n">slink</span><span class="p">))</span>
-                        <span class="n">_link_or_copy</span><span class="p">(</span><span class="n">full_src</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+                        <span class="n">os</span><span class="o">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">slink</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
 
             <span class="n">directory</span> <span class="o">=</span> <span class="n">newdir</span>
+
+            <span class="k">if</span> <span class="n">concurrent</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">to_copy</span><span class="p">:</span>
+                    <span class="n">_transfer_file</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span>
+                <span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+                <span class="k">with</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pool</span><span class="p">(</span><span class="n">concurrent</span><span class="p">)</span> <span class="k">as</span> <span class="n">p</span><span class="p">:</span>
+                    <span class="n">p</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">_transfer_file</span><span class="p">,</span> <span class="n">to_copy</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">consume</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># If we copied everything over to our own staging directory, we&#39;re entitled to consume its contents.</span>
@@ -369,35 +384,35 @@
 
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_is_absolute_or_local_link</span><span class="p">(</span><span class="n">target</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">link_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">target</span><span class="p">):</span>
-        <span class="k">return</span> <span class="kc">True</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_transfer_file</span><span class="p">(</span><span class="n">info</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">):</span>
+    <span class="n">src</span><span class="p">,</span> <span class="n">dest</span> <span class="o">=</span> <span class="n">info</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
 
-    <span class="c1"># Both &#39;target&#39; and &#39;link_path&#39; should be relative at this point, so the</span>
-    <span class="c1"># idea is to check whether &#39;os.path.join(os.path.dirname(link_path),</span>
-    <span class="c1"># target)&#39; is still a child of &#39;os.path.dirname(link_path)&#39;.</span>
-    <span class="n">pre_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">link_path</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">post_fragments</span> <span class="o">=</span> <span class="n">target</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">sstat</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+    <span class="n">dstat</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">stat</span><span class="p">(</span><span class="n">dest</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sstat</span><span class="o">.</span><span class="n">st_size</span> <span class="o">!=</span> <span class="n">dstat</span><span class="o">.</span><span class="n">st_size</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mismatch in sizes after copy (&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">sstat</span><span class="o">.</span><span class="n">st_size</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; vs &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dstat</span><span class="o">.</span><span class="n">st_size</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">post_fragments</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;.&quot;</span><span class="p">:</span>
-            <span class="k">continue</span>
-        <span class="k">elif</span> <span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;..&quot;</span><span class="p">:</span>
-            <span class="n">pre_length</span> <span class="o">-=</span> <span class="mi">1</span>
-            <span class="k">if</span> <span class="n">pre_length</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">pre_length</span> <span class="o">+=</span> <span class="mi">1</span>
-
-    <span class="k">return</span> <span class="kc">True</span>
+    <span class="n">smd5</span> <span class="o">=</span> <span class="n">compute_md5sum</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+    <span class="n">dmd5</span> <span class="o">=</span> <span class="n">compute_md5sum</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">smd5</span> <span class="o">!=</span> <span class="n">dmd5</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;mismatch in MD5 checksums after copy (&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">smd5</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; vs &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">dmd5</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span><span class="p">)</span>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_link_or_copy</span><span class="p">(</span><span class="n">src</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dest</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">os</span><span class="o">.</span><span class="n">link</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
-    <span class="k">except</span><span class="p">:</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
-        <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">dest</span><span class="p">)</span>
+<div class="viewcode-block" id="compute_md5sum">
+<a class="viewcode-back" href="../../api/pygobbler.html#pygobbler.upload_directory.compute_md5sum">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute_md5sum</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+    <span class="n">hasher</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">chunk</span> <span class="o">=</span> <span class="n">handle</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="mi">8192</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">hasher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">hasher</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span></div>
+
 </pre></div>
         </article>
       </div>
@@ -430,7 +445,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=74197168"></script>
+</div><script src="../../_static/documentation_options.js?v=e55dce88"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>

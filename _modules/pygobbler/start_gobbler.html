@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
-        <title>pygobbler.start_gobbler - pygobbler 0.0.post1.dev1+g6d355b8 documentation</title>
+        <title>pygobbler.start_gobbler - pygobbler 0.0.post1.dev1+g74827c2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
@@ -165,7 +165,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g6d355b8 documentation</div></a>
+      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g74827c2 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -189,7 +189,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g6d355b8 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g74827c2 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -261,7 +261,10 @@
     <span class="n">port</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">wait</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">version</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;0.5.0&quot;</span><span class="p">,</span>
-    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+    <span class="n">overwrite</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">admin</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">list</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
+    <span class="n">extra_args</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Start a test Gobbler service.</span>
 
@@ -287,6 +290,13 @@
 <span class="sd">        overwrite:</span>
 <span class="sd">            Whether to overwrite the existing Gobbler binary.</span>
 
+<span class="sd">        admin:</span>
+<span class="sd">            List of strings containing the user names of the Gobbler administrators.</span>
+<span class="sd">            If ``None``, the current user is used.</span>
+
+<span class="sd">        extra_args:</span>
+<span class="sd">            Additional arguments to pass to the Gobbler service on the command line.</span>
+
 <span class="sd">    Returns:</span>
 <span class="sd">        A tuple indicating whether a new test service was created (or an</span>
 <span class="sd">        existing instance was re-used), the path to the staging directory, the</span>
@@ -303,7 +313,7 @@
         <span class="k">return</span> <span class="kc">False</span><span class="p">,</span> <span class="n">test_staging</span><span class="p">,</span> <span class="n">test_registry</span><span class="p">,</span> <span class="s2">&quot;http://0.0.0.0:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">test_port</span><span class="p">)</span>
 
     <span class="n">exe</span> <span class="o">=</span> <span class="n">_acquire_gobbler_binary</span><span class="p">(</span><span class="n">version</span><span class="p">,</span> <span class="n">overwrite</span><span class="p">)</span>
-    <span class="n">_initialize_gobbler_process</span><span class="p">(</span><span class="n">exe</span><span class="p">,</span> <span class="n">staging</span><span class="p">,</span> <span class="n">registry</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+    <span class="n">_initialize_gobbler_process</span><span class="p">(</span><span class="n">exe</span><span class="p">,</span> <span class="n">staging</span><span class="p">,</span> <span class="n">registry</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">admin</span><span class="p">,</span> <span class="n">extra_args</span><span class="p">)</span>
 
     <span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
     <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">wait</span><span class="p">)</span> <span class="c1"># give it some time to spin up.</span>
@@ -359,7 +369,7 @@
     <span class="k">return</span> <span class="n">exe</span>
    
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_initialize_gobbler_process</span><span class="p">(</span><span class="n">exe</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">staging</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">registry</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">port</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_initialize_gobbler_process</span><span class="p">(</span><span class="n">exe</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">staging</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">registry</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">port</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">admin</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">extra_args</span><span class="p">:</span> <span class="nb">list</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">staging</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">staging</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span>
     <span class="k">global</span> <span class="n">test_staging</span>
@@ -378,12 +388,23 @@
     <span class="k">global</span> <span class="n">test_port</span>
     <span class="n">test_port</span> <span class="o">=</span> <span class="n">port</span>
 
-    <span class="kn">import</span><span class="w"> </span><span class="nn">getpass</span>
-    <span class="n">user</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">admin</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">getpass</span>
+        <span class="n">admin</span> <span class="o">=</span> <span class="p">[</span><span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">()]</span>
+
+    <span class="n">cmd_args</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">exe</span><span class="p">,</span>
+        <span class="s2">&quot;-registry&quot;</span><span class="p">,</span> <span class="n">registry</span><span class="p">,</span>
+        <span class="s2">&quot;-staging&quot;</span><span class="p">,</span> <span class="n">staging</span><span class="p">,</span>
+        <span class="s2">&quot;-port&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">port</span><span class="p">)</span> 
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">admin</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">cmd_args</span> <span class="o">+=</span> <span class="p">[</span> <span class="s2">&quot;-admin&quot;</span><span class="p">,</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">admin</span><span class="p">)</span> <span class="p">]</span>
+    <span class="n">cmd_args</span> <span class="o">+=</span> <span class="n">extra_args</span>
 
     <span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
     <span class="k">global</span> <span class="n">test_process</span>
-    <span class="n">test_process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">([</span> <span class="n">exe</span><span class="p">,</span> <span class="s2">&quot;-admin&quot;</span><span class="p">,</span> <span class="n">user</span><span class="p">,</span> <span class="s2">&quot;-registry&quot;</span><span class="p">,</span> <span class="n">registry</span><span class="p">,</span> <span class="s2">&quot;-staging&quot;</span><span class="p">,</span> <span class="n">staging</span><span class="p">,</span> <span class="s2">&quot;-port&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">port</span><span class="p">)</span> <span class="p">],</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">)</span>
+    <span class="n">test_process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span><span class="n">cmd_args</span><span class="p">,</span> <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">,</span> <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">DEVNULL</span><span class="p">)</span>
 
     <span class="kn">import</span><span class="w"> </span><span class="nn">atexit</span>
     <span class="n">atexit</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">stop_gobbler</span><span class="p">)</span>
@@ -435,7 +456,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=74197168"></script>
+</div><script src="../../_static/documentation_options.js?v=e55dce88"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>

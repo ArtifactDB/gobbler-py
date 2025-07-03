@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
-        <title>pygobbler.set_permissions - pygobbler 0.0.post1.dev1+g6d355b8 documentation</title>
+        <title>pygobbler.set_permissions - pygobbler 0.0.post1.dev1+g74827c2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../../_static/styles/furo-extensions.css?v=302659d7" />
@@ -165,7 +165,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g6d355b8 documentation</div></a>
+      <a href="../../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g74827c2 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -189,7 +189,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g6d355b8 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g74827c2 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -260,6 +260,7 @@
     <span class="n">global_write</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">append</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">spoof</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">dry_run</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Set the owner and uploader permissions for a project or an asset within a project.</span>
@@ -303,6 +304,16 @@
 <span class="sd">            String containing the name of a user on whose behalf this request is being made.</span>
 <span class="sd">            This should only be used if the Gobbler service allows spoofing by the current user. </span>
 <span class="sd">            If ``None``, no spoofing is performed.</span>
+
+<span class="sd">        dry_run:</span>
+<span class="sd">            Whether to perform a dry run, in which case an object is returned containing the modified permissions.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        If ``dry_run = False``, the permissions are modified and nothing is returned.</span>
+
+<span class="sd">        If ``dry_run = True``, an object is returned the new permissions for the project/asset.</span>
+<span class="sd">        This contains zero, one or more of ``owners``, ``uploaders`` and ``global_write``.</span>
+<span class="sd">        A missing field indicates that it will not be updated in the project/asset permissions. </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">perms</span> <span class="o">=</span> <span class="p">{}</span>
 
@@ -325,6 +336,8 @@
     <span class="k">elif</span> <span class="n">global_write</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">perms</span><span class="p">[</span><span class="s2">&quot;global_write&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">global_write</span>
 
+    <span class="k">if</span> <span class="n">dry_run</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">perms</span>
     <span class="n">payload</span><span class="p">[</span><span class="s2">&quot;permissions&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">perms</span>
     <span class="n">ut</span><span class="o">.</span><span class="n">dump_request</span><span class="p">(</span><span class="n">staging</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="s2">&quot;set_permissions&quot;</span><span class="p">,</span> <span class="n">payload</span><span class="p">,</span> <span class="n">spoof</span><span class="o">=</span><span class="n">spoof</span><span class="p">)</span></div>
 
@@ -360,7 +373,7 @@
       
     </aside>
   </div>
-</div><script src="../../_static/documentation_options.js?v=74197168"></script>
+</div><script src="../../_static/documentation_options.js?v=e55dce88"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/scripts/furo.js?v=5fa4622c"></script>
