@@ -6,7 +6,7 @@
 <link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="prev" title="pygobbler" href="modules.html" />
 
     <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
-        <title>pygobbler package - pygobbler 0.0.post1.dev1+g74827c2 documentation</title>
+        <title>pygobbler package - pygobbler 0.0.post1.dev1+g24b7922 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo.css?v=354aac6f" />
     <link rel="stylesheet" type="text/css" href="../_static/styles/furo-extensions.css?v=302659d7" />
@@ -166,7 +166,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g74827c2 documentation</div></a>
+      <a href="../index.html"><div class="brand">pygobbler 0.0.post1.dev1+g24b7922 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -190,7 +190,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../index.html">
   
   
-  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g74827c2 documentation</span>
+  <span class="sidebar-brand-text">pygobbler 0.0.post1.dev1+g24b7922 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -827,7 +827,7 @@ This regenerates all of the internal <code class="docutils literal notranslate">
 <li><p><strong>staging</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the staging directory.</p></li>
 <li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – URL to the Gobbler REST API.</p></li>
 <li><p><strong>force</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether the version should be forcibly rejected and removed if it contains invalid files.
-If this needs to be set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, users may need to call <code class="xref py py-func docutils literal notranslate"><span class="pre">refresh_usage`()</span></code> afterwards to correct project-level usage statistics.</p></li>
+If this needs to be set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, users may need to call <a class="reference internal" href="#pygobbler.refresh_usage.refresh_usage" title="pygobbler.refresh_usage.refresh_usage"><code class="xref py py-func docutils literal notranslate"><span class="pre">refresh_usage()</span></code></a> afterwards to correct project-level usage statistics.</p></li>
 <li><p><strong>spoof</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/typing.html#typing.Optional" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.13/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>]</span>) – String containing the name of a user on whose behalf this request is being made.
 This should only be used if the Gobbler service allows spoofing by the current user.
 If <code class="docutils literal notranslate"><span class="pre">None</span></code>, no spoofing is performed.</p></li>
@@ -853,7 +853,7 @@ Consider running <a class="reference internal" href="#pygobbler.reroute_links.re
 <li><p><strong>staging</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the staging directory.</p></li>
 <li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – URL to the Gobbler REST API.</p></li>
 <li><p><strong>force</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether the asset should be forcibly removed if it contains invalid files.
-If this needs to be set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, users may need to call <code class="xref py py-func docutils literal notranslate"><span class="pre">refresh_usage`()</span></code> afterwards to correct project-level usage statistics.</p></li>
+If this needs to be set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, users may need to call <a class="reference internal" href="#pygobbler.refresh_usage.refresh_usage" title="pygobbler.refresh_usage.refresh_usage"><code class="xref py py-func docutils literal notranslate"><span class="pre">refresh_usage()</span></code></a> afterwards to correct project-level usage statistics.</p></li>
 </ul>
 </dd>
 </dl>
@@ -896,8 +896,8 @@ Consider running <a class="reference internal" href="#pygobbler.reroute_links.re
 <li><p><strong>version</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – The name of the version of the <code class="docutils literal notranslate"><span class="pre">asset</span></code> to remove.</p></li>
 <li><p><strong>staging</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – Path to the staging directory.</p></li>
 <li><p><strong>force</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether the version should be forcibly removed if it contains invalid files.
-If this needs to be set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, users may need to call <code class="xref py py-func docutils literal notranslate"><span class="pre">refresh_usage`()</span></code> afterwards to correct project-level usage statistics.
-Similarly, <code class="xref py py-func docutils literal notranslate"><span class="pre">refresh_latest()</span></code> may also need to be called.</p></li>
+If this needs to be set to <code class="docutils literal notranslate"><span class="pre">True</span></code>, users may need to call <a class="reference internal" href="#pygobbler.refresh_usage.refresh_usage" title="pygobbler.refresh_usage.refresh_usage"><code class="xref py py-func docutils literal notranslate"><span class="pre">refresh_usage()</span></code></a> afterwards to correct project-level usage statistics.
+Similarly, <a class="reference internal" href="#pygobbler.refresh_latest.refresh_latest" title="pygobbler.refresh_latest.refresh_latest"><code class="xref py py-func docutils literal notranslate"><span class="pre">refresh_latest()</span></code></a> may also need to be called.</p></li>
 <li><p><strong>url</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/stdtypes.html#str" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></span>) – URL to the Gobbler REST API.</p></li>
 </ul>
 </dd>
@@ -991,9 +991,9 @@ If supplied, permissions are set on this asset rather than the entire project.</
 <li><p><strong>owners</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/typing.html#typing.Optional" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.13/library/typing.html#typing.List" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>]</span>) – List of user IDs for owners of this project.
 If <code class="docutils literal notranslate"><span class="pre">None</span></code>, no change is made to the existing owners in the project permissions.</p></li>
 <li><p><strong>uploaders</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/typing.html#typing.Optional" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.13/library/typing.html#typing.List" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">List</span></code></a>]</span>) – List of dictionaries specifying the authorized uploaders for this project.
-Each dictionary should follow the same format as the <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> field in the return value of <code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_permissions()</span></code>.
+Each dictionary should follow the same format as the <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> field in the return value of <a class="reference internal" href="#pygobbler.fetch_permissions.fetch_permissions" title="pygobbler.fetch_permissions.fetch_permissions"><code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_permissions()</span></code></a>.
 If <code class="docutils literal notranslate"><span class="pre">None</span></code>, no change is made to the existing uploaders.</p></li>
-<li><p><strong>global_write</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/typing.html#typing.Optional" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.13/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</span>) – Whether to enable global writes for this project, see the <code class="docutils literal notranslate"><span class="pre">global_write</span></code> field in the return value of <code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_permissions()</span></code> for more details.
+<li><p><strong>global_write</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/typing.html#typing.Optional" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.13/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>]</span>) – Whether to enable global writes for this project, see the <code class="docutils literal notranslate"><span class="pre">global_write</span></code> field in the return value of <a class="reference internal" href="#pygobbler.fetch_permissions.fetch_permissions" title="pygobbler.fetch_permissions.fetch_permissions"><code class="xref py py-func docutils literal notranslate"><span class="pre">fetch_permissions()</span></code></a> for more details.
 If <code class="docutils literal notranslate"><span class="pre">None</span></code>, no change is made to the global write status.
 Ignored if <code class="docutils literal notranslate"><span class="pre">asset</span></code> is provided.</p></li>
 <li><p><strong>append</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether <code class="docutils literal notranslate"><span class="pre">owners</span></code> and <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> should be appended to the existing owners and uploaders, respectively.
@@ -1004,8 +1004,11 @@ If <code class="docutils literal notranslate"><span class="pre">None</span></cod
 <li><p><strong>dry_run</strong> (<span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/functions.html#bool" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></span>) – Whether to perform a dry run, in which case an object is returned containing the modified permissions.</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p><p>If <code class="docutils literal notranslate"><span class="pre">dry_run</span> <span class="pre">=</span> <span class="pre">False</span></code>, the permissions are modified and nothing is returned.</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><span class="sphinx_autodoc_typehints-type"><a class="reference external" href="https://docs.python.org/3.13/library/typing.html#typing.Optional" title="(in Python v3.13)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Optional</span></code></a>[<a class="reference external" href="https://docs.python.org/3.13/library/typing.html#typing.Dict" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Dict</span></code></a>]</span></p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><p>If <code class="docutils literal notranslate"><span class="pre">dry_run</span> <span class="pre">=</span> <span class="pre">False</span></code>, the permissions are modified and nothing is returned.</p>
 <p>If <code class="docutils literal notranslate"><span class="pre">dry_run</span> <span class="pre">=</span> <span class="pre">True</span></code>, an object is returned the new permissions for the project/asset.
 This contains zero, one or more of <code class="docutils literal notranslate"><span class="pre">owners</span></code>, <code class="docutils literal notranslate"><span class="pre">uploaders</span></code> and <code class="docutils literal notranslate"><span class="pre">global_write</span></code>.
 A missing field indicates that it will not be updated in the project/asset permissions.</p>
@@ -1357,7 +1360,7 @@ This compares the size, MD5 checksums and link information in the internal <code
       
     </aside>
   </div>
-</div><script src="../_static/documentation_options.js?v=e55dce88"></script>
+</div><script src="../_static/documentation_options.js?v=7276c0f0"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/scripts/furo.js?v=5fa4622c"></script>
