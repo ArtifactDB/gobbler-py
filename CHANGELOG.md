@@ -1,6 +1,12 @@
 # Changelog
 
-## Version 0.1.9
+## Version 0.1.11
+
+- Modified `upload_directory()` to preserve empty directories and all symlinks when copying to the staging directory.
+- Added options to `start_gobbler()` to set adminstrators and pass extra arguments to the Gobbler binary.
+- Added a `dry_run=` option to `set_permissions()` for previewing the new permissions.
+
+## Version 0.1.10
 
 - Added the `validate_version()` function to validate an existing directory in the registry.
 - Report empty subdirectories when listing directory contents with `list_files()`.
